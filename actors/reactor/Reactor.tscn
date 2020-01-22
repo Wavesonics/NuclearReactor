@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actors/reactor/Reactor.gd" type="Script" id=1]
+[ext_resource path="res://actors/fuel_rod/FuelRod.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 200.279, 199.718 )
+
+[node name="Reactor" type="Node2D" groups=[
+"reactors",
+]]
+script = ExtResource( 1 )
+core_path = NodePath("Core")
+
+[node name="Core" type="Area2D" parent="."]
+editor/display_folded = true
+gravity_vec = Vector2( 0, 0 )
+collision_layer = 4
+
+[node name="Rect2D" type="ColorRect" parent="Core"]
+margin_right = 400.0
+margin_bottom = 400.0
+rect_pivot_offset = Vector2( 201.664, 200.257 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
+position = Vector2( 200, 200 )
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Core"]
+margin_right = 81.0
+margin_bottom = 14.0
+text = "Reactor Core"
+
+[node name="FuelRod" parent="." instance=ExtResource( 2 )]
+position = Vector2( 85.5001, 201.4 )
+
+[node name="FuelRod2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 241.3, 196.65 )
+[connection signal="body_exited" from="Core" to="." method="_on_Core_body_exited"]

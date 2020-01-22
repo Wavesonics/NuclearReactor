@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "FuelRod",
+"language": "GDScript",
+"path": "res://actors/fuel_rod/FuelRod.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Neutron",
+"language": "GDScript",
+"path": "res://actors/neutron/Neutron.gd"
+}, {
+"base": "Node2D",
+"class": "Reactor",
+"language": "GDScript",
+"path": "res://actors/reactor/Reactor.gd"
+} ]
+_global_script_class_icons={
+"FuelRod": "",
+"Neutron": "",
+"Reactor": ""
+}
+
+[application]
+
+config/name="Reactor"
+run/main_scene="res://Game.tscn"
+config/icon="res://icon.png"
+
+[layer_names]
+
+2d_physics/layer_1="neutrons"
+2d_physics/layer_2="fuel_rods"
+2d_physics/layer_3="core"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

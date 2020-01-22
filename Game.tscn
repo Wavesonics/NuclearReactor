@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://actors/reactor/Reactor.tscn" type="PackedScene" id=2]
+
+[node name="Game" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+reactor_path = NodePath("Reactor")
+
+[node name="Reactor" parent="." instance=ExtResource( 2 )]
+position = Vector2( 265.263, 95.7895 )
+
+[node name="NeutronButton" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Make Neutron"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 536.842
+margin_top = 67.3684
+margin_right = 576.842
+margin_bottom = 81.3684
+text = "Neutrons:
+"
+
+[node name="NeutronCount" type="Label" parent="."]
+margin_left = 605.263
+margin_top = 68.4211
+margin_right = 645.263
+margin_bottom = 82.4211
+[connection signal="pressed" from="NeutronButton" to="." method="_on_NeutronButton_pressed"]
