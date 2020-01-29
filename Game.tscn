@@ -10,12 +10,7 @@ script = ExtResource( 1 )
 reactor_path = NodePath("Reactor")
 
 [node name="Reactor" parent="." instance=ExtResource( 2 )]
-position = Vector2( 265.263, 95.7895 )
-
-[node name="NeutronButton" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Make Neutron"
+position = Vector2( 200, 100 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 536.842
@@ -30,4 +25,3 @@ margin_left = 605.263
 margin_top = 68.4211
 margin_right = 645.263
 margin_bottom = 82.4211
-[connection signal="pressed" from="NeutronButton" to="." method="_on_NeutronButton_pressed"]

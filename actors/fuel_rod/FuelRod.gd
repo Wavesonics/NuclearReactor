@@ -29,17 +29,21 @@ func spawn_random_neutron():
 	var area = collision_shape_node.shape as RectangleShape2D
 
 	# Random position inside of reactor core
-	var half_w = area.extents.x / 2.0
-	var half_h = area.extents.y / 2.0
+	var half_w = area.extents.x
+	var half_h = area.extents.y
 	
-	var pos = Vector2(rand_range(-half_w, half_w), rand_range(-half_h, half_h))
-	spawn_neutron(pos)
+	var rand_pos = Vector2(rand_range(-half_w, half_w), rand_range(-half_h, half_h))
+	var spawn_pos = self.global_position + rand_pos 
+	
+	spawn_neutron(spawn_pos)
 
 
 func spawn_neutron(pos: Vector2):
+	
 	var neutron = neutron_scene.instance()
-	add_child(neutron)
-	neutron.position = pos
+	reactor.add_child(neutron)
+	
+	neutron.global_position = pos
 	
 	# Random direction at relativistic speed
 	var direction = Vector2(rand_range(1.0, 2.0), rand_range(1.0, 2.0)).normalized()
@@ -54,12 +58,10 @@ func spawn_neutron(pos: Vector2):
 func fission(neutron):
 	#print("fission!")
 	
-	var fission_position = neutron.position
+	var fission_position = neutron.global_position
 	#print("x %d y %d" % [fission_position.x, fission_position.y])
 
 	neutron.queue_free()
 	
-	call_deferred("spawn_neutron", fission_position)
-	call_deferred("spawn_neutron", fission_position)
-	#spawn_neutron(fission_position)
-	#spawn_neutron(fission_position)
+	spawn_neutron(fission_position)
+	spawn_neutron(fission_position)

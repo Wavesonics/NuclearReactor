@@ -28,8 +28,6 @@ func _ready():
 #	neutron.apply_central_impulse(direction)
 
 func _on_Core_body_exited(body):
-	
 	#body.get_parent().remove_child(body)
 	body.queue_free()
 	#print("Neutron escaped core")
-	pass
