@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://actors/reactor/Reactor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -25,3 +26,9 @@ margin_left = 605.263
 margin_top = 68.4211
 margin_right = 645.263
 margin_bottom = 82.4211
+
+[node name="RealTimeGraph" parent="." instance=ExtResource( 3 )]
+margin_left = 620.044
+margin_top = 103.102
+margin_right = -303.956
+margin_bottom = -396.898

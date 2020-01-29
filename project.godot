@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Reactor",
 "language": "GDScript",
 "path": "res://actors/reactor/Reactor.gd"
+}, {
+"base": "Control",
+"class": "RealTimeGraph",
+"language": "GDScript",
+"path": "res://actors/real_time_graph/RealTimeGraph.gd"
 } ]
 _global_script_class_icons={
 "ControlRod": "",
 "FuelRod": "",
 "Neutron": "",
-"Reactor": ""
+"Reactor": "",
+"RealTimeGraph": ""
 }
 
 [application]
