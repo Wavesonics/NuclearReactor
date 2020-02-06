@@ -34,12 +34,33 @@ shape = SubResource( 1 )
 margin_right = 81.0
 margin_bottom = 14.0
 text = "Reactor Core"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FuelRod" parent="." instance=ExtResource( 2 )]
-position = Vector2( 150.55, 202.85 )
-
-[node name="FuelRod2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 248.5, 203.8 )
+position = Vector2( 29.0037, 205.305 )
 
 [node name="ControlRod" parent="." instance=ExtResource( 3 )]
-position = Vector2( 201.4, 198.55 )
+position = Vector2( 78.6261, 201.005 )
+
+[node name="FuelRod2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 126.954, 206.255 )
+
+[node name="ControlRod2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 167.023, 207.144 )
+
+[node name="FuelRod3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 210.44, 205.028 )
+
+[node name="ControlRod3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 254.193, 202.233 )
+
+[node name="FuelRod4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 298.837, 207.483 )
+
+[node name="ControlRod4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 340.134, 207.144 )
+
+[node name="FuelRod5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 374.957, 208.711 )
