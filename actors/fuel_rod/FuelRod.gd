@@ -1,26 +1,33 @@
 extends Area2D
 class_name FuelRod
-
-onready var neutron_scene := preload("res://actors/neutron/Neutron.tscn")
+tool
 
 export(NodePath) var collision_shape_path: NodePath
 onready var collision_shape_node := get_node(collision_shape_path) as CollisionShape2D
 
+var neutron_field: NeutronField
+
 var rect : Rect2
-var reactor
+
+#const CROSS_SECTION_RELATIVISTIC := 0.99
+const CROSS_SECTION_RELATIVISTIC := 0.975
+const CROSS_SECTION_THERMAL := 0.50
 
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2
 	self.rect = Rect2(Vector2(-size.x, -size.y), Vector2(size.x*2, size.y*2))
+	
+	self.neutron_field = get_tree().get_nodes_in_group("neutron_field")[0] as NeutronField
 
-	var reactors = get_tree().get_nodes_in_group("reactors")
-	self.reactor = reactors[0]
 
 func _draw():
 	draw_rect(self.rect, Color.red)
 
 
 func _physics_process(delta):
+	if Engine.is_editor_hint():
+		return
+	
 	if randf() > 0.95:
 		spawn_random_neutron()
 
@@ -38,30 +45,36 @@ func spawn_random_neutron():
 	spawn_neutron(spawn_pos)
 
 
+func process_neutron(neutron: Array):
+	var pos := neutron[0] as Vector2
+	var vel := neutron[1] as Vector2
+	
+	var crossSection: float
+	if vel.length() > (NeutronField.SPEED_THERMAL + 1.0):
+		crossSection = CROSS_SECTION_RELATIVISTIC
+	else:
+		crossSection = CROSS_SECTION_THERMAL
+	
+	if rand_range(0.0, 1.0) >= crossSection:
+		fission(pos)
+		return true
+	else:
+		return false
+
+
 func spawn_neutron(pos: Vector2):
-	
-	var neutron = neutron_scene.instance()
-	reactor.add_child(neutron)
-	
-	neutron.global_position = pos
-	
-	# Random direction at relativistic speed
 	var direction = Vector2(rand_range(1.0, 2.0), rand_range(1.0, 2.0)).normalized()
 	if randi() % 2 == 0:
 		direction.x *= -1
 	if randi() % 2 == 0:
 		direction.y *= -1
-	direction *= Neutron.SPEED_RELATIVISTIC
-	neutron.apply_central_impulse(direction)
+	direction *= NeutronField.SPEED_RELATIVISTIC
+	
+	neutron_field.spawn_neutron(pos, direction)
 
 
-func fission(neutron):
+func fission(fission_position: Vector2):
 	#print("fission!")
-	
-	var fission_position = neutron.global_position
-	#print("x %d y %d" % [fission_position.x, fission_position.y])
 
-	neutron.queue_free()
-	
 	spawn_neutron(fission_position)
 	spawn_neutron(fission_position)

@@ -10,9 +10,8 @@ func _ready():
 	for ii in range(0, size-1):
 		self.data[ii] = 0
 
-func _physics_process(delta):
-	var neutrons = get_tree().get_nodes_in_group("neutrons")
-	self.data[self.nextWrite] = neutrons.size()
+func write_data(dataPoint: int):
+	self.data[self.nextWrite] = dataPoint
 	
 	self.nextWrite += 1
 	self.nextWrite %= size

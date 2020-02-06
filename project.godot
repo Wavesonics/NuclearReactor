@@ -19,10 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/fuel_rod/FuelRod.gd"
 }, {
-"base": "RigidBody2D",
-"class": "Neutron",
+"base": "Node2D",
+"class": "NeutronField",
 "language": "GDScript",
-"path": "res://actors/neutron/Neutron.gd"
+"path": "res://actors/neutron/NeutronField.gd"
 }, {
 "base": "Node2D",
 "class": "Reactor",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ControlRod": "",
 "FuelRod": "",
-"Neutron": "",
+"NeutronField": "",
 "Reactor": "",
 "RealTimeGraph": ""
 }

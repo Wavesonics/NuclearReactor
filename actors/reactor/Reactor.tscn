@@ -14,7 +14,6 @@ script = ExtResource( 1 )
 core_path = NodePath("Core")
 
 [node name="Core" type="Area2D" parent="."]
-editor/display_folded = true
 gravity_vec = Vector2( 0, 0 )
 collision_layer = 4
 
@@ -23,6 +22,9 @@ margin_right = 400.0
 margin_bottom = 400.0
 rect_pivot_offset = Vector2( 201.664, 200.257 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
 position = Vector2( 200, 200 )
@@ -41,4 +43,3 @@ position = Vector2( 248.5, 203.8 )
 
 [node name="ControlRod" parent="." instance=ExtResource( 3 )]
 position = Vector2( 201.4, 198.55 )
-[connection signal="body_exited" from="Core" to="." method="_on_Core_body_exited"]
