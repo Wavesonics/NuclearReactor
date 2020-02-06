@@ -13,6 +13,9 @@ var rect : Rect2
 const CROSS_SECTION_RELATIVISTIC := 0.975
 const CROSS_SECTION_THERMAL := 0.50
 
+var _time_sinc_last_fission := 0.0
+const SPANTANEUOS_FISION_RATE := 0.5
+
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2
 	self.rect = Rect2(Vector2(-size.x, -size.y), Vector2(size.x*2, size.y*2))
@@ -28,7 +31,9 @@ func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
 	
-	if randf() > 0.95:
+	_time_sinc_last_fission += delta
+	if _time_sinc_last_fission >= SPANTANEUOS_FISION_RATE:
+		_time_sinc_last_fission = 0.0
 		spawn_random_neutron()
 
 

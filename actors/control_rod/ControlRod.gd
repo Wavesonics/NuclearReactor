@@ -6,13 +6,18 @@ export(NodePath) var collision_shape_path: NodePath
 onready var collision_shape_node := get_node(collision_shape_path) as CollisionShape2D
 
 const CONTROL_CROSS_SECTION := 0.50
+const SPEED := 1.0
+const SPEED_SCRAM := 10.0
 
 var rect : Rect2
 var fullOutPositionDelta: float
 var fullInPosition: float
 var currentPositionDelta: float = 0.0
-const SPEED := 1.0
 
+var scram := false
+
+func scram():
+	scram = true
 
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2
@@ -49,12 +54,19 @@ func _process(delta):
 	
 	var changed := false
 	
-	if Input.is_action_pressed("ui_up"):
-		self.currentPositionDelta -= SPEED
-		changed = true
-	elif Input.is_action_pressed("ui_down"):
-		self.currentPositionDelta += SPEED
-		changed = true
+	if scram:
+		if percent_in() > 0.0:
+			self.currentPositionDelta += SPEED_SCRAM
+			changed = true
+		else:
+			scram = false
+	else:
+		if Input.is_action_pressed("ui_up"):
+			self.currentPositionDelta -= SPEED
+			changed = true
+		elif Input.is_action_pressed("ui_down"):
+			self.currentPositionDelta += SPEED
+			changed = true
 	
 	if changed:
 		self.currentPositionDelta = clamp(self.currentPositionDelta, -self.fullOutPositionDelta, 0.0)

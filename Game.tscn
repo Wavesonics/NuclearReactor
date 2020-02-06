@@ -43,3 +43,26 @@ margin_top = 18.0
 margin_right = 163.0
 margin_bottom = 113.0
 size_flags_vertical = 3
+
+[node name="Text" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 190.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Text"]
+margin_right = 190.0
+margin_bottom = 14.0
+text = "Controls:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Text"]
+margin_top = 18.0
+margin_right = 190.0
+margin_bottom = 418.0
+rect_min_size = Vector2( 0, 400 )
+meta_underlined = false
+text = "Up Arrow: Control Rod Out
+Down Arrow: Control Rod Out
+S: SCRAM"
+scroll_active = false
