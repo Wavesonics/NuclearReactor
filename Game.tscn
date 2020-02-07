@@ -64,5 +64,5 @@ rect_min_size = Vector2( 0, 400 )
 meta_underlined = false
 text = "Up Arrow: Control Rod Out
 Down Arrow: Control Rod Out
-S: SCRAM"
+Spacebar: SCRAM"
 scroll_active = false
