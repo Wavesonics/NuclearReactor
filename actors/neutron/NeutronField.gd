@@ -12,12 +12,6 @@ const SPEED_THERMAL := 10.0
 const DRAW_RADIUS := 5
 var draw_color := Color.gray
 
-#const CROSS_SECTION_RELATIVISTIC := 0.99
-const CROSS_SECTION_RELATIVISTIC := 0.975
-const CROSS_SECTION_THERMAL := 0.50
-
-const CONTROL_CROSS_SECTION := 0.50
-
 var reactorShape: Shape2D
 var space_state: Physics2DDirectSpaceState
 
@@ -28,6 +22,7 @@ func _ready():
 	self.reactorShape = self.reactor.collisionShape.shape as Shape2D
 	
 	self.space_state = get_world_2d().get_direct_space_state()
+
 
 func num_neutrons() -> int:
 	return neutrons.size()
@@ -50,6 +45,7 @@ func _process(delta):
 		var pos := neutron[0] as Vector2
 		var vel := neutron[1] as Vector2
 		
+		# Update the neutron's position from it's velocity
 		var distanceMoved = vel * delta
 		neutron[0] = pos + distanceMoved
 		

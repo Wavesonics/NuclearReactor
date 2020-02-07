@@ -10,6 +10,7 @@ extents = Vector2( 200.279, 199.718 )
 [node name="Reactor" type="Node2D" groups=[
 "reactors",
 ]]
+z_index = 1
 script = ExtResource( 1 )
 core_path = NodePath("Core")
 

@@ -5,16 +5,18 @@ tool
 export(NodePath) var collision_shape_path: NodePath
 onready var collision_shape_node := get_node(collision_shape_path) as CollisionShape2D
 
+onready var reactor := get_tree().get_nodes_in_group("reactors")[0] as Reactor
+
 var neutron_field: NeutronField
 
 var rect : Rect2
 
-#const CROSS_SECTION_RELATIVISTIC := 0.99
 const CROSS_SECTION_RELATIVISTIC := 0.975
 const CROSS_SECTION_THERMAL := 0.50
 
 var _time_sinc_last_fission := 0.0
 const SPANTANEUOS_FISION_RATE := 0.5
+
 
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2
@@ -80,6 +82,7 @@ func spawn_neutron(pos: Vector2):
 
 func fission(fission_position: Vector2):
 	#print("fission!")
+	reactor.add_heat(fission_position)
 
 	spawn_neutron(fission_position)
 	spawn_neutron(fission_position)
