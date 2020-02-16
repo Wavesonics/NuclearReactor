@@ -89,3 +89,7 @@ valign = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PerfReport" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="PerfReport" to="." method="_on_PerfReport_timeout"]

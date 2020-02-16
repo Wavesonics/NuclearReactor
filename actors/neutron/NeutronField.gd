@@ -24,6 +24,9 @@ func _ready():
 	self.reactorShape = self.reactor.collisionShape.shape as Shape2D
 	
 	self.space_state = get_world_2d().get_direct_space_state()
+	
+	if OS.has_feature("vr"):
+		enable_draw = false
 
 
 func num_neutrons() -> int:

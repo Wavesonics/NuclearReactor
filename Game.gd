@@ -23,3 +23,9 @@ func _process(delta):
 # Debug neutron spawn
 func _on_NeutronButton_pressed():
 	reactor_node.spawn_neutron()
+
+
+func _on_PerfReport_timeout():
+	var fps = Engine.get_frames_per_second()
+	var neutrons := neutron_field_node.num_neutrons()
+	print("%d neutrons @ %d fps" % [neutrons, fps])
