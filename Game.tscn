@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://actors/reactor/Reactor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/neutron/NeutronField.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://vr/Ubuntu-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 1 )
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -13,7 +22,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 reactor_path = NodePath("Reactor")
-neutron_field_path = NodePath("NeutronField")
 
 [node name="Reactor" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 100 )
@@ -66,3 +74,18 @@ text = "Up Arrow: Control Rod Out
 Down Arrow: Control Rod Out
 Spacebar: SCRAM"
 scroll_active = false
+
+[node name="FpsLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -336.0
+margin_bottom = 179.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "30 fps"
+align = 2
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

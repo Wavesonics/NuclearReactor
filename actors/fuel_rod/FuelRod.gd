@@ -11,8 +11,9 @@ var neutron_field: NeutronField
 
 var rect : Rect2
 
-const CROSS_SECTION_RELATIVISTIC := 0.975
-const CROSS_SECTION_THERMAL := 0.50
+const CROSS_SECTION_RELATIVISTIC := 0.95
+const CROSS_SECTION_THERMAL := 0.95
+#const CROSS_SECTION_THERMAL := 0.50
 
 var _time_sinc_last_fission := 0.0
 const SPANTANEUOS_FISION_RATE := 0.5
@@ -81,8 +82,8 @@ func spawn_neutron(pos: Vector2):
 
 
 func fission(fission_position: Vector2):
-	#print("fission!")
+	#print("=================== fission!")
+	spawn_neutron(fission_position)
+	spawn_neutron(fission_position)
+	
 	reactor.add_heat(fission_position)
-
-	spawn_neutron(fission_position)
-	spawn_neutron(fission_position)

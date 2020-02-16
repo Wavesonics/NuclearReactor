@@ -40,6 +40,7 @@ func add_heat(global_pos: Vector2, magnitude: float = 1.0):
 
 
 func _draw():
+	return
 	for iY in range(0, heat_grid.size(), 1):
 		for iX in range(0, heat_grid[iY].size(), 1):
 			var tempature := heat_grid[iY][iX] as float

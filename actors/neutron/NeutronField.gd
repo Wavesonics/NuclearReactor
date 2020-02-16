@@ -15,6 +15,8 @@ var draw_color := Color.gray
 var reactorShape: Shape2D
 var space_state: Physics2DDirectSpaceState
 
+var enable_draw := true
+
 var neutrons := []
 
 func _ready():
@@ -27,6 +29,7 @@ func _ready():
 func num_neutrons() -> int:
 	return neutrons.size()
 
+
 func spawn_neutron(pos: Vector2, vel: Vector2):
 	var neutron := []
 	#neutron.resize(2)
@@ -36,7 +39,8 @@ func spawn_neutron(pos: Vector2, vel: Vector2):
 	neutrons.append(neutron)
 	update()
 
-func _process(delta):
+
+func _physics_process(delta):
 	
 	var toRemove := []
 	
@@ -77,6 +81,7 @@ func _process(delta):
 	update()
 
 func _draw():
-	for neutron in neutrons:
-		var pos = neutron[0]
-		draw_circle(pos, DRAW_RADIUS, draw_color)
+	if enable_draw:
+		for neutron in neutrons:
+			var pos = neutron[0]
+			draw_circle(pos, DRAW_RADIUS, draw_color)
