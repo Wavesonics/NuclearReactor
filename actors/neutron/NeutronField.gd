@@ -19,6 +19,13 @@ var enable_draw := true
 
 var neutrons := []
 
+var stillWorking := 0
+var toRemove := []
+var curDelta := 0.0
+
+var neutronWaitSemaphore := Semaphore.new()
+var neutronRemovalMutex := Mutex.new()
+
 func _ready():
 	self.reactor_core = self.reactor.core_node
 	self.reactorShape = self.reactor.collisionShape.shape as Shape2D
@@ -40,20 +47,22 @@ func spawn_neutron(pos: Vector2, vel: Vector2):
 	neutron.append(vel)
 	
 	neutrons.append(neutron)
+	
 	update()
 
 
-func _physics_process(delta):
-	
-	var toRemove := []
+func process_neutrons(batch: Array):
+	#print("Neutron thread %d WOKE UP!! %d neutrons" % [batch[0], batch.size()])
 	
 	var iN = 0
-	for neutron in neutrons:
+	
+	for index in batch:
+		var neutron = neutrons[index]
 		var pos := neutron[0] as Vector2
 		var vel := neutron[1] as Vector2
 		
 		# Update the neutron's position from it's velocity
-		var distanceMoved = vel * delta
+		var distanceMoved = vel * curDelta
 		neutron[0] = pos + distanceMoved
 		
 		# Find all areas this Neutron collides with
@@ -72,16 +81,59 @@ func _physics_process(delta):
 		
 		if not is_in_reactor_core or remove_neutron:
 			#print("Neutron escaped!")
-			toRemove.append(iN)
+			remove_neutron(iN)
 		
 		iN += 1
+
+	# Let everyone know we're done
+	self.stillWorking -= 1
+	self.neutronWaitSemaphore.post()
+
+
+func _physics_process(delta):
 	
-	# Remove in reverse order
-	for iR in range(toRemove.size()-1, -1, -1):
-		var ii = toRemove[iR]
-		neutrons.remove(ii)
+	self.toRemove.clear()
+	self.curDelta = delta
 	
-	update()
+	var numNuetrons := num_neutrons()
+	var numWorkers := OS.get_processor_count()
+	
+	if numNuetrons > 0:
+		var batchSize := 0
+		# Just use one worker
+		if numNuetrons < numWorkers:
+			batchSize = numNuetrons
+		else:
+			batchSize = numNuetrons / numWorkers
+		
+		self.stillWorking = 1
+		#$ThreadPool.submit_task(self, "process_neutrons", range(0, num_neutrons()-1))
+		#self.stillWorking = numWorkers
+		#for ii in range(0, numWorkers-1):
+		#	var batchStart := batchSize*ii
+		#	var batch := range(batchStart, batchStart+batchSize)
+		#	print("Starting worker")
+		#	$ThreadPool.submit_task(self, "process_neutrons", batch)
+		
+		#print("============================")
+		
+		#while self.stillWorking > 0:
+			#print("Still waiting... %d" % self.stillWorking)
+			#self.neutronWaitSemaphore.wait()
+		
+		self.toRemove.sort()
+		
+		# Remove in reverse order
+		for iR in range(toRemove.size()-1, -1, -1):
+			var ii = toRemove[iR]
+			neutrons.remove(ii)
+		
+		update()
+
+func remove_neutron(index: int):
+	self.neutronRemovalMutex.lock()
+	self.toRemove.append(index)
+	self.neutronRemovalMutex.unlock()
 
 func _draw():
 	if enable_draw:

@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "RealTimeGraph",
 "language": "GDScript",
 "path": "res://actors/real_time_graph/RealTimeGraph.gd"
+}, {
+"base": "Node",
+"class": "ThreadPool",
+"language": "GDScript",
+"path": "res://addons/thread_pool/thread_pool.gd"
 } ]
 _global_script_class_icons={
 "ControlRod": "",
 "FuelRod": "",
 "NeutronField": "",
 "Reactor": "",
-"RealTimeGraph": ""
+"RealTimeGraph": "",
+"ThreadPool": ""
 }
 
 [application]
@@ -47,6 +53,10 @@ _global_script_class_icons={
 config/name="Reactor"
 run/main_scene="res://entry/Entry.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+thread_pool_plugin="res://addons/thread_pool/thread_pool_plugin.gd"
 
 [gdnative]
 
