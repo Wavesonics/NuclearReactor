@@ -15,7 +15,9 @@ z_index = 1
 script = ExtResource( 1 )
 core_path = NodePath("Core")
 
-[node name="Core" type="Area2D" parent="."]
+[node name="Core" type="Area2D" parent="." groups=[
+"reactor_cores",
+]]
 gravity_vec = Vector2( 0, 0 )
 collision_layer = 4
 

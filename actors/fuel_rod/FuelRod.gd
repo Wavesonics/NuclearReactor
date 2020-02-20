@@ -82,3 +82,4 @@ func fission(fission_position: Vector2):
 	spawn_neutron(fission_position)
 	
 	reactor.add_heat(fission_position)
+	reactor.add_fission_biproduct(fission_position)

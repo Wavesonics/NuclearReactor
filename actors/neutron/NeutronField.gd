@@ -1,7 +1,7 @@
 extends Node2D
 class_name NeutronField
 
-onready var reactor_core := (get_tree().get_nodes_in_group("reactors")[0] as Reactor).core_node as Area2D
+onready var reactor_core := get_tree().get_nodes_in_group("reactor_cores")[0] as Area2D
 
 const GROUP := "neutron_field"
 
@@ -110,8 +110,6 @@ func _physics_process(delta):
 				#print("Starting worker")
 				$ThreadPool.submit_task(self, "process_neutrons", batch)
 		
-		#print("============================")
-		
 		while self.stillWorking > 0:
 			#print("Still waiting... %d" % self.stillWorking)
 			self.neutronWaitSemaphore.wait()
@@ -137,8 +135,8 @@ func _draw():
 		
 		for neutronI in range(0, neutrons.size(), step):
 			var neutron := neutrons[neutronI] as Array
-			var pos = neutron[0] as Vector2
-			var vel = neutron[1] as Vector2
+			var pos := neutron[0] as Vector2
+			var vel := neutron[1] as Vector2
 			
 			if vel.length() > (SPEED_THERMAL+1.0):
 				draw_circle(pos, DRAW_RADIUS, draw_color_relativistic)
