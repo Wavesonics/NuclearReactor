@@ -15,7 +15,7 @@ var draw_color := Color.gray
 var reactorShape: Shape2D
 var space_state: Physics2DDirectSpaceState
 
-var enable_draw := true
+var enable_draw := false
 
 var neutrons := []
 
@@ -106,20 +106,22 @@ func _physics_process(delta):
 		else:
 			batchSize = numNuetrons / numWorkers
 		
-		self.stillWorking = 1
-		#$ThreadPool.submit_task(self, "process_neutrons", range(0, num_neutrons()-1))
-		#self.stillWorking = numWorkers
-		#for ii in range(0, numWorkers-1):
-		#	var batchStart := batchSize*ii
-		#	var batch := range(batchStart, batchStart+batchSize)
-		#	print("Starting worker")
-		#	$ThreadPool.submit_task(self, "process_neutrons", batch)
+		if batchSize <= numNuetrons:
+			self.stillWorking = 1
+			$ThreadPool.submit_task(self, "process_neutrons", range(0, num_neutrons()-1))
+		else:
+			self.stillWorking = numWorkers
+			for ii in range(0, numWorkers-1):
+				var batchStart := batchSize*ii
+				var batch := range(batchStart, batchStart+batchSize)
+				#print("Starting worker")
+				$ThreadPool.submit_task(self, "process_neutrons", batch)
 		
 		#print("============================")
 		
-		#while self.stillWorking > 0:
+		while self.stillWorking > 0:
 			#print("Still waiting... %d" % self.stillWorking)
-			#self.neutronWaitSemaphore.wait()
+			self.neutronWaitSemaphore.wait()
 		
 		self.toRemove.sort()
 		
