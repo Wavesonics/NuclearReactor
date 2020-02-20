@@ -9,6 +9,8 @@ var collisionShape: CollisionShape2D
 var heat_grid_draw_pos := Vector2(-100, -100)
 const HEAT_GRID_RESOLUTION = 0.16
 var heat_grid := []
+const BIPRODUCT_GRID_RESOLUTION = 0.16
+var biproduct_grid := []
 
 func _ready():
 	self.collisionShape = core_node.get_node("CollisionShape2D") as CollisionShape2D
@@ -40,7 +42,6 @@ func add_heat(global_pos: Vector2, magnitude: float = 1.0):
 
 
 func _draw():
-	return
 	for iY in range(0, heat_grid.size(), 1):
 		for iX in range(0, heat_grid[iY].size(), 1):
 			var tempature := heat_grid[iY][iX] as float

@@ -7,15 +7,16 @@ var reactor_core: Area2D
 const GROUP := "neutron_field"
 
 const SPEED_RELATIVISTIC := 100.0
-const SPEED_THERMAL := 10.0
+const SPEED_THERMAL := 50.0
 
-const DRAW_RADIUS := 5
-var draw_color := Color.gray
+const DRAW_RADIUS := 1
+var draw_color_thermal := Color.gray
+var draw_color_relativistic := Color.orange
 
 var reactorShape: Shape2D
 var space_state: Physics2DDirectSpaceState
 
-var enable_draw := false
+var enable_draw := true
 
 var neutrons := []
 
@@ -139,6 +140,15 @@ func remove_neutron(index: int):
 
 func _draw():
 	if enable_draw:
-		for neutron in neutrons:
-			var pos = neutron[0]
-			draw_circle(pos, DRAW_RADIUS, draw_color)
+		var max_draw := 400
+		var step := max(1, (neutrons.size() / max_draw))
+		
+		for neutronI in range(0, neutrons.size(), step):
+			var neutron := neutrons[neutronI] as Array
+			var pos = neutron[0] as Vector2
+			var vel = neutron[1] as Vector2
+			
+			if vel.length() > (SPEED_THERMAL+1.0):
+				draw_circle(pos, DRAW_RADIUS, draw_color_relativistic)
+			else:
+				draw_circle(pos, DRAW_RADIUS, draw_color_thermal)

@@ -5,9 +5,9 @@ tool
 export(NodePath) var collision_shape_path: NodePath
 onready var collision_shape_node := get_node(collision_shape_path) as CollisionShape2D
 
-const CONTROL_CROSS_SECTION := 0.50
-const SPEED := 1.0
-const SPEED_SCRAM := 10.0
+const CONTROL_CROSS_SECTION := 0.10
+const SPEED := 10.0
+const SPEED_SCRAM := 100.0
 
 var rect : Rect2
 var fullOutPositionDelta: float
@@ -16,7 +16,7 @@ var currentPositionDelta: float = 0.0
 
 var scram := false
 
-func scram():
+func do_scram():
 	scram = true
 
 func _ready():
@@ -42,7 +42,7 @@ func percent_in():
 
 
 func process_neutron(neutron: Array):
-	if rand_range(0.0, 1.0) >= CONTROL_CROSS_SECTION:
+	if rand_range(0.0, 1.0) >= (1.0 - CONTROL_CROSS_SECTION):
 		return true
 	else:
 		return false
@@ -56,16 +56,16 @@ func _process(delta):
 	
 	if scram:
 		if percent_in() > 0.0:
-			self.currentPositionDelta += SPEED_SCRAM
+			self.currentPositionDelta += SPEED_SCRAM * delta
 			changed = true
 		else:
 			scram = false
 	else:
 		if Input.is_action_pressed("ui_up"):
-			self.currentPositionDelta -= SPEED
+			self.currentPositionDelta -= SPEED * delta
 			changed = true
 		elif Input.is_action_pressed("ui_down"):
-			self.currentPositionDelta += SPEED
+			self.currentPositionDelta += SPEED * delta
 			changed = true
 	
 	if changed:

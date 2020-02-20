@@ -17,7 +17,7 @@ func _process(delta):
 	if Input.is_action_just_released("scram"):
 		var controlRods := get_tree().get_nodes_in_group("control_rods")
 		for rod in controlRods:
-			rod.scram()
+			rod.do_scram()
 
 
 # Debug neutron spawn

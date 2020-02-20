@@ -19,7 +19,6 @@ func write_data(dataPoint: int):
 	update()
 
 func _draw():
-	
 	for ii in range(0, size-1):
 		var n = self.data[ii]
 		if ii == nextWrite:

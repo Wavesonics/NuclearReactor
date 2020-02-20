@@ -11,9 +11,8 @@ var neutron_field: NeutronField
 
 var rect : Rect2
 
-const CROSS_SECTION_RELATIVISTIC := 0.95
-const CROSS_SECTION_THERMAL := 0.95
-#const CROSS_SECTION_THERMAL := 0.50
+const CROSS_SECTION_RELATIVISTIC := 0.001
+const CROSS_SECTION_THERMAL := 0.05
 
 var _time_sinc_last_fission := 0.0
 const SPANTANEUOS_FISION_RATE := 0.5
@@ -63,7 +62,7 @@ func process_neutron(neutron: Array):
 	else:
 		crossSection = CROSS_SECTION_THERMAL
 	
-	if rand_range(0.0, 1.0) >= crossSection:
+	if rand_range(0.0, 1.0) >= (1.0 - crossSection):
 		fission(pos)
 		return true
 	else:
@@ -71,7 +70,7 @@ func process_neutron(neutron: Array):
 
 
 func spawn_neutron(pos: Vector2):
-	var direction = Vector2(rand_range(1.0, 2.0), rand_range(1.0, 2.0)).normalized()
+	var direction = Vector2(rand_range(0.0, 1.0), rand_range(0.0, 1.0)).normalized()
 	if randi() % 2 == 0:
 		direction.x *= -1
 	if randi() % 2 == 0:
@@ -82,7 +81,6 @@ func spawn_neutron(pos: Vector2):
 
 
 func fission(fission_position: Vector2):
-	#print("=================== fission!")
 	spawn_neutron(fission_position)
 	spawn_neutron(fission_position)
 	
