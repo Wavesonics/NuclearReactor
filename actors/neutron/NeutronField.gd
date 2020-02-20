@@ -1,8 +1,7 @@
 extends Node2D
 class_name NeutronField
 
-onready var reactor := get_tree().get_nodes_in_group("reactors")[0] as Reactor
-var reactor_core: Area2D
+onready var reactor_core := (get_tree().get_nodes_in_group("reactors")[0] as Reactor).core_node as Area2D
 
 const GROUP := "neutron_field"
 
@@ -28,9 +27,6 @@ var neutronWaitSemaphore := Semaphore.new()
 var neutronRemovalMutex := Mutex.new()
 
 func _ready():
-	self.reactor_core = self.reactor.core_node
-	self.reactorShape = self.reactor.collisionShape.shape as Shape2D
-	
 	self.space_state = get_world_2d().get_direct_space_state()
 	
 	if OS.has_feature("vr"):
@@ -42,11 +38,7 @@ func num_neutrons() -> int:
 
 
 func spawn_neutron(pos: Vector2, vel: Vector2):
-	var neutron := []
-	#neutron.resize(2)
-	neutron.append(pos)
-	neutron.append(vel)
-	
+	var neutron := [pos, vel]
 	neutrons.append(neutron)
 	
 	update()

@@ -6,8 +6,7 @@ export(NodePath) var collision_shape_path: NodePath
 onready var collision_shape_node := get_node(collision_shape_path) as CollisionShape2D
 
 onready var reactor := get_tree().get_nodes_in_group("reactors")[0] as Reactor
-
-var neutron_field: NeutronField
+onready var neutron_field := get_tree().get_nodes_in_group("neutron_field")[0] as NeutronField
 
 var rect : Rect2
 
@@ -21,8 +20,6 @@ const SPANTANEUOS_FISION_RATE := 0.5
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2
 	self.rect = Rect2(Vector2(-size.x, -size.y), Vector2(size.x*2, size.y*2))
-	
-	self.neutron_field = get_tree().get_nodes_in_group("neutron_field")[0] as NeutronField
 
 
 func _draw():
