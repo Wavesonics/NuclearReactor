@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/reactor/Reactor.gd" type="Script" id=1]
 [ext_resource path="res://actors/fuel_rod/FuelRod.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/control_rod/ControlRod.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/moderator/Moderator.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 200.279, 199.718 )
@@ -65,3 +66,15 @@ position = Vector2( 340.134, 207.144 )
 
 [node name="FuelRod5" parent="." instance=ExtResource( 2 )]
 position = Vector2( 374.957, 208.711 )
+
+[node name="Moderator" parent="." instance=ExtResource( 4 )]
+position = Vector2( 54.279, 202.9 )
+
+[node name="Moderator2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 147.329, 206.777 )
+
+[node name="Moderator3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 231.332, 215.824 )
+
+[node name="Moderator4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 321.797, 209.362 )
