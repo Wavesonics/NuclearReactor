@@ -67,14 +67,8 @@ func process_neutron(neutron: Array):
 
 
 func spawn_neutron(pos: Vector2):
-	var direction = Vector2(rand_range(0.0, 1.0), rand_range(0.0, 1.0)).normalized()
-	if randi() % 2 == 0:
-		direction.x *= -1
-	if randi() % 2 == 0:
-		direction.y *= -1
-	direction *= NeutronField.SPEED_RELATIVISTIC
-	
-	neutron_field.spawn_neutron(pos, direction)
+	var vel := neutron_field.random_direction() * NeutronField.SPEED_RELATIVISTIC
+	neutron_field.spawn_neutron(pos, vel)
 
 
 func fission(fission_position: Vector2):

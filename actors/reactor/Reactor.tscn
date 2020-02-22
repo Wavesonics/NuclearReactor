@@ -80,3 +80,7 @@ position = Vector2( 231.332, 215.824 )
 
 [node name="Moderator4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 321.797, 209.362 )
+
+[node name="MapUpdateTimer" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="MapUpdateTimer" to="." method="_on_MapUpdateTimer_timeout"]

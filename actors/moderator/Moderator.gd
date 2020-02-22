@@ -30,7 +30,12 @@ func process_neutron(neutron: Array):
 	if speed > NeutronField.SPEED_THERMAL + 1.0:
 		if rand_range(0.0, 1.0) >= (1.0 - MODERATOR_CROSS_SECTION):
 			
+			# Refect
 			var thermalizedVel := vel * -1.0
+			# Don't reflect perfectly back
+			thermalizedVel.x += rand_range(-0.3, 0.3)
+			thermalizedVel.y += rand_range(-0.3, 0.3)
+			# Slow down
 			thermalizedVel = thermalizedVel.normalized() * NeutronField.SPEED_THERMAL
 			
 			neutron_field.spawn_neutron(pos, thermalizedVel)

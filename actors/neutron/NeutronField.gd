@@ -37,6 +37,14 @@ func num_neutrons() -> int:
 	return neutrons.size()
 
 
+func random_direction() -> Vector2:
+	var direction = Vector2(rand_range(0.0, 1.0), rand_range(0.0, 1.0)).normalized()
+	if randi() % 2 == 0:
+		direction.x *= -1
+	if randi() % 2 == 0:
+		direction.y *= -1
+	return direction
+
 func spawn_neutron(pos: Vector2, vel: Vector2):
 	var neutron := [pos, vel]
 	neutrons.append(neutron)
