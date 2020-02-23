@@ -1,48 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://vr/vr_player/VrPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://vr/VrGame.gd" type="Script" id=2]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=3]
-[ext_resource path="res://vr/nuclear_control_panel_v0.glb" type="PackedScene" id=4]
-
-[sub_resource type="VisualShaderNodeColorConstant" id=1]
-output_port_for_preview = 0
-constant = Color( 0.390625, 0.0671387, 0.0671387, 1 )
-
-[sub_resource type="VisualShader" id=2]
-code = "shader_type spatial;
-
-
-
-void vertex() {
-// Output:0
-
-}
-
-void fragment() {
-// Color:2
-	vec3 n_out2p0;
-	float n_out2p1;
-	n_out2p0 = vec3(0.390625,0.067139,0.067139);
-	n_out2p1 = 1.000000;
-
-// Output:0
-	ALBEDO = n_out2p0;
-
-}
-
-void light() {
-// Output:0
-
-}
-"
-graph_offset = Vector2( 0, 88.2609 )
-nodes/fragment/2/node = SubResource( 1 )
-nodes/fragment/2/position = Vector2( 120, 280 )
-nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[ext_resource path="res://vr/art/room/Reactor_room_v2.glb" type="PackedScene" id=4]
 
 [sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Viewport")
@@ -55,16 +16,7 @@ albedo_texture = SubResource( 4 )
 script = ExtResource( 2 )
 
 [node name="VrPlayer" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166443, 0 )
-
-[node name="Floor" type="CSGBox" parent="."]
-width = 9.69107
-height = 0.25
-depth = 7.20463
-material = SubResource( 3 )
-
-[node name="nuclear_control_panel_v0" parent="." instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.18277, -3.57948 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.11523, 0.668906 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1024, 600 )
@@ -75,8 +27,10 @@ usage = 0
 reactor_path = NodePath("../../Viewport/CanvasLayer/Game/Reactor")
 
 [node name="CoreDisplay" type="CSGBox" parent="."]
-transform = Transform( -0.650107, 0, 0.759843, 0, 1, 0, -0.759843, 0, -0.650107, 3.54945, 2.6216, -2.52255 )
+transform = Transform( -0.637875, -0.19307, 0.745547, -0.0144866, 0.970903, 0.239035, -0.770004, 0.141674, -0.622112, 2.94745, 1.23103, -0.221467 )
 width = 2.29922
 height = 1.57619
 depth = 0.100504
 material = SubResource( 5 )
+
+[node name="Reactor_room_v2" parent="." instance=ExtResource( 4 )]
