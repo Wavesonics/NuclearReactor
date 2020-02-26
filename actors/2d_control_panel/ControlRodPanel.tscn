@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://actors/2d_control_panel/IndicatorLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/2d_control_panel/ControlRodPanel.gd" type="Script" id=2]
 [ext_resource path="res://actors/2d_control_panel/momentary_button.gd" type="Script" id=3]
 
@@ -17,7 +16,8 @@ __meta__ = {
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 56.0
-margin_bottom = 226.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 0, 256 )
 
 [node name="UpButton" type="Button" parent="HBoxContainer"]
 margin_right = 56.0
@@ -28,36 +28,18 @@ script = ExtResource( 3 )
 [node name="Control" type="Control" parent="HBoxContainer"]
 margin_top = 24.0
 margin_right = 56.0
-margin_bottom = 202.0
+margin_bottom = 232.0
 size_flags_vertical = 3
 
 [node name="DownButton" type="Button" parent="HBoxContainer"]
-margin_top = 206.0
+margin_top = 236.0
 margin_right = 56.0
-margin_bottom = 226.0
+margin_bottom = 256.0
 text = "DOWN"
 script = ExtResource( 3 )
 
-[node name="LightsContainer" type="Control" parent="."]
+[node name="LightsContainer" type="VBoxContainer" parent="."]
 margin_left = 60.0
-margin_right = 60.0
-margin_bottom = 226.0
-
-[node name="IndicatorLight0" parent="LightsContainer" instance=ExtResource( 1 )]
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="IndicatorLight1" parent="LightsContainer" instance=ExtResource( 1 )]
-margin_top = 60.0
-margin_right = 0.0
-margin_bottom = 60.0
-
-[node name="IndicatorLight2" parent="LightsContainer" instance=ExtResource( 1 )]
-margin_top = 120.0
-margin_right = 0.0
-margin_bottom = 120.0
-
-[node name="IndicatorLight3" parent="LightsContainer" instance=ExtResource( 1 )]
-margin_top = 180.0
-margin_right = 0.0
-margin_bottom = 180.0
+margin_right = 100.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 40, 0 )
