@@ -1,4 +1,4 @@
 extends Spatial
 
 func _ready():
-	pass
+	vr.initialize()

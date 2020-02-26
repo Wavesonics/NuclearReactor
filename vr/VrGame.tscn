@@ -1,22 +1,19 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://vr/vr_player/VrPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://vr/VrGame.gd" type="Script" id=2]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://vr/art/room/Reactor_room_v2.glb" type="PackedScene" id=4]
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
-albedo_texture = SubResource( 4 )
+albedo_texture = SubResource( 1 )
 
 [node name="VrGame" type="Spatial"]
 script = ExtResource( 2 )
-
-[node name="VrPlayer" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.11523, 0.668906 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1024, 600 )
@@ -31,6 +28,9 @@ transform = Transform( -0.637875, -0.19307, 0.745547, -0.0144866, 0.970903, 0.23
 width = 2.29922
 height = 1.57619
 depth = 0.100504
-material = SubResource( 5 )
+material = SubResource( 2 )
 
 [node name="Reactor_room_v2" parent="." instance=ExtResource( 4 )]
+
+[node name="OqVrPlayer" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14566, 0.347217 )

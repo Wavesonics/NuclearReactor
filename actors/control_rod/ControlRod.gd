@@ -25,13 +25,15 @@ func _ready():
 	
 	self.fullOutPositionDelta = size.y*2
 	self.fullInPosition = self.position.y
+	
+	ControlSystem.controlRods.append(self)
 
 
 func _draw():
 	draw_rect(self.rect, Color.green)
 
 
-func percent_in():
+func percent_out():
 	var totalDistance = abs(self.fullOutPositionDelta)
 	var curPos = abs(self.currentPositionDelta)
 	
@@ -48,6 +50,17 @@ func process_neutron(neutron: Array):
 		return false
 
 
+func move_up(delta: float):
+	self.currentPositionDelta -= SPEED * delta
+	update_rod_position()
+	
+
+
+func move_down(delta: float):
+	self.currentPositionDelta += SPEED * delta
+	update_rod_position()
+
+
 func _process(delta):
 	if Engine.is_editor_hint():
 		return
@@ -55,7 +68,7 @@ func _process(delta):
 	var changed := false
 	
 	if scram:
-		if percent_in() > 0.0:
+		if percent_out() > 0.0:
 			self.currentPositionDelta += SPEED_SCRAM * delta
 			changed = true
 		else:
@@ -69,5 +82,9 @@ func _process(delta):
 			changed = true
 	
 	if changed:
-		self.currentPositionDelta = clamp(self.currentPositionDelta, -self.fullOutPositionDelta, 0.0)
-		self.position.y = self.fullInPosition + self.currentPositionDelta
+		update_rod_position()
+
+
+func update_rod_position():
+	self.currentPositionDelta = clamp(self.currentPositionDelta, -self.fullOutPositionDelta, 0.0)
+	self.position.y = self.fullInPosition + self.currentPositionDelta

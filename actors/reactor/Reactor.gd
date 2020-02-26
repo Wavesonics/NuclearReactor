@@ -107,6 +107,7 @@ var rectSide := 2.0
 var rectSize := Vector2(rectSide, rectSide)
 
 func _draw():
+	return
 	for iY in range(0, heat_grid.size(), 1):
 		for iX in range(0, heat_grid[iY].size(), 1):
 			var tempature := heat_grid[iY][iX] as float

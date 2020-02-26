@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://actors/reactor/Reactor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/neutron/NeutronField.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://vr/Ubuntu-Medium.ttf"
@@ -24,7 +25,7 @@ __meta__ = {
 reactor_path = NodePath("Reactor")
 
 [node name="Reactor" parent="." instance=ExtResource( 2 )]
-position = Vector2( 200, 100 )
+position = Vector2( 6.14667, 191.757 )
 
 [node name="NeutronField" parent="." instance=ExtResource( 4 )]
 
@@ -92,4 +93,10 @@ __meta__ = {
 
 [node name="PerfReport" type="Timer" parent="."]
 autostart = true
+
+[node name="ControlPanel" parent="." instance=ExtResource( 5 )]
+margin_left = 416.0
+margin_top = 323.0
+margin_right = -17.0
+margin_bottom = -12.0
 [connection signal="timeout" from="PerfReport" to="." method="_on_PerfReport_timeout"]
