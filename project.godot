@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/control_rod/ControlRod.gd"
 }, {
+"base": "HBoxContainer",
+"class": "ControlRodPanel",
+"language": "GDScript",
+"path": "res://actors/2d_control_panel/ControlRodPanel.gd"
+}, {
+"base": "Spatial",
+"class": "Feature_RigidBodyGrab",
+"language": "GDScript",
+"path": "res://OQ_Toolkit/OQ_ARVRController/scripts/Feature_RigidBodyGrab.gd"
+}, {
 "base": "Area2D",
 "class": "FuelRod",
 "language": "GDScript",
@@ -24,10 +34,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/moderator/Moderator.gd"
 }, {
+"base": "Button",
+"class": "MomentaryButton",
+"language": "GDScript",
+"path": "res://actors/2d_control_panel/momentary_button.gd"
+}, {
 "base": "Node2D",
 "class": "NeutronField",
 "language": "GDScript",
 "path": "res://actors/neutron/NeutronField.gd"
+}, {
+"base": "RigidBody",
+"class": "OQClass_GrabbableRigidBody",
+"language": "GDScript",
+"path": "res://OQ_Toolkit/OQ_Classes/OQClass_GrabbableRigidBody.gd"
 }, {
 "base": "Node2D",
 "class": "Reactor",
@@ -46,9 +66,13 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ControlRod": "",
+"ControlRodPanel": "",
+"Feature_RigidBodyGrab": "",
 "FuelRod": "",
 "Moderator": "",
+"MomentaryButton": "",
 "NeutronField": "",
+"OQClass_GrabbableRigidBody": "",
 "Reactor": "",
 "RealTimeGraph": "",
 "ThreadPool": ""
@@ -59,6 +83,11 @@ _global_script_class_icons={
 config/name="Reactor"
 run/main_scene="res://entry/Entry.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+vr="*res://OQ_Toolkit/vr_autoload.gd"
+ControlSystem="*res://actors/control_system/ControlSystem.gd"
 
 [editor_plugins]
 

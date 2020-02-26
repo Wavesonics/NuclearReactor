@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/2d_control_panel/ControlRodPanel.gd" type="Script" id=2]
+[ext_resource path="res://actors/2d_control_panel/momentary_button.gd" type="Script" id=3]
+
+[node name="RodControl" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -919.0
+margin_bottom = -374.0
+rect_min_size = Vector2( 105, 0 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 56.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 0, 256 )
+
+[node name="UpButton" type="Button" parent="HBoxContainer"]
+margin_right = 56.0
+margin_bottom = 20.0
+text = "UP"
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_top = 24.0
+margin_right = 56.0
+margin_bottom = 232.0
+size_flags_vertical = 3
+
+[node name="DownButton" type="Button" parent="HBoxContainer"]
+margin_top = 236.0
+margin_right = 56.0
+margin_bottom = 256.0
+text = "DOWN"
+script = ExtResource( 3 )
+
+[node name="LightsContainer" type="VBoxContainer" parent="."]
+margin_left = 60.0
+margin_right = 100.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 40, 0 )

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actors/2d_control_panel/IndicatorLight.gd" type="Script" id=1]
+
+[node name="IndicatorLight" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 20 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Off" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 20.0
+color = Color( 0.12549, 0.00392157, 0.00392157, 1 )
+
+[node name="On" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 20.0
+color = Color( 0.909804, 0.0705882, 0.0705882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actors/2d_control_panel/2dControlPanel.gd" type="Script" id=2]
+
+[node name="Panel" type="Panel"]
+margin_right = 670.0
+margin_bottom = 324.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlPanel" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
