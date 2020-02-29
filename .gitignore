@@ -1,1 +1,5 @@
 .import/*
+cpp/.idea
+cpp/.vs
+cpp/cmake-build-debug
+cpp/out

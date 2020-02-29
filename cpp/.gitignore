@@ -1,0 +1,4 @@
+godot_headers/
+godot-cpp/
+lib/
+*.obj
