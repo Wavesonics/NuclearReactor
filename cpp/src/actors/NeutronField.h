@@ -10,7 +10,6 @@
 #include <Node2D.hpp>
 #include "Neutron.h"
 #include "ReactorCore.h"
-#include "../math/AABB2d.h"
 #include "NeutronRegion.h"
 #include "../util/ThreadPool.h"
 

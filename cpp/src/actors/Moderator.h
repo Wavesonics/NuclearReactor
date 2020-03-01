@@ -19,7 +19,7 @@ namespace nuclearPhysics
 		Moderator();
 		~Moderator() override;
 
-		void _physics_process(float delta) override;
+		virtual void _physics_process(float delta);
 		bool handleNeutron(nuclearPhysics::Neutron &neutron) override;
 
 		static void _register_methods();

@@ -26,32 +26,11 @@ bool ReactorCore::handleNeutron(Neutron & neutron)
 
 void ReactorCore::_init()
 {
-    coreBounds = DEFAULT_BOUNDS;
-}
-
-void ReactorCore::_ready()
-{
-    cout << "pos " << coreBounds.position.x << ", " << coreBounds.position.y << " size " << coreBounds.size.width << ", " << coreBounds.size.width << endl;
-    area = new AABB2d(Vector2(coreBounds.position.x, coreBounds.position.y), Vector2(coreBounds.position.x + coreBounds.size.width, coreBounds.position.y + coreBounds.size.height));
-    cout << "bottomLeft " << area->bottomLeft.x << ", " << area->bottomLeft.y << " topRight " << area->topRight.x << ", " << area->topRight.y << endl;
-}
-
-void ReactorCore::_draw()
-{
-    Godot::print("_draw");
-    auto color = Color();
-    color.a = 1.0f;
-    color.r = 0.0f;
-    color.g = 0.0f;
-    color.b = 0.0f;
-
-    draw_rect(coreBounds, color);
-    Godot::print("_draw DONE");
+    area = DEFAULT_BOUNDS;
 }
 
 void ReactorCore::_register_methods()
 {
-    register_property<ReactorCore, Rect2>("coreBounds", &ReactorCore::coreBounds, DEFAULT_BOUNDS);
+    register_property<ReactorCore, godot::Rect2>("area", &ReactorCore::area, DEFAULT_BOUNDS);
     register_method("_init", &ReactorCore::_init);
-    register_method("_ready", &ReactorCore::_ready);
 }

@@ -60,7 +60,7 @@ void FuelRod::spawnFissionNeutron(Neutron &neutron)
 
 void FuelRod::spawnSpontaneousNeutron()
 {
-	auto position = rand_vec2(area->bottomLeft.x, area->width(), area->bottomLeft.y, area->height());
+	auto position = rand_vec2(area.position.x, area.size.width, area.position.y, area.size.height);
 	auto velocity = rand_vec2(-1.0f, 1.0f) * Neutron::SPEED_RELATIVISTIC;
 	auto newNeutron = Neutron(position, velocity);
 	neutronField->addNeutron(newNeutron);

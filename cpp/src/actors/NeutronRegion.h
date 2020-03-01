@@ -8,15 +8,16 @@
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include "Neutron.h"
-#include "../math/AABB2d.h"
 
 namespace nuclearPhysics
 {
 	class NeutronRegion : public godot::Node2D
 	{
 		GODOT_CLASS(NeutronRegion, godot::Node2D)
+	protected:
+		godot::Color drawColor;
 	public:
-		nuclearPhysics::AABB2d* area = NULL;
+		godot::Rect2 area;
 
 		NeutronRegion();
 		virtual ~NeutronRegion();
@@ -30,9 +31,11 @@ namespace nuclearPhysics
 		virtual bool handleNeutron(nuclearPhysics::Neutron &neutron) = 0;
 
 		// Convenience method for checking the area
-		bool contains(const godot::Vector2 &point) const;
+		bool contains(const godot::Point2 &point) const;
 
-		virtual void _physics_process(float delta);
+		virtual void _init();
+		virtual void _ready();
+		virtual void _draw();
 		static void _register_methods();
 	};
 }

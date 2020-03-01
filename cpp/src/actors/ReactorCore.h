@@ -14,15 +14,11 @@ namespace nuclearPhysics
 	class ReactorCore : public NeutronRegion
 	{
 		GODOT_CLASS(ReactorCore, nuclearPhysics::NeutronRegion)
-	private:
-		godot::Rect2 coreBounds;
 	public:
 		ReactorCore();
 		~ReactorCore() override;
 
 		virtual void _init();
-		virtual void _ready();
-		virtual void _draw();
 		bool handleNeutron(Neutron& neutron) override;
 
 		static void _register_methods();

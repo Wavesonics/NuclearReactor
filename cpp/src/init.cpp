@@ -5,7 +5,7 @@
 #include "actors/FuelRod.h"
 #include "actors/Moderator.h"
 #include "actors/ReactorCore.h"
-#include "math/AABB2d.h"
+
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
     godot::Godot::gdnative_init(o);
@@ -23,5 +23,4 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
     godot::register_class<nuclearPhysics::ControlRod>();
     godot::register_class<nuclearPhysics::FuelRod>();
     godot::register_class<nuclearPhysics::Moderator>();
-    godot::register_class<nuclearPhysics::AABB2d>();
 }
