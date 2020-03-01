@@ -21,6 +21,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
     godot::register_class<nuclearPhysics::NeutronField>();
     godot::register_tool_class<nuclearPhysics::ReactorCore>();
     godot::register_tool_class<nuclearPhysics::ControlRod>();
-    godot::register_tool_class<nuclearPhysics::FuelRod>();
+    godot::register_class<nuclearPhysics::FuelRod>();
     godot::register_tool_class<nuclearPhysics::Moderator>();
 }

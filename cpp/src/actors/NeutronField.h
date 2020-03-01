@@ -25,11 +25,11 @@ namespace nuclearPhysics
 
 		std::vector<nuclearPhysics::Neutron> neutrons;
 		std::vector<int> toRemove;
-		std::vector<std::vector<int>*>
-			workerScratchSpace;
+		std::vector<std::vector<int>*> workerScratchSpace;
 
 		int maxPopulation = 200000;
 		bool enableRendering = true;
+		int maxRender = DEFAULT_MAX_RENDER;
 
 		godot::NodePath reactorCorePath;
 		nuclearPhysics::ReactorCore* reactorCore = NULL;
@@ -56,6 +56,7 @@ namespace nuclearPhysics
 		virtual void _draw();
 
 		static void _register_methods();
+		static constexpr int DEFAULT_MAX_RENDER = 1500;
 		//static const string GROUP;
 	};
 }

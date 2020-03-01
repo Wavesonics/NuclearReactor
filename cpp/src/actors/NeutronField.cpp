@@ -5,6 +5,7 @@
 #include "NeutronField.h"
 #include "../util/Utils.h"
 #include <Engine.hpp>
+#include <Texture.hpp>
 #include <iostream>
 #include <algorithm>
 
@@ -42,6 +43,7 @@ void NeutronField::_init()
 {
 	neutronThermalColor = NEUTRON_THERMAL_COLOR;
 	neutronRelativisticColor = NEUTRON_RELATIVISTIC_COLOR;
+	maxRender = DEFAULT_MAX_RENDER;
 
 	if (Engine::get_singleton()->is_editor_hint()) return;
 
@@ -91,7 +93,7 @@ void NeutronField::addNeutronRegion(NeutronRegion *region)
 void NeutronField::addNeutron(const Neutron &neutron)
 {
 	// Adding a neutron past maxPopulation will cause a crash
-	if (neutrons.size() < maxPopulation)
+	if (neutrons.size() < maxPopulation-1)
 	{
 		neutrons.push_back(neutron);
 	}
@@ -127,6 +129,7 @@ void NeutronField::_physics_process(float delta)
 				threadPool->enqueue([this, ii, batchSize, delta, n] {
 					int start = ii * batchSize;
 					int end;
+					// Last worker will take the remainder of jobs left
 					if (ii >= (numWorkers - 1))
 					{
 						end = n - 1;
@@ -181,8 +184,6 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 		Vector2 scaledVelocity = neutron.velocity * delta;
 		neutron.position += scaledVelocity;
 
-		//cout << neutron.velocity.x << ", " << neutron.velocity.y << endl;
-
 		if(reactorCore != NULL && !reactorCore->contains(neutron.position))
 		{
 			removal->push_back(ii);
@@ -207,23 +208,28 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 
 void NeutronField::_draw()
 {
-	if (enableRendering)
+	if (enableRendering && neutrons.size() > 0)
 	{
-		const int maxRender = 1000;
 		const int num = neutrons.size();
-		const int step = max(1, num / maxRender);	
+		const int step = max(1, num / maxRender);
 
 		int rendered = 0;
+
+		auto neutronThermalColorArray = PoolColorArray(Array::make(neutronThermalColor));
+		auto neutronRelativisticColorArray = PoolColorArray(Array::make(neutronRelativisticColor));
+		auto emptyArray = PoolVector2Array();
+
 		for(int ii=0; ii< num; ii += step)
 		{
 			const Neutron &n = neutrons[ii];
+			
 			if (n.isThermalized())
 			{
-				draw_circle(n.position, 1.0f, neutronThermalColor);
+				draw_primitive(PoolVector2Array(Array::make(n.position)), neutronThermalColorArray, emptyArray);
 			}
 			else
 			{
-				draw_circle(n.position, 1.0f, neutronRelativisticColor);
+				draw_primitive(PoolVector2Array(Array::make(n.position)), neutronRelativisticColorArray, emptyArray);
 			}
 
 			// Don't allow us to render more tha maxRender
@@ -242,6 +248,7 @@ void NeutronField::_register_methods()
 {
 	register_property<NeutronField, NodePath>("reactorCorePath", &NeutronField::reactorCorePath, NULL);
 	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
+	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
 	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
 
 	register_method("setCapacity", &NeutronField::setCapacity);

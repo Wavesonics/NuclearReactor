@@ -49,11 +49,11 @@ position = Vector2( 330, 150 )
 script = ExtResource( 6 )
 
 [node name="ControlRod0" type="Node2D" parent="ReactorCore"]
-position = Vector2( 250, 150 )
+position = Vector2( 250, -50 )
 script = ExtResource( 7 )
 
 [node name="ControlRod1" type="Node2D" parent="ReactorCore"]
-position = Vector2( 150, 150 )
+position = Vector2( 150, -50 )
 script = ExtResource( 7 )
 
 [node name="FpsLabel" type="Label" parent="."]
