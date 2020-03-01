@@ -17,12 +17,11 @@ namespace nuclearPhysics
 		GODOT_CLASS(FuelRod, nuclearPhysics::NeutronRegion)
 	private:
 		godot::NodePath neutronFieldPath;
-		NeutronField *neutronField = NULL;
+		NeutronField* neutronField = NULL;
 
 		float timeSinceLastFission = 0.0f;
 
 		void spawnFissionNeutron(Neutron &neutron);
-
 		void spawnSpontaneousNeutron();
 
 	public:

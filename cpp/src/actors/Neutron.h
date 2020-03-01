@@ -22,8 +22,8 @@ namespace nuclearPhysics
 
 		bool isThermalized() const;
 
-		static constexpr float SPEED_THERMAL = 10.0f;
-		static constexpr float SPEED_RELATIVISTIC = 100.0f;
+		static constexpr float SPEED_THERMAL = 50.0f;
+		static constexpr float SPEED_RELATIVISTIC = 200.0f;
 
 		friend std::ostream &operator<<(std::ostream &os, const Neutron &n);
 		friend std::ostream &operator<<(std::ostream &os, Neutron &n);

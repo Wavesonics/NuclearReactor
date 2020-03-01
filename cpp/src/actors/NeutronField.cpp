@@ -11,6 +11,9 @@ using namespace std;
 using namespace nuclearPhysics;
 using namespace godot;
 
+
+//const string NeutronField::GROUP = "neutron_field";
+
 template<class Container, class Iterator>
 Iterator reorderingErase(Container &c, Iterator it)
 {
@@ -38,14 +41,14 @@ void NeutronField::_init()
 
 	neutronThermalColor = godot::Color();
 	neutronThermalColor.a = 1.0f;
-	neutronThermalColor.r = 0.0f;
-	neutronThermalColor.g = 0.0f;
-	neutronThermalColor.b = 1.0f;
+	neutronThermalColor.r = 0.5f;
+	neutronThermalColor.g = 0.5f;
+	neutronThermalColor.b = 0.5f;
 
 	neutronRelativisticColor = godot::Color();
 	neutronRelativisticColor.a = 1.0f;
-	neutronRelativisticColor.r = 1.0f;
-	neutronRelativisticColor.g = 0.0f;
+	neutronRelativisticColor.r = 0.8f;
+	neutronRelativisticColor.g = 0.5f;
 	neutronRelativisticColor.b = 0.0f;
 }
 
@@ -54,13 +57,15 @@ void NeutronField::_ready()
 	ReactorCore* obj = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
 	if (obj != nullptr)
 	{
-		Godot::print("GOT REACTOR CORE!!");
 		reactorCore = obj;
 	}
 	else
 	{
 		Godot::print("FAILED TO GET REACTOR CORE!!");
 	}
+
+	//add_to_group(NeutronField::GROUP);
+	add_to_group("neutron_field");
 }
 
 void NeutronField::setCapacity(int capacity)
@@ -170,9 +175,9 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 {
 	for(int ii = start; ii < end; ++ii)
 	{
-		auto neutron = neutrons[ii];
+		auto & neutron = neutrons[ii];
 		Vector2 scaledVelocity = neutron.velocity * delta;
-		neutrons[ii].position += scaledVelocity;
+		neutron.position += scaledVelocity;
 
 		//cout << neutron.velocity.x << ", " << neutron.velocity.y << endl;
 
@@ -204,7 +209,14 @@ void NeutronField::_draw()
 	{
 		for (auto& n : neutrons)
 		{
-			draw_circle(n.position, 1.0f, neutronThermalColor);
+			if (n.isThermalized())
+			{
+				draw_circle(n.position, 1.0f, neutronThermalColor);
+			}
+			else
+			{
+				draw_circle(n.position, 1.0f, neutronRelativisticColor);
+			}
 		}
 	}
 }

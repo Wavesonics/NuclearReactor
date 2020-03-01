@@ -13,7 +13,7 @@ using namespace nuclearPhysics;
 using namespace godot;
 
 
-static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(50, 200));
+static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(20, 200));
 
 FuelRod::FuelRod() : NeutronRegion()
 {
@@ -28,7 +28,7 @@ void FuelRod::_init()
 	drawColor.a = 1.0f;
 	drawColor.r = 5.0f;
 	drawColor.g = 0.0f;
-	drawColor.b = 5.0f;
+	drawColor.b = 1.0f;
 
 	area = DEFAULT_BOUNDS;
 }
@@ -46,7 +46,8 @@ void FuelRod::_ready()
 	{
 		Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
 	}
-	neutronField->addNeutronRegion(this);
+
+	add_to_group("fuel_rod");
 }
 
 void FuelRod::_draw()

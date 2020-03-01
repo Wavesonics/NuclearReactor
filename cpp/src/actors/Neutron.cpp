@@ -24,7 +24,8 @@ Neutron::Neutron(const Vector2 &position, const Vector2 &velocity)
 bool Neutron::isThermalized() const
 {
 	const float speed = velocity.length();
-	return about_equal(speed, SPEED_THERMAL, 0.1f);
+	//return about_equal(speed, SPEED_THERMAL, 0.1f);
+	return speed <= (SPEED_THERMAL + 1.0f);
 }
 
 std::ostream &operator<<(std::ostream &os, const Neutron &n)

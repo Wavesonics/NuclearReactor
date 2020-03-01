@@ -2,11 +2,17 @@
 // Created by Adam on 2/28/2020.
 //
 
-#include "NeutronRegion.h"
 #include <utility>
+#include <iostream>
+#include "NeutronRegion.h"
+#include "NeutronField.h"
+#include "SceneTree.hpp"
 
+
+using namespace std;
 using namespace nuclearPhysics;
 using namespace godot;
+
 
 static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(50, 50));
 
@@ -38,6 +44,22 @@ void NeutronRegion::_ready()
 	Vector2 globalAreaPos = get_global_position() + area.position;
 	globalArea = Rect2(globalAreaPos, area.size);
 	update();
+
+	// Add every neutron region to the neutron field so it can be checked
+	auto nodes = get_tree()->get_nodes_in_group("neutron_field");
+	if (nodes.size() > 0)
+	{
+		NeutronField* neutronField = Object::cast_to<NeutronField>(nodes[0]);
+		if (neutronField != nullptr)
+		{
+			cout << "adding NR to NF" << endl;
+			neutronField->addNeutronRegion(this);
+		}
+		else
+		{
+			Godot::print("FAILED TO GET NEUTRON FIELD!!");
+		}
+	}
 }
 
 void NeutronRegion::_draw()

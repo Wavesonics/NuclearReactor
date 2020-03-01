@@ -54,7 +54,9 @@ namespace nuclearPhysics
 		virtual void _ready();
 		virtual void _physics_process(float delta);
 		virtual void _draw();
+
 		static void _register_methods();
+		//static const string GROUP;
 	};
 }
 
