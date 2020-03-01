@@ -41,6 +41,7 @@ void NeutronRegion::_init()
 
 void NeutronRegion::_ready()
 {
+	// Create our global Rect2 for testing global points
 	Vector2 globalAreaPos = get_global_position() + area.position;
 	globalArea = Rect2(globalAreaPos, area.size);
 	update();
@@ -52,7 +53,6 @@ void NeutronRegion::_ready()
 		NeutronField* neutronField = Object::cast_to<NeutronField>(nodes[0]);
 		if (neutronField != nullptr)
 		{
-			cout << "adding NR to NF" << endl;
 			neutronField->addNeutronRegion(this);
 		}
 		else

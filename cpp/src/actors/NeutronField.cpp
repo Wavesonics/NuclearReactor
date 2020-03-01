@@ -207,8 +207,14 @@ void NeutronField::_draw()
 {
 	if (enableRendering)
 	{
-		for (auto& n : neutrons)
+		const int maxRender = 1000;
+		const int num = neutrons.size();
+		const int step = max(1, num / maxRender);	
+
+		int rendered = 0;
+		for(int ii=0; ii< num; ii += step)
 		{
+			const Neutron &n = neutrons[ii];
 			if (n.isThermalized())
 			{
 				draw_circle(n.position, 1.0f, neutronThermalColor);
@@ -216,6 +222,13 @@ void NeutronField::_draw()
 			else
 			{
 				draw_circle(n.position, 1.0f, neutronRelativisticColor);
+			}
+
+			// Don't allow us to render more tha maxRender
+			++rendered;
+			if (rendered >= maxRender)
+			{
+				break;
 			}
 		}
 	}
