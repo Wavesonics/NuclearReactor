@@ -37,6 +37,8 @@ namespace nuclearPhysics
 
 		std::vector<int>* processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
 
+		godot::Color neutronThermalColor;
+		godot::Color neutronRelativisticColor;
 	public:
 		NeutronField();
 		~NeutronField();
@@ -50,6 +52,7 @@ namespace nuclearPhysics
 		virtual void _init();
 		virtual void _ready();
 		virtual void _physics_process(float delta);
+		virtual void _draw();
 		static void _register_methods();
 	};
 }

@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actors/neutron/NeutronField.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
-[ext_resource path="res://actors/reactor/ReactorCore.gdns" type="Script" id=3]
+
 
 [node name="CppTest" type="Control"]
 anchor_right = 1.0
@@ -12,10 +12,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReactorCore" type="Node2D" parent="."]
-script = ExtResource( 3 )
-area = Rect2( 100, 100, 500, 500 )
-
 [node name="NeutronField" type="Node2D" parent="."]
 script = ExtResource( 1 )
-reactorCorePath = NodePath("../ReactorCore")

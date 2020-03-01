@@ -35,6 +35,18 @@ NeutronField::NeutronField() : Node2D()
 void NeutronField::_init()
 {
 	setCapacity(maxPopulation);
+
+	neutronThermalColor = godot::Color();
+	neutronThermalColor.a = 1.0f;
+	neutronThermalColor.r = 0.0f;
+	neutronThermalColor.g = 0.0f;
+	neutronThermalColor.b = 1.0f;
+
+	neutronRelativisticColor = godot::Color();
+	neutronRelativisticColor.a = 1.0f;
+	neutronRelativisticColor.r = 1.0f;
+	neutronRelativisticColor.g = 0.0f;
+	neutronRelativisticColor.b = 0.0f;
 }
 
 void NeutronField::_ready()
@@ -150,6 +162,8 @@ void NeutronField::_physics_process(float delta)
 		reorderingErase(neutrons, neutrons.begin() + *index);
 	}
 	toRemove.clear();
+
+	update();
 }
 
 vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, int end, float delta)
@@ -184,6 +198,14 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 	return removal;
 }
 
+void NeutronField::_draw()
+{
+	for (auto & n : neutrons)
+	{
+		draw_circle(n.position, 1.0f, neutronThermalColor);
+	}
+}
+
 NeutronField::~NeutronField() = default;
 
 void NeutronField::_register_methods()
@@ -197,4 +219,5 @@ void NeutronField::_register_methods()
 	register_method("_init", &NeutronField::_init);
 	register_method("_ready", &NeutronField::_ready);
 	register_method("_physics_process", &NeutronField::_physics_process);
+	register_method("_draw", &NeutronField::_draw);
 }
