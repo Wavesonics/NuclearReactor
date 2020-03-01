@@ -8,7 +8,7 @@
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include "Neutron.h"
-#include "../math/Area2d.h"
+#include "../math/AABB2d.h"
 
 namespace nuclearPhysics
 {
@@ -16,7 +16,7 @@ namespace nuclearPhysics
 	{
 		GODOT_CLASS(NeutronRegion, godot::Node2D)
 	public:
-		nuclearPhysics::Area2d* area = NULL;
+		nuclearPhysics::AABB2d* area = NULL;
 
 		NeutronRegion();
 		virtual ~NeutronRegion();

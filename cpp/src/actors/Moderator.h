@@ -7,7 +7,6 @@
 
 
 #include <Godot.hpp>
-#include "../math/Area2d.h"
 #include "NeutronRegion.h"
 #include "NeutronField.h"
 

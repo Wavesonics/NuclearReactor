@@ -22,12 +22,12 @@ bool NeutronRegion::contains(const Vector2 &point) const
 
 void NeutronRegion::_physics_process(float delta)
 {
-
+	
 }
 
 void NeutronRegion::_register_methods()
 {
-	register_property<NeutronRegion, Area2d*>("area", &NeutronRegion::area, NULL);
+	register_property<NeutronRegion, AABB2d*>("area", &NeutronRegion::area, NULL);
 	register_method("contains", &NeutronRegion::contains);
 	register_method("_physics_process", &NeutronRegion::_physics_process);
 }

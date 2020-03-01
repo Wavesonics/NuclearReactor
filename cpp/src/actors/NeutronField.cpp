@@ -3,7 +3,7 @@
 //
 
 #include "NeutronField.h"
-
+#include "../util/Utils.h"
 #include <iostream>
 #include <algorithm>
 
@@ -29,12 +29,26 @@ Iterator reorderingErase(Container &c, Iterator it)
 
 NeutronField::NeutronField() : Node2D()
 {
-
+	
 }
 
 void NeutronField::_init()
 {
-	setCapacity(100000);
+	setCapacity(maxPopulation);
+}
+
+void NeutronField::_ready()
+{
+	ReactorCore* obj = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
+	if (obj != nullptr)
+	{
+		Godot::print("GOT REACTOR CORE!!");
+		reactorCore = obj;
+	}
+	else
+	{
+		Godot::print("FAILED TO GET REACTOR CORE!!");
+	}
 }
 
 void NeutronField::setCapacity(int capacity)
@@ -66,6 +80,12 @@ void NeutronField::addNeutron(const Neutron &neutron)
 	neutrons.push_back(neutron);
 }
 
+void NeutronField::createNeutron(const godot::Vector2& position, const godot::Vector2& velocity)
+{
+	auto neutron = Neutron(position, velocity);
+	addNeutron(neutron);
+}
+
 int NeutronField::numNeutrons() const
 {
 	return neutrons.size();
@@ -74,19 +94,21 @@ int NeutronField::numNeutrons() const
 void NeutronField::_physics_process(float delta)
 {
 	const int n = neutrons.size();
-	const int batchSize = n / numWorkers;
+	int batchSize = n / numWorkers;
 
-	vector<future<vector<int> *>> results;
-	results.reserve(numWorkers);
-
-	// Split work load into batches for each hardware thread
-	for(int ii = 0; ii < numWorkers; ++ii)
+	vector<future<vector<int>*>> results;
+	if (n >= numWorkers)
 	{
-		results.emplace_back(
+		results.reserve(numWorkers);
+
+		// Split work load into batches for each hardware thread
+		for (int ii = 0; ii < numWorkers; ++ii)
+		{
+			results.emplace_back(
 				threadPool->enqueue([this, ii, batchSize, delta, n] {
 					int start = ii * batchSize;
 					int end;
-					if(ii >= (numWorkers - 1))
+					if (ii >= (numWorkers - 1))
 					{
 						end = n - 1;
 					}
@@ -97,6 +119,17 @@ void NeutronField::_physics_process(float delta)
 					auto& removal = workerScratchSpace[ii];
 
 					return processNeutronBatch(removal, start, end, delta);
+					})
+			);
+		}
+	}	
+	// Not enough neutrons, just use 1 thread
+	else
+	{
+		results.emplace_back(
+			threadPool->enqueue([this, delta, n] {
+				auto& removal = workerScratchSpace[0];
+				return processNeutronBatch(removal, 0, n, delta);
 				})
 		);
 	}
@@ -127,7 +160,9 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 		Vector2 scaledVelocity = neutron.velocity * delta;
 		neutrons[ii].position += scaledVelocity;
 
-		if(!reactorCore->contains(neutron.position))
+		cout << neutrons[ii].position.x << ", " << neutrons[ii].position.y << endl;
+
+		if(reactorCore != NULL && !reactorCore->contains(neutron.position))
 		{
 			removal->push_back(ii);
 		}
@@ -153,9 +188,13 @@ NeutronField::~NeutronField() = default;
 
 void NeutronField::_register_methods()
 {
+	register_property<NeutronField, NodePath>("reactorCorePath", &NeutronField::reactorCorePath, NULL);
+	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
 	register_method("setCapacity", &NeutronField::setCapacity);
 	register_method("numNeutrons", &NeutronField::numNeutrons);
+	register_method("createNeutron", &NeutronField::createNeutron);
 	register_method("addNeutronRegion", &NeutronField::addNeutronRegion);
 	register_method("_init", &NeutronField::_init);
+	register_method("_ready", &NeutronField::_ready);
 	register_method("_physics_process", &NeutronField::_physics_process);
 }

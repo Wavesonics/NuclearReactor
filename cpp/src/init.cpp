@@ -4,7 +4,8 @@
 #include "actors/ControlRod.h"
 #include "actors/FuelRod.h"
 #include "actors/Moderator.h"
-
+#include "actors/ReactorCore.h"
+#include "math/AABB2d.h"
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
     godot::Godot::gdnative_init(o);
@@ -16,10 +17,11 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 
 extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
     godot::Godot::nativescript_init(handle);
-
+    
     godot::register_class<nuclearPhysics::NeutronField>();
+    godot::register_class<nuclearPhysics::ReactorCore>();
     godot::register_class<nuclearPhysics::ControlRod>();
     godot::register_class<nuclearPhysics::FuelRod>();
     godot::register_class<nuclearPhysics::Moderator>();
-    godot::register_class<nuclearPhysics::Area2d>();
+    godot::register_class<nuclearPhysics::AABB2d>();
 }

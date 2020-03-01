@@ -9,7 +9,8 @@
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include "Neutron.h"
-#include "../math/Area2d.h"
+#include "ReactorCore.h"
+#include "../math/AABB2d.h"
 #include "NeutronRegion.h"
 #include "../util/ThreadPool.h"
 
@@ -28,7 +29,11 @@ namespace nuclearPhysics
 		std::vector<std::vector<int>*>
 			workerScratchSpace;
 
-		const nuclearPhysics::Area2d* reactorCore;
+		int maxPopulation = 100000;
+
+		godot::NodePath reactorCorePath;
+		nuclearPhysics::ReactorCore* reactorCore = NULL;
+
 		std::vector<nuclearPhysics::NeutronRegion*> regions;
 
 		std::vector<int>* processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
@@ -40,9 +45,11 @@ namespace nuclearPhysics
 		void setCapacity(int capacity);
 		void addNeutronRegion(nuclearPhysics::NeutronRegion* region);
 		void addNeutron(const nuclearPhysics::Neutron& neutron);
+		void createNeutron(const godot::Vector2& position, const godot::Vector2& velocity);
 		int numNeutrons() const;
 
 		virtual void _init();
+		virtual void _ready();
 		virtual void _physics_process(float delta);
 		static void _register_methods();
 	};
