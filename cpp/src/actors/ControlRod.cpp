@@ -110,6 +110,10 @@ void ControlRod::updatePosition()
     auto& pos = get_position();
     pos.y = fullInPosition + currentPositionDelta;
     set_position(pos);
+
+    // Now update our cached rect used for checking
+    Vector2 globalAreaPos = get_global_position() + area.position;
+    globalArea = Rect2(globalAreaPos, area.size);
 }
 
 ControlRod::~ControlRod() = default;

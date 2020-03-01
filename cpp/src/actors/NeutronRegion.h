@@ -15,9 +15,8 @@ namespace nuclearPhysics
 	class NeutronRegion : public godot::Node2D
 	{
 		GODOT_CLASS(NeutronRegion, godot::Node2D)
-	private:
-		godot::Rect2 globalArea;
 	protected:
+		godot::Rect2 globalArea;
 		godot::Color drawColor;
 	public:
 		godot::Rect2 area;
