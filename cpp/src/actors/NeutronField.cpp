@@ -92,7 +92,7 @@ void NeutronField::addNeutron(const Neutron &neutron)
 	neutrons.push_back(neutron);
 }
 
-void NeutronField::createNeutron(const godot::Vector2& position, const godot::Vector2& velocity)
+void NeutronField::createNeutron(const godot::Vector2 position, const godot::Vector2 velocity)
 {
 	auto neutron = Neutron(position, velocity);
 	addNeutron(neutron);
@@ -174,7 +174,7 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 		Vector2 scaledVelocity = neutron.velocity * delta;
 		neutrons[ii].position += scaledVelocity;
 
-		cout << neutrons[ii].position.x << ", " << neutrons[ii].position.y << endl;
+		//cout << neutron.velocity.x << ", " << neutron.velocity.y << endl;
 
 		if(reactorCore != NULL && !reactorCore->contains(neutron.position))
 		{

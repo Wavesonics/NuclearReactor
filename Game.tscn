@@ -30,10 +30,10 @@ position = Vector2( 6.14667, 191.757 )
 [node name="NeutronField" parent="." instance=ExtResource( 4 )]
 
 [node name="NeutronPopulation" type="VBoxContainer" parent="."]
-margin_left = 616.0
-margin_top = 67.0
-margin_right = 779.0
-margin_bottom = 180.0
+margin_left = 778.837
+margin_top = 148.418
+margin_right = 941.837
+margin_bottom = 261.418
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -49,8 +49,8 @@ __meta__ = {
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 163.0
-margin_bottom = 113.0
+margin_right = 196.0
+margin_bottom = 146.0
 size_flags_vertical = 3
 
 [node name="Text" type="VBoxContainer" parent="."]

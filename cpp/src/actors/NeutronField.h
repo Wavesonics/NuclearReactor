@@ -46,7 +46,7 @@ namespace nuclearPhysics
 		void setCapacity(int capacity);
 		void addNeutronRegion(nuclearPhysics::NeutronRegion* region);
 		void addNeutron(const nuclearPhysics::Neutron& neutron);
-		void createNeutron(const godot::Vector2& position, const godot::Vector2& velocity);
+		void createNeutron(const godot::Vector2 position, const godot::Vector2 velocity);
 		int numNeutrons() const;
 
 		virtual void _init();

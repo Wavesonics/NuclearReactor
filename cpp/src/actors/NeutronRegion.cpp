@@ -40,6 +40,7 @@ void NeutronRegion::_ready()
 
 void NeutronRegion::_draw()
 {
+	Godot::print("NeutronRegion::_draw()");
 	draw_rect(area, drawColor);
 }
 

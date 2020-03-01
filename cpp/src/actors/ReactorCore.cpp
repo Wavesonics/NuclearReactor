@@ -26,11 +26,24 @@ bool ReactorCore::handleNeutron(Neutron & neutron)
 
 void ReactorCore::_init()
 {
+    NeutronRegion::_init();
     area = DEFAULT_BOUNDS;
+}
+
+void ReactorCore::_ready()
+{
+    NeutronRegion::_ready();
+}
+
+void ReactorCore::_draw()
+{
+    NeutronRegion::_draw();
 }
 
 void ReactorCore::_register_methods()
 {
     register_property<ReactorCore, godot::Rect2>("area", &ReactorCore::area, DEFAULT_BOUNDS);
     register_method("_init", &ReactorCore::_init);
+    register_method("_ready", &ReactorCore::_ready);
+    register_method("_draw", &ReactorCore::_draw);
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/neutron/NeutronField.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
 [ext_resource path="res://actors/reactor/ReactorCore.gdns" type="Script" id=3]
+[ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
 
 [node name="CppTest" type="Control"]
 anchor_right = 1.0
@@ -19,3 +20,34 @@ area = Rect2( 100, 100, 500, 500 )
 [node name="NeutronField" type="Node2D" parent="."]
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
+
+[node name="FpsLabel" type="Label" parent="."]
+margin_left = 967.226
+margin_top = 13.6037
+margin_right = 1007.23
+margin_bottom = 27.6037
+text = "fps"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NeutronPopulation" type="VBoxContainer" parent="."]
+margin_left = 818.945
+margin_top = 74.8206
+margin_right = 877.945
+margin_bottom = 114.821
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Readout" type="Label" parent="NeutronPopulation"]
+margin_right = 59.0
+margin_bottom = 14.0
+text = "Neutrons"
+
+[node name="Graph" parent="NeutronPopulation" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 196.0
+margin_bottom = 146.0
