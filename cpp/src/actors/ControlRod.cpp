@@ -5,12 +5,20 @@
 #include "ControlRod.h"
 #include "../util/Utils.h"
 #include <utility>
+#include <cmath>
+#include <algorithm>
+#include <Engine.hpp>
+#include <SceneTree.hpp>
+#include <Viewport.hpp>
+#include <Variant.hpp>
 
+using namespace std;
 using namespace nuclearPhysics;
 using namespace godot;
 
 static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(20, 200));
 static const Color DEFAULT_COLOR = Color(0.0, 1.0, 0.0);
+static constexpr float DEFAULT_CUR_POS = 0.0f;
 
 ControlRod::ControlRod() : NeutronRegion()
 {
@@ -23,6 +31,13 @@ void ControlRod::_init()
 
     drawColor = DEFAULT_COLOR;
     area = DEFAULT_BOUNDS;
+
+    fullOutPositionDelta = 0.0f;
+    fullInPosition = 0.0f;
+    currentPositionDelta = 0.0f;
+
+    speed = SPEED;
+    scramSpeed = SPEED_SCRAM;
 }
 
 void ControlRod::_ready()
@@ -30,6 +45,23 @@ void ControlRod::_ready()
     NeutronRegion::_ready();
 
     add_to_group("control_rod");
+
+    if (Engine::get_singleton()->is_editor_hint()) return;
+
+    fullOutPositionDelta = area.size.height;
+    fullInPosition = get_position().y;
+    currentPositionDelta = fullInPosition;
+    updatePosition();
+    
+    Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
+    if (obj != nullptr)
+    {
+        obj->call("add_control_rod", Variant(this));
+    }
+    else
+    {
+        Godot::print("Failed to get ControlSystem");
+    }
 }
 
 void ControlRod::_draw()
@@ -42,12 +74,57 @@ bool ControlRod::handleNeutron(Neutron &neutron)
 	return CROSS_SECTION > randPercent();
 }
 
+float ControlRod::percentOut() const
+{
+    const float totalDistance = fabs(fullOutPositionDelta);
+    const float curPos = fabs(currentPositionDelta);
+
+    if (curPos > 0.0f)
+    {
+        return curPos / totalDistance;
+    }
+    else
+    {
+        return 0.0f;
+    }
+}
+
+void ControlRod::moveOut(float delta, float speed = SPEED)
+{
+    currentPositionDelta -= speed * delta;
+    updatePosition();
+}
+
+void ControlRod::moveIn(float delta, float speed = SPEED)
+{
+    currentPositionDelta += speed * delta;
+    updatePosition();
+}
+
+void ControlRod::updatePosition()
+{
+    if (Engine::get_singleton()->is_editor_hint()) return;
+
+    currentPositionDelta = clamp(currentPositionDelta, -fullOutPositionDelta, 0.0f);
+    
+    auto& pos = get_position();
+    pos.y = fullInPosition + currentPositionDelta;
+    set_position(pos);
+}
+
 ControlRod::~ControlRod() = default;
 
 void ControlRod::_register_methods()
 {
     register_property<ControlRod, godot::Color>("drawColor", &ControlRod::drawColor, DEFAULT_COLOR);
-
+    register_property<ControlRod, float>("currentPositionDelta", &ControlRod::currentPositionDelta, DEFAULT_CUR_POS);
+    register_property<ControlRod, float>("speed", &ControlRod::speed, SPEED);
+    register_property<ControlRod, float>("scramSpeed", &ControlRod::scramSpeed, SPEED_SCRAM);
+    
+    register_method("percentOut", &ControlRod::percentOut);
+    register_method("moveOut", &ControlRod::moveOut);
+    register_method("moveIn", &ControlRod::moveIn);
+    
     register_method("_init", &ControlRod::_init);
     register_method("_ready", &ControlRod::_ready);
     register_method("_draw", &ControlRod::_draw);

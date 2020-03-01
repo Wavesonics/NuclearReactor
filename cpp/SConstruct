@@ -77,11 +77,11 @@ elif env['platform'] == "windows":
     env.Append(CCFLAGS=['-W3', '-GR'])
     if env['target'] in ('debug', 'd'):
         env.Append(CPPDEFINES=['_DEBUG'])
-        env.Append(CCFLAGS=['-EHsc', '-MDd', '-ZI'])
+        env.Append(CCFLAGS=['-EHsc', '-MDd', '-ZI', '/std:c++17'])
         env.Append(LINKFLAGS=['-DEBUG'])
     else:
         env.Append(CPPDEFINES=['NDEBUG'])
-        env.Append(CCFLAGS=['-O2', '-EHsc', '-MD'])
+        env.Append(CCFLAGS=['-O2', '-EHsc', '-MD', '/std:c++17'])
 
 if env['target'] in ('debug', 'd'):
     cpp_library += '.debug'
