@@ -94,7 +94,11 @@ void NeutronField::addNeutronRegion(NeutronRegion *region)
 
 void NeutronField::addNeutron(const Neutron &neutron)
 {
-	neutrons.push_back(neutron);
+	// Adding a neutron past maxPopulation will cause a crash
+	if (neutrons.size() < maxPopulation)
+	{
+		neutrons.push_back(neutron);
+	}
 }
 
 void NeutronField::createNeutron(const godot::Vector2 position, const godot::Vector2 velocity)
