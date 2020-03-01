@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://actors/neutron/NeutronField.gdns" type="Script" id=1]
+[ext_resource path="res://actors/neutron/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
-[ext_resource path="res://actors/reactor/ReactorCore.gdns" type="Script" id=3]
+[ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=3]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
 
 [node name="CppTest" type="Control"]
@@ -49,5 +49,5 @@ text = "Neutrons"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 196.0
-margin_bottom = 146.0
+margin_right = 59.0
+margin_bottom = 18.0
