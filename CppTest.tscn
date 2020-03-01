@@ -22,33 +22,38 @@ script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
 
 [node name="ReactorCore" type="Node2D" parent="."]
+position = Vector2( 100, 50 )
 script = ExtResource( 3 )
-area = Rect2( 100, 100, 500, 500 )
+area = Rect2( 0, 0, 500, 500 )
 
-[node name="FuelRod0" type="Node2D" parent="."]
-position = Vector2( 208.137, 229.903 )
+[node name="FuelRod0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 110, 150 )
 script = ExtResource( 5 )
-neutronFieldPath = NodePath("../NeutronField")
+neutronFieldPath = NodePath("../../NeutronField")
 
-[node name="FuelRod1" type="Node2D" parent="."]
-position = Vector2( 418.995, 214.94 )
+[node name="FuelRod1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 290, 150 )
 script = ExtResource( 5 )
-neutronFieldPath = NodePath("../NeutronField")
+neutronFieldPath = NodePath("../../NeutronField")
 
-[node name="Moderator0" type="Node2D" parent="."]
-position = Vector2( 134.677, 229.903 )
+[node name="Moderator0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 50, 150 )
 script = ExtResource( 6 )
 
-[node name="Moderator1" type="Node2D" parent="."]
-position = Vector2( 304.724, 224.462 )
+[node name="Moderator1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 190, 150 )
 script = ExtResource( 6 )
 
-[node name="Moderator2" type="Node2D" parent="."]
-position = Vector2( 504.699, 214.939 )
+[node name="Moderator2" type="Node2D" parent="ReactorCore"]
+position = Vector2( 330, 150 )
 script = ExtResource( 6 )
 
-[node name="ControlRod0" type="Node2D" parent="."]
-position = Vector2( 364.58, 190.452 )
+[node name="ControlRod0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 250, 150 )
+script = ExtResource( 7 )
+
+[node name="ControlRod1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 150, 150 )
 script = ExtResource( 7 )
 
 [node name="FpsLabel" type="Label" parent="."]

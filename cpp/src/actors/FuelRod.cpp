@@ -4,7 +4,7 @@
 
 #include "FuelRod.h"
 #include "../util/Utils.h"
-
+#include <Engine.hpp>
 #include <utility>
 #include <iostream>
 
@@ -32,6 +32,8 @@ void FuelRod::_init()
 void FuelRod::_ready()
 {
 	NeutronRegion::_ready();
+	add_to_group("fuel_rod");
+	if (Engine::get_singleton()->is_editor_hint()) return;
 
 	NeutronField* obj = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if (obj != nullptr)
@@ -42,8 +44,6 @@ void FuelRod::_ready()
 	{
 		Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
 	}
-
-	add_to_group("fuel_rod");
 }
 
 void FuelRod::_draw()
@@ -53,6 +53,8 @@ void FuelRod::_draw()
 
 void FuelRod::_physics_process(float delta)
 {
+	if (Engine::get_singleton()->is_editor_hint()) return;
+
 	timeSinceLastFission += delta;
 	if (timeSinceLastFission >= SPONTANEUOS_FISION_RATE)
 	{

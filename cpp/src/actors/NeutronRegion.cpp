@@ -7,6 +7,7 @@
 #include "NeutronRegion.h"
 #include "NeutronField.h"
 #include "SceneTree.hpp"
+#include "Engine.hpp"
 
 
 using namespace std;
@@ -15,6 +16,7 @@ using namespace godot;
 
 
 static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(50, 50));
+static const Color DEFAULT_COLOR = Color(0.3, 0.3, 0.3);
 
 NeutronRegion::NeutronRegion() : Node2D()
 {
@@ -30,12 +32,7 @@ bool NeutronRegion::contains(const Vector2 &point) const
 
 void NeutronRegion::_init()
 {
-	drawColor = Color();
-	drawColor.a = 1.0f;
-	drawColor.r = 0.0f;
-	drawColor.g = 0.0f;
-	drawColor.b = 0.0f;
-
+	drawColor = DEFAULT_COLOR;
 	area = DEFAULT_BOUNDS;
 }
 
@@ -45,6 +42,8 @@ void NeutronRegion::_ready()
 	Vector2 globalAreaPos = get_global_position() + area.position;
 	globalArea = Rect2(globalAreaPos, area.size);
 	update();
+
+	if (Engine::get_singleton()->is_editor_hint()) return;
 
 	// Add every neutron region to the neutron field so it can be checked
 	auto nodes = get_tree()->get_nodes_in_group("neutron_field");

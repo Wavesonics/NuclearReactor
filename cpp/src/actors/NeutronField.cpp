@@ -4,6 +4,7 @@
 
 #include "NeutronField.h"
 #include "../util/Utils.h"
+#include <Engine.hpp>
 #include <iostream>
 #include <algorithm>
 
@@ -12,6 +13,8 @@ using namespace nuclearPhysics;
 using namespace godot;
 
 
+static const Color NEUTRON_THERMAL_COLOR = Color(0.5, 0.5, 0.5);
+static const Color NEUTRON_RELATIVISTIC_COLOR = Color(0.8, 0.5, 0.0);
 //const string NeutronField::GROUP = "neutron_field";
 
 template<class Container, class Iterator>
@@ -37,23 +40,19 @@ NeutronField::NeutronField() : Node2D()
 
 void NeutronField::_init()
 {
+	neutronThermalColor = NEUTRON_THERMAL_COLOR;
+	neutronRelativisticColor = NEUTRON_RELATIVISTIC_COLOR;
+
+	if (Engine::get_singleton()->is_editor_hint()) return;
+
 	setCapacity(maxPopulation);
-
-	neutronThermalColor = godot::Color();
-	neutronThermalColor.a = 1.0f;
-	neutronThermalColor.r = 0.5f;
-	neutronThermalColor.g = 0.5f;
-	neutronThermalColor.b = 0.5f;
-
-	neutronRelativisticColor = godot::Color();
-	neutronRelativisticColor.a = 1.0f;
-	neutronRelativisticColor.r = 0.8f;
-	neutronRelativisticColor.g = 0.5f;
-	neutronRelativisticColor.b = 0.0f;
 }
 
 void NeutronField::_ready()
 {
+	add_to_group("neutron_field");
+	if (Engine::get_singleton()->is_editor_hint()) return;
+
 	ReactorCore* obj = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
 	if (obj != nullptr)
 	{
@@ -63,9 +62,6 @@ void NeutronField::_ready()
 	{
 		Godot::print("FAILED TO GET REACTOR CORE!!");
 	}
-
-	//add_to_group(NeutronField::GROUP);
-	add_to_group("neutron_field");
 }
 
 void NeutronField::setCapacity(int capacity)
@@ -114,6 +110,8 @@ int NeutronField::numNeutrons() const
 
 void NeutronField::_physics_process(float delta)
 {
+	if (Engine::get_singleton()->is_editor_hint()) return;
+
 	const int n = neutrons.size();
 	int batchSize = n / numWorkers;
 
