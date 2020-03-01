@@ -28,7 +28,8 @@ namespace nuclearPhysics
 		std::vector<std::vector<int>*>
 			workerScratchSpace;
 
-		int maxPopulation = 100000;
+		int maxPopulation = 200000;
+		bool enableRendering = true;
 
 		godot::NodePath reactorCorePath;
 		nuclearPhysics::ReactorCore* reactorCore = NULL;

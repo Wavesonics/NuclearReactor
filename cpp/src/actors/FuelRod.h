@@ -16,7 +16,9 @@ namespace nuclearPhysics
 	{
 		GODOT_CLASS(FuelRod, nuclearPhysics::NeutronRegion)
 	private:
-		NeutronField *neutronField;
+		godot::NodePath neutronFieldPath;
+		NeutronField *neutronField = NULL;
+
 		float timeSinceLastFission = 0.0f;
 
 		void spawnFissionNeutron(Neutron &neutron);
@@ -27,8 +29,13 @@ namespace nuclearPhysics
 		FuelRod();
 		~FuelRod() override;
 
-		virtual void _physics_process(float delta);
 		bool handleNeutron(Neutron &neutron) override;
+
+		virtual void _init();
+		virtual void _ready();
+		virtual void _draw();
+		virtual void _physics_process(float delta);
+
 		static void _register_methods();
 
 		static constexpr float SPONTANEUOS_FISION_RATE = 0.5f;

@@ -14,6 +14,8 @@ namespace nuclearPhysics
 	class NeutronRegion : public godot::Node2D
 	{
 		GODOT_CLASS(NeutronRegion, godot::Node2D)
+	private:
+		godot::Rect2 globalArea;
 	protected:
 		godot::Color drawColor;
 	public:
@@ -36,6 +38,7 @@ namespace nuclearPhysics
 		virtual void _init();
 		virtual void _ready();
 		virtual void _draw();
+
 		static void _register_methods();
 	};
 }

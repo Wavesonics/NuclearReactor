@@ -200,9 +200,12 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 
 void NeutronField::_draw()
 {
-	for (auto & n : neutrons)
+	if (enableRendering)
 	{
-		draw_circle(n.position, 1.0f, neutronThermalColor);
+		for (auto& n : neutrons)
+		{
+			draw_circle(n.position, 1.0f, neutronThermalColor);
+		}
 	}
 }
 
@@ -211,7 +214,9 @@ NeutronField::~NeutronField() = default;
 void NeutronField::_register_methods()
 {
 	register_property<NeutronField, NodePath>("reactorCorePath", &NeutronField::reactorCorePath, NULL);
+	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
 	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
+
 	register_method("setCapacity", &NeutronField::setCapacity);
 	register_method("numNeutrons", &NeutronField::numNeutrons);
 	register_method("createNeutron", &NeutronField::createNeutron);

@@ -13,17 +13,52 @@ using namespace nuclearPhysics;
 using namespace godot;
 
 
+static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(50, 200));
+
 FuelRod::FuelRod() : NeutronRegion()
 {
 	neutronField = NULL;
 }
 
+void FuelRod::_init()
+{
+	NeutronRegion::_init();
+
+	drawColor = Color();
+	drawColor.a = 1.0f;
+	drawColor.r = 5.0f;
+	drawColor.g = 0.0f;
+	drawColor.b = 5.0f;
+
+	area = DEFAULT_BOUNDS;
+}
+
+void FuelRod::_ready()
+{
+	NeutronRegion::_ready();
+
+	NeutronField* obj = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
+	if (obj != nullptr)
+	{
+		neutronField = obj;
+	}
+	else
+	{
+		Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
+	}
+	neutronField->addNeutronRegion(this);
+}
+
+void FuelRod::_draw()
+{
+	NeutronRegion::_draw();
+}
+
 void FuelRod::_physics_process(float delta)
 {
 	timeSinceLastFission += delta;
-	if(timeSinceLastFission >= SPONTANEUOS_FISION_RATE )
+	if (timeSinceLastFission >= SPONTANEUOS_FISION_RATE)
 	{
-		//cout << "spawn" << endl;
 		timeSinceLastFission = 0.0f;
 		spawnSpontaneousNeutron();
 	}
@@ -43,7 +78,7 @@ bool FuelRod::handleNeutron(Neutron &neutron)
 
 	if(fission)
 	{
-		//cout << "fission!" << endl;
+		//Godot::print("FISSION!");
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);
 	}
@@ -61,8 +96,9 @@ void FuelRod::spawnFissionNeutron(Neutron &neutron)
 void FuelRod::spawnSpontaneousNeutron()
 {
 	auto position = rand_vec2(area.position.x, area.size.width, area.position.y, area.size.height);
+	auto globalPos = to_global(position);
 	auto velocity = rand_vec2(-1.0f, 1.0f) * Neutron::SPEED_RELATIVISTIC;
-	auto newNeutron = Neutron(position, velocity);
+	auto newNeutron = Neutron(globalPos, velocity);
 	neutronField->addNeutron(newNeutron);
 }
 
@@ -70,5 +106,10 @@ FuelRod::~FuelRod() = default;
 
 void FuelRod::_register_methods()
 {
+	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, NULL);
+
+	register_method("_init", &FuelRod::_init);
+	register_method("_ready", &FuelRod::_ready);
+	register_method("_draw", &FuelRod::_draw);
 	register_method("_physics_process", &FuelRod::_physics_process);
 }

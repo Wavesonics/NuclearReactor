@@ -19,7 +19,7 @@ NeutronRegion::~NeutronRegion() = default;
 
 bool NeutronRegion::contains(const Vector2 &point) const
 {
-	return area.has_point(point);
+	return globalArea.has_point(point);
 }
 
 void NeutronRegion::_init()
@@ -35,6 +35,8 @@ void NeutronRegion::_init()
 
 void NeutronRegion::_ready()
 {
+	Vector2 globalAreaPos = get_global_position() + area.position;
+	globalArea = Rect2(globalAreaPos, area.size);
 	update();
 }
 

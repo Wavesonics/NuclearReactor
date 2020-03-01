@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/neutron/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
 [ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=3]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/fuel_rod/FuelRodcpp.gdns" type="Script" id=5]
 
 [node name="CppTest" type="Control"]
 anchor_right = 1.0
@@ -17,9 +18,24 @@ __meta__ = {
 script = ExtResource( 3 )
 area = Rect2( 100, 100, 500, 500 )
 
+[node name="FuelRod0" type="Node2D" parent="." groups=[
+"fuel_rod",
+]]
+position = Vector2( 208.137, 229.903 )
+script = ExtResource( 5 )
+neutronFieldPath = NodePath("../NeutronField")
+
+[node name="FuelRod1" type="Node2D" parent="." groups=[
+"fuel_rod",
+]]
+position = Vector2( 414.914, 231.264 )
+script = ExtResource( 5 )
+neutronFieldPath = NodePath("../NeutronField")
+
 [node name="NeutronField" type="Node2D" parent="."]
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
+enableRendering = false
 
 [node name="FpsLabel" type="Label" parent="."]
 margin_left = 967.226
