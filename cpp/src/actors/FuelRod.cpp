@@ -14,6 +14,7 @@ using namespace godot;
 
 
 static const Rect2 DEFAULT_BOUNDS = Rect2(Point2(0.0f, 0.0f), Size2(20, 200));
+static const Color DEFAULT_COLOR = Color(1.0, 0.0, 0.0);
 
 FuelRod::FuelRod() : NeutronRegion()
 {
@@ -24,12 +25,7 @@ void FuelRod::_init()
 {
 	NeutronRegion::_init();
 
-	drawColor = Color();
-	drawColor.a = 1.0f;
-	drawColor.r = 5.0f;
-	drawColor.g = 0.0f;
-	drawColor.b = 1.0f;
-
+	drawColor = DEFAULT_COLOR;
 	area = DEFAULT_BOUNDS;
 }
 
@@ -108,6 +104,7 @@ FuelRod::~FuelRod() = default;
 void FuelRod::_register_methods()
 {
 	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, NULL);
+	register_property<FuelRod, godot::Color>("drawColor", &FuelRod::drawColor, DEFAULT_COLOR);
 
 	register_method("_init", &FuelRod::_init);
 	register_method("_ready", &FuelRod::_ready);

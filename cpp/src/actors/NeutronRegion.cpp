@@ -70,6 +70,8 @@ void NeutronRegion::_draw()
 void NeutronRegion::_register_methods()
 {
 	register_property<NeutronRegion, godot::Rect2>("area", &NeutronRegion::area, DEFAULT_BOUNDS);
+	register_property<NeutronRegion, godot::Color>("drawColor", &NeutronRegion::drawColor, Color());
+	
 	register_method("contains", &NeutronRegion::contains);
 	register_method("_init", &NeutronRegion::_init);
 	register_method("_ready", &NeutronRegion::_ready);

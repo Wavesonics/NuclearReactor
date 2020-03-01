@@ -18,8 +18,11 @@ namespace nuclearPhysics
 		ControlRod();
 		~ControlRod() override;
 
-		virtual void _physics_process(float delta);
 		bool handleNeutron(Neutron &neutron) override;
+
+		virtual void _init();
+		virtual void _ready();
+		virtual void _draw();
 
 		static void _register_methods();
 		static constexpr float CROSS_SECTION = 0.1f;

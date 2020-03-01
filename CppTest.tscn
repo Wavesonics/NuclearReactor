@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/neutron/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/fuel_rod/FuelRodcpp.gdns" type="Script" id=5]
 [ext_resource path="res://actors/moderator/Moderator.gdns" type="Script" id=6]
+[ext_resource path="res://actors/control_rod/ControlRodCpp.gdns" type="Script" id=7]
 
 [node name="CppTest" type="Control"]
 anchor_right = 1.0
@@ -45,6 +46,10 @@ script = ExtResource( 6 )
 [node name="Moderator2" type="Node2D" parent="."]
 position = Vector2( 504.699, 214.939 )
 script = ExtResource( 6 )
+
+[node name="ControlRod0" type="Node2D" parent="."]
+position = Vector2( 364.58, 190.452 )
+script = ExtResource( 7 )
 
 [node name="FpsLabel" type="Label" parent="."]
 margin_left = 967.226
