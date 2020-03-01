@@ -32,8 +32,10 @@ void FuelRod::_init()
 void FuelRod::_ready()
 {
 	NeutronRegion::_ready();
-	add_to_group("fuel_rod");
+	
 	if (Engine::get_singleton()->is_editor_hint()) return;
+
+	add_to_group("fuel_rod");
 
 	NeutronField* obj = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if (obj != nullptr)

@@ -44,9 +44,9 @@ void ControlRod::_ready()
 {
     NeutronRegion::_ready();
 
-    add_to_group("control_rod");
-
     if (Engine::get_singleton()->is_editor_hint()) return;
+
+    add_to_group("control_rod");
 
     fullOutPositionDelta = area.size.height;
     fullInPosition = get_position().y;

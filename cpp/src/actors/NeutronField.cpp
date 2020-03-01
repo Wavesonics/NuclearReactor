@@ -52,8 +52,9 @@ void NeutronField::_init()
 
 void NeutronField::_ready()
 {
-	add_to_group("neutron_field");
 	if (Engine::get_singleton()->is_editor_hint()) return;
+
+	add_to_group("neutron_field");
 
 	ReactorCore* obj = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
 	if (obj != nullptr)

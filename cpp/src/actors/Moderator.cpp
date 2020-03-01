@@ -4,6 +4,7 @@
 
 #include "Moderator.h"
 #include "../util/Utils.h"
+#include <Engine.hpp>
 #include <iostream>
 
 using namespace std;
@@ -34,7 +35,9 @@ void Moderator::_ready()
 {
     NeutronRegion::_ready();
 
-    add_to_group("fuel_rod");
+    if (Engine::get_singleton()->is_editor_hint()) return;
+
+    add_to_group("moderator");
 }
 
 void Moderator::_draw()
