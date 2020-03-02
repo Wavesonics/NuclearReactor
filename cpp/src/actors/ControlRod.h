@@ -2,8 +2,8 @@
 // Created by Adam on 2/28/2020.
 //
 
-#ifndef REACTORCPPTEST_CONTROLROD_H
-#define REACTORCPPTEST_CONTROLROD_H
+#ifndef REACTORCPP_CONTROLROD_H
+#define REACTORCPP_CONTROLROD_H
 
 
 #include <Godot.hpp>
@@ -43,4 +43,4 @@ namespace nuclearPhysics
 	};
 }
 
-#endif //REACTORCPPTEST_CONTROLROD_H
+#endif //REACTORCPP_CONTROLROD_H

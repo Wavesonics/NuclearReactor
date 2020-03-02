@@ -11,6 +11,7 @@ func random_direction() -> Vector2:
 
 
 func _ready():
+	set_process_input(true)
 	return
 	
 	for ii in range(0,100000):
@@ -18,6 +19,14 @@ func _ready():
 		var position = Vector2(rand_range(50.0, 450.0), rand_range(50.0, 450.0))
 		$NeutronField.createNeutron(position, velocity)
 
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			
+			var pos := event.position as Vector2
+			print("Add biproduct to " + String(pos))
+			$NeutronField.addFissionBiproduct(pos)
 
 func _process(delta):
 	$FpsLabel.text = "%d fps" % Engine.get_frames_per_second()

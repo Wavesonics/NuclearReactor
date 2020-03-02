@@ -2,8 +2,8 @@
 // Created by Adam on 2/28/2020.
 //
 
-#ifndef REACTORCPPTEST_REACTORCORE_H
-#define REACTORCPPTEST_REACTORCORE_H
+#ifndef REACTORCPP_REACTORCORE_H
+#define REACTORCPP_REACTORCORE_H
 
 
 #include <Godot.hpp>
@@ -27,4 +27,4 @@ namespace nuclearPhysics
 	};
 }
 
-#endif //REACTORCPPTEST_REACTORCORE_H
+#endif //REACTORCPP_REACTORCORE_H

@@ -2,8 +2,8 @@
 // Created by Adam on 2/27/2020.
 //
 
-#ifndef REACTORCPPTEST_NEUTRONREGION_H
-#define REACTORCPPTEST_NEUTRONREGION_H
+#ifndef REACTORCPP_NEUTRONREGION_H
+#define REACTORCPP_NEUTRONREGION_H
 
 #include <Godot.hpp>
 #include <Node2D.hpp>
@@ -43,4 +43,4 @@ namespace nuclearPhysics
 	};
 }
 
-#endif //REACTORCPPTEST_NEUTRONREGION_H
+#endif //REACTORCPP_NEUTRONREGION_H

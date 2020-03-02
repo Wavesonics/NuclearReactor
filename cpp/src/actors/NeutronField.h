@@ -2,8 +2,8 @@
 // Created by Adam on 2/27/2020.
 //
 
-#ifndef REACTORCPPTEST_NEUTRONFIELD_H
-#define REACTORCPPTEST_NEUTRONFIELD_H
+#ifndef REACTORCPP_NEUTRONFIELD_H
+#define REACTORCPP_NEUTRONFIELD_H
 
 #include <vector>
 #include <Godot.hpp>
@@ -11,6 +11,7 @@
 #include "Neutron.h"
 #include "ReactorCore.h"
 #include "NeutronRegion.h"
+#include "HeatMap.h"
 #include "../util/ThreadPool.h"
 
 
@@ -34,6 +35,15 @@ namespace nuclearPhysics
 		godot::NodePath reactorCorePath;
 		nuclearPhysics::ReactorCore* reactorCore = NULL;
 
+		float biproduct = DEFAULT_BIPRODUCT;
+		float biproductDecayRate = DEFAULT_BIPRODUCT_DECAY_RATE;
+		float biproductFissionRate = DEFAULT_BIPRODUCT_FISSION_RATE;
+		godot::NodePath biproductMapPath;
+		nuclearPhysics::HeatMap* biproductMap = NULL;
+
+		void processFissionBiproducts();
+		bool processFissionBiproductBatch(float* row, int yy);
+
 		std::vector<nuclearPhysics::NeutronRegion*> regions;
 
 		std::vector<int>* processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
@@ -49,7 +59,7 @@ namespace nuclearPhysics
 		void addNeutron(const nuclearPhysics::Neutron& neutron);
 		void createNeutron(const godot::Vector2 position, const godot::Vector2 velocity);
 		int numNeutrons() const;
-
+		void addFissionBiproduct(const godot::Vector2 &globalPos);
 		virtual void _init();
 		virtual void _ready();
 		virtual void _physics_process(float delta);
@@ -57,9 +67,12 @@ namespace nuclearPhysics
 
 		static void _register_methods();
 		static constexpr int DEFAULT_MAX_RENDER = 1500;
+		static constexpr float DEFAULT_BIPRODUCT = 0.01f;
+		static constexpr float DEFAULT_BIPRODUCT_FISSION_RATE = 0.01f;
+		static constexpr float DEFAULT_BIPRODUCT_DECAY_RATE = 0.0015f;
 		//static const string GROUP;
 	};
 }
 
 
-#endif //REACTORCPPTEST_NEUTRONFIELD_H
+#endif //REACTORCPP_NEUTRONFIELD_H

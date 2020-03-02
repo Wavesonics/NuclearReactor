@@ -8,6 +8,7 @@
 #include <Texture.hpp>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 using namespace nuclearPhysics;
@@ -44,6 +45,8 @@ void NeutronField::_init()
 	neutronThermalColor = NEUTRON_THERMAL_COLOR;
 	neutronRelativisticColor = NEUTRON_RELATIVISTIC_COLOR;
 	maxRender = DEFAULT_MAX_RENDER;
+	biproduct = DEFAULT_BIPRODUCT;
+	biproductDecayRate = DEFAULT_BIPRODUCT_DECAY_RATE;
 
 	if (Engine::get_singleton()->is_editor_hint()) return;
 
@@ -56,14 +59,14 @@ void NeutronField::_ready()
 
 	add_to_group("neutron_field");
 
-	ReactorCore* obj = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
-	if (obj != nullptr)
-	{
-		reactorCore = obj;
-	}
+	reactorCore = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
+	if (reactorCore == nullptr) Godot::print("FAILED TO GET REACTOR CORE!!");
+
+	biproductMap = Object::cast_to<HeatMap>(get_node(biproductMapPath));
+	if (biproductMap == nullptr) Godot::print("FAILED TO GET BIPRODUCT MAP!!");
 	else
 	{
-		Godot::print("FAILED TO GET REACTOR CORE!!");
+		biproductMap->calculateCellSizes(reactorCore->area);
 	}
 }
 
@@ -109,6 +112,16 @@ void NeutronField::createNeutron(const godot::Vector2 position, const godot::Vec
 int NeutronField::numNeutrons() const
 {
 	return neutrons.size();
+}
+
+void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
+{
+	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
+
+	const int gridX = (int)floor(pos.x / biproductMap->cellWidth);
+	const int gridY = (int)floor(pos.y / biproductMap->cellHeight);
+
+	biproductMap->addHeat(biproduct, gridX, gridY);
 }
 
 void NeutronField::_physics_process(float delta)
@@ -175,6 +188,8 @@ void NeutronField::_physics_process(float delta)
 	toRemove.clear();
 
 	update();
+
+	processFissionBiproducts();
 }
 
 vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, int end, float delta)
@@ -207,6 +222,62 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 	return removal;
 }
 
+void NeutronField::processFissionBiproducts()
+{
+	vector<future<bool>> results;
+
+	auto map = biproductMap->map;
+	int mapSize = biproductMap->mapSize;
+
+	// Assign each row to it's own worker
+	for (int yy = 0; yy < mapSize; ++yy)
+	{
+		float* row = map[yy];
+		results.emplace_back(
+			threadPool->enqueue([this, row, yy] {
+				return processFissionBiproductBatch(row, yy);
+				})
+		);
+	}
+
+	// Wait for all workers to finish
+	for (auto& result : results)
+	{
+		const auto& done = result.get();
+	}
+
+	biproductMap->update();
+}
+
+// Process an individual row of the Biproduct heatmap
+bool NeutronField::processFissionBiproductBatch(float *row, int yy)
+{
+	int mapSize = biproductMap->mapSize;
+	for (int xx = 0; xx < mapSize; ++xx)
+	{
+		const float biproductDensity = row[xx];
+
+		// Biproducts decay over time
+		row[xx] = clamp(biproductDensity - biproductDecayRate, 0.0f, 1.0f);
+
+		// Random change of biproducts fissioning and releasing a Neutron
+		if ((biproductFissionRate*biproductDensity) > randf(0.0000001, 1.0))
+		{
+			auto pos = reactorCore->get_global_position() + reactorCore->area.position;
+			pos.x += biproductMap->cellWidth * (float)xx;
+			pos.y += biproductMap->cellHeight * (float)yy;
+
+			auto vel = rand_vec2(-1.0f, 1.0f) * Neutron::SPEED_RELATIVISTIC;
+
+			auto neutron = Neutron(pos, vel);
+			addNeutron(neutron);
+		}
+	}
+
+	return true;
+}
+
+
 void NeutronField::_draw()
 {
 	if (enableRendering && neutrons.size() > 0)
@@ -219,18 +290,21 @@ void NeutronField::_draw()
 		auto neutronThermalColorArray = PoolColorArray(Array::make(neutronThermalColor));
 		auto neutronRelativisticColorArray = PoolColorArray(Array::make(neutronRelativisticColor));
 		auto emptyArray = PoolVector2Array();
+		auto point = PoolVector2Array(Array::make(Vector2()));
 
 		for(int ii=0; ii< num; ii += step)
 		{
 			const Neutron &n = neutrons[ii];
-			
+			point.set(0, n.position);
+
 			if (n.isThermalized())
 			{
-				draw_primitive(PoolVector2Array(Array::make(n.position)), neutronThermalColorArray, emptyArray);
+				
+				draw_primitive(point, neutronThermalColorArray, emptyArray);
 			}
 			else
 			{
-				draw_primitive(PoolVector2Array(Array::make(n.position)), neutronRelativisticColorArray, emptyArray);
+				draw_primitive(point, neutronRelativisticColorArray, emptyArray);
 			}
 
 			// Don't allow us to render more tha maxRender
@@ -248,6 +322,10 @@ NeutronField::~NeutronField() = default;
 void NeutronField::_register_methods()
 {
 	register_property<NeutronField, NodePath>("reactorCorePath", &NeutronField::reactorCorePath, NULL);
+	register_property<NeutronField, NodePath>("biproductMapPath", &NeutronField::biproductMapPath, NULL);
+	register_property<NeutronField, float>("biproduct", &NeutronField::biproduct, NeutronField::DEFAULT_BIPRODUCT);
+	register_property<NeutronField, float>("biproductFissionRate", &NeutronField::biproductFissionRate, NeutronField::DEFAULT_BIPRODUCT_FISSION_RATE);
+	register_property<NeutronField, float>("biproductDecayRate", &NeutronField::biproductDecayRate, NeutronField::DEFAULT_BIPRODUCT_DECAY_RATE);
 	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
 	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
@@ -256,6 +334,7 @@ void NeutronField::_register_methods()
 	register_method("numNeutrons", &NeutronField::numNeutrons);
 	register_method("createNeutron", &NeutronField::createNeutron);
 	register_method("addNeutronRegion", &NeutronField::addNeutronRegion);
+	register_method("addFissionBiproduct", &NeutronField::addFissionBiproduct);
 	register_method("_init", &NeutronField::_init);
 	register_method("_ready", &NeutronField::_ready);
 	register_method("_physics_process", &NeutronField::_physics_process);

@@ -2,8 +2,8 @@
 // Created by Adam on 2/27/2020.
 //
 
-#ifndef REACTORCPPTEST_MODERATOR_H
-#define REACTORCPPTEST_MODERATOR_H
+#ifndef REACTORCPP_MODERATOR_H
+#define REACTORCPP_MODERATOR_H
 
 
 #include <Godot.hpp>
@@ -30,4 +30,4 @@ namespace nuclearPhysics
 	};
 }
 
-#endif //REACTORCPPTEST_MODERATOR_H
+#endif //REACTORCPP_MODERATOR_H

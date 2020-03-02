@@ -2,8 +2,8 @@
 // Created by Adam on 2/27/2020.
 //
 
-#ifndef REACTORCPPTEST_NEUTRON_H
-#define REACTORCPPTEST_NEUTRON_H
+#ifndef REACTORCPP_NEUTRON_H
+#define REACTORCPP_NEUTRON_H
 
 #include <iostream>
 #include <Vector2.hpp>
@@ -30,4 +30,4 @@ namespace nuclearPhysics
 	};
 }
 
-#endif //REACTORCPPTEST_NEUTRON_H
+#endif //REACTORCPP_NEUTRON_H

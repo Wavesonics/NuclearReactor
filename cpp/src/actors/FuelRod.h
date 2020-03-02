@@ -2,8 +2,8 @@
 // Created by Adam on 2/28/2020.
 //
 
-#ifndef REACTORCPPTEST_FUELROD_H
-#define REACTORCPPTEST_FUELROD_H
+#ifndef REACTORCPP_FUELROD_H
+#define REACTORCPP_FUELROD_H
 
 
 #include <Godot.hpp>
@@ -44,4 +44,4 @@ namespace nuclearPhysics
 }
 
 
-#endif //REACTORCPPTEST_FUELROD_H
+#endif //REACTORCPP_FUELROD_H

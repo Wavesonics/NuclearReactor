@@ -37,15 +37,8 @@ void FuelRod::_ready()
 
 	add_to_group("fuel_rod");
 
-	NeutronField* obj = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
-	if (obj != nullptr)
-	{
-		neutronField = obj;
-	}
-	else
-	{
-		Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
-	}
+	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
+	if (neutronField == nullptr) Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
 }
 
 void FuelRod::_draw()
@@ -80,6 +73,7 @@ bool FuelRod::handleNeutron(Neutron &neutron)
 	if(fission)
 	{
 		//Godot::print("FISSION!");
+		neutronField->addFissionBiproduct(neutron.position);
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);
 	}

@@ -2,8 +2,8 @@
 // Created by Adam on 2/28/2020.
 //
 
-#ifndef REACTORCPPTEST_UTILS_H
-#define REACTORCPPTEST_UTILS_H
+#ifndef REACTORCPP_UTILS_H
+#define REACTORCPP_UTILS_H
 
 #include <iostream>
 #include <Vector2.hpp>
@@ -21,4 +21,4 @@ bool about_equal(float a, float b, float epsilon);
 std::ostream& operator<<(std::ostream& os, const godot::Vector2& v);
 std::ostream& operator<<(std::ostream& os, godot::Vector2& v);
 
-#endif //REACTORCPPTEST_UTILS_H
+#endif //REACTORCPP_UTILS_H

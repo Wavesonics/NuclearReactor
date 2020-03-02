@@ -5,6 +5,7 @@
 #include "actors/FuelRod.h"
 #include "actors/Moderator.h"
 #include "actors/ReactorCore.h"
+#include "actors/HeatMap.h"
 
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
@@ -23,4 +24,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
     godot::register_tool_class<nuclearPhysics::ControlRod>();
     godot::register_class<nuclearPhysics::FuelRod>();
     godot::register_tool_class<nuclearPhysics::Moderator>();
+    godot::register_class<nuclearPhysics::HeatMap>();
 }
