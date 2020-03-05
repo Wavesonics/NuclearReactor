@@ -3,3 +3,12 @@ cpp/.idea
 cpp/.vs
 cpp/cmake-build-debug
 cpp/out
+*.obj
+*.exp
+*.ilk
+*.pdb
+*.lib
+*.o
+*.d
+*.idb
+*.pdb

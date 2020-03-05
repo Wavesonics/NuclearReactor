@@ -7,8 +7,8 @@ reloadable=true
 
 [entry]
 
-Android.arm64-v8a="res://cpp/libs/arm64-v8a/libnuclear-physics.so"
-Windows.64="res://cpp/libs/win64/libnuclearphysics.dll"
+Android.arm64-v8a="res://bin/arm64-v8a/libnuclear-physics.so"
+Windows.64="res://bin/win64/libnuclearphysics.dll"
 
 [dependencies]
 
