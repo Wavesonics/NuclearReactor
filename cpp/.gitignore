@@ -1,5 +1,6 @@
 godot_headers/
 godot-cpp/
+obj/
 .sconsign.dblite
 *.obj
 *.exp

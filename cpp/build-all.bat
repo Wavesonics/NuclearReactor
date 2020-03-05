@@ -7,4 +7,4 @@ REM Build for windows release
 call scons platform=windows target=release
 
 REM Build for android
-call ndk-build --jobs 12  NDK_PROJECT_PATH=.
+call ndk-build --jobs 12  NDK_PROJECT_PATH=. NDK_LIBS_OUT=../bin$(TARGET_ARCH_ABI)

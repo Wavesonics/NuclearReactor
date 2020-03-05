@@ -35,6 +35,4 @@ godot-cpp/include/gen
 
 LOCAL_STATIC_LIBRARIES := godot-prebuilt
 
-NDK_LIBS_OUT=../bin/$(TARGET_ARCH_ABI)
-
 include $(BUILD_SHARED_LIBRARY)
