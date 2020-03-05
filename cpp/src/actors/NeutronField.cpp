@@ -75,8 +75,11 @@ void NeutronField::setCapacity(int capacity)
 	threadPool = new ThreadPool(std::thread::hardware_concurrency());
 
 	const int removeDivisor = 4;
+	// During process, we need to allow for Neutrons to be
+	// added above the max without crashing
+	const float capacityMargin = 1.01f;
 
-	neutrons.reserve(capacity);
+	neutrons.reserve((int)((float)capacity * capacityMargin));
 	toRemove.reserve(capacity / removeDivisor);
 
 	for (int ii = 0; ii < numWorkers; ++ii)
