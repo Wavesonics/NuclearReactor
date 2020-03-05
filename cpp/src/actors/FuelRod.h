@@ -40,6 +40,7 @@ namespace nuclearPhysics
 		static constexpr float SPONTANEUOS_FISION_RATE = 0.5f;
 		static constexpr float CROSS_SECTION_THERMAL = 0.1f;
 		static constexpr float CROSS_SECTION_RELATIVISTIC = 0.01f;
+		inline static const char* GROUP = "fuel_rod";
 	};
 }
 

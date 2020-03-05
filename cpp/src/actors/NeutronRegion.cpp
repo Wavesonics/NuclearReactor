@@ -4,6 +4,7 @@
 
 #include <utility>
 #include <iostream>
+#include <string>
 #include "NeutronRegion.h"
 #include "NeutronField.h"
 #include "SceneTree.hpp"
@@ -46,7 +47,7 @@ void NeutronRegion::_ready()
 	if (Engine::get_singleton()->is_editor_hint()) return;
 
 	// Add every neutron region to the neutron field so it can be checked
-	auto nodes = get_tree()->get_nodes_in_group("neutron_field");
+	auto nodes = get_tree()->get_nodes_in_group(NeutronField::GROUP);
 	if (nodes.size() > 0)
 	{
 		NeutronField* neutronField = Object::cast_to<NeutronField>(nodes[0]);

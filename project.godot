@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "NeutronField",
 "language": "GDScript",
-"path": "res://actors/neutron/NeutronField.gd"
+"path": "res://actors/neutron_field/NeutronField.gd"
 }, {
 "base": "RigidBody",
 "class": "OQClass_GrabbableRigidBody",
@@ -136,7 +136,6 @@ scram={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 threads/thread_model=2
 vram_compression/import_etc=true
 quality/depth/hdr=false

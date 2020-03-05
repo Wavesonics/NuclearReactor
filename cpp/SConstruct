@@ -11,11 +11,11 @@ opts.Add(EnumVariable('target', "Compilation target", 'debug', ['d', 'debug', 'r
 opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'x11', 'linux', 'osx']))
 opts.Add(EnumVariable('p', "Compilation target, alias for 'platform'", '', ['', 'windows', 'x11', 'linux', 'osx']))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
-opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'lib/'))
+opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'libs/'))
 opts.Add(PathVariable('target_name', 'The library name.', 'libnuclearphysics', PathVariable.PathAccept))
 
 # Local dependency paths, adapt them to your setup
-godot_headers_path = "godot_headers/"
+godot_headers_path = "godot-cpp/godot_headers/"
 cpp_bindings_path = "godot-cpp/"
 cpp_library = "libgodot-cpp"
 
@@ -74,14 +74,14 @@ elif env['platform'] == "windows":
     env.Append(ENV=os.environ)
 
     env.Append(CPPDEFINES=['WIN32', '_WIN32', '_WINDOWS', '_CRT_SECURE_NO_WARNINGS'])
-    env.Append(CCFLAGS=['-W3', '-GR'])
+    env.Append(CCFLAGS=['-W3', '-GR', '/std:c++17'])
     if env['target'] in ('debug', 'd'):
         env.Append(CPPDEFINES=['_DEBUG'])
-        env.Append(CCFLAGS=['-EHsc', '-MDd', '-ZI', '/std:c++17'])
+        env.Append(CCFLAGS=['-EHsc', '-MDd', '-ZI'])
         env.Append(LINKFLAGS=['-DEBUG'])
     else:
         env.Append(CPPDEFINES=['NDEBUG'])
-        env.Append(CCFLAGS=['-O2', '-EHsc', '-MD', '/std:c++17'])
+        env.Append(CCFLAGS=['-O2', '-EHsc', '-MD'])
 
 if env['target'] in ('debug', 'd'):
     cpp_library += '.debug'
@@ -99,8 +99,8 @@ env.Append(LIBS=[cpp_library])
 env.Append(CPPPATH=['src/'])
 sources = Glob('src/*.cpp')
 sources.extend(Glob('src/*/*.cpp'))
-sources.extend(Glob('src/*/*/*.cpp'))
-sources.extend(Glob('src/*/*/*/*.cpp'))
+#sources.extend(Glob('src/*/*/*.cpp'))
+#sources.extend(Glob('src/*/*/*/*.cpp'))
 
 library = env.SharedLibrary(target=env['target_path'] + env['target_name'] , source=sources)
 

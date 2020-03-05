@@ -70,7 +70,7 @@ namespace nuclearPhysics
 		static constexpr float DEFAULT_BIPRODUCT = 0.01f;
 		static constexpr float DEFAULT_BIPRODUCT_FISSION_RATE = 0.01f;
 		static constexpr float DEFAULT_BIPRODUCT_DECAY_RATE = 0.0015f;
-		//static const string GROUP;
+		inline static const char* GROUP = "neutron_field";
 	};
 }
 

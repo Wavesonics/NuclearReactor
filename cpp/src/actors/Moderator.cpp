@@ -37,7 +37,7 @@ void Moderator::_ready()
 
     if (Engine::get_singleton()->is_editor_hint()) return;
 
-    add_to_group("moderator");
+    add_to_group(GROUP);
 }
 
 void Moderator::_draw()

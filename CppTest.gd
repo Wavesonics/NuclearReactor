@@ -32,5 +32,10 @@ func _process(delta):
 	$FpsLabel.text = "%d fps" % Engine.get_frames_per_second()
 	
 	var neutrons: int = $NeutronField.numNeutrons()
-	$NeutronPopulation/Readout.text = "Neutrons: %d" % neutrons
+	var scaleTrip := 500
+	var scale := 1
+	if neutrons > scaleTrip:
+		scale = (ceil(neutrons as float / scaleTrip as float) as float) * 1.5
+	$NeutronPopulation/Readout.text = "Neutrons: %d [x%d]" % [neutrons, scale]
+	$NeutronPopulation/Graph.scale = scale
 	$NeutronPopulation/Graph.write_data(neutrons)

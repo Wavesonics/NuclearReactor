@@ -61,6 +61,8 @@ void HeatMap::_ready()
 
 void HeatMap::_draw()
 {
+    if(!enableRendering) return;
+
     constexpr float rectSize = 2.0f;
     auto drawRect = Rect2(Vector2(), Vector2(rectSize, rectSize));
     auto color = Color();
@@ -84,6 +86,7 @@ void HeatMap::_draw()
 void HeatMap::_register_methods()
 {
     register_property<HeatMap, int>("mapSize", &HeatMap::mapSize, DEFAULT_MAP_SIZE);
+    register_property<HeatMap, bool>("enableRendering", &HeatMap::enableRendering, true);
 
     register_method("addHeat", &HeatMap::addHeat);
     register_method("_init", &HeatMap::_init);

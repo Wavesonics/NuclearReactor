@@ -35,6 +35,7 @@ void ControlRod::_init()
     fullOutPositionDelta = 0.0f;
     fullInPosition = 0.0f;
     currentPositionDelta = 0.0f;
+    initialPercentOut = 0.0f;
 
     speed = SPEED;
     scramSpeed = SPEED_SCRAM;
@@ -44,13 +45,13 @@ void ControlRod::_ready()
 {
     NeutronRegion::_ready();
 
-    if (Engine::get_singleton()->is_editor_hint()) return;
+    add_to_group(GROUP);
 
-    add_to_group("control_rod");
+    if (Engine::get_singleton()->is_editor_hint()) return;
 
     fullOutPositionDelta = area.size.height;
     fullInPosition = get_position().y;
-    currentPositionDelta = fullInPosition;
+    currentPositionDelta = (-fabs(fullOutPositionDelta * initialPercentOut));
     updatePosition();
     
     Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
@@ -107,7 +108,7 @@ void ControlRod::updatePosition()
 
     currentPositionDelta = clamp(currentPositionDelta, -fullOutPositionDelta, 0.0f);
     
-    auto& pos = get_position();
+    Vector2 pos = get_position();
     pos.y = fullInPosition + currentPositionDelta;
     set_position(pos);
 
@@ -121,7 +122,7 @@ ControlRod::~ControlRod() = default;
 void ControlRod::_register_methods()
 {
     register_property<ControlRod, godot::Color>("drawColor", &ControlRod::drawColor, DEFAULT_COLOR);
-    register_property<ControlRod, float>("currentPositionDelta", &ControlRod::currentPositionDelta, DEFAULT_CUR_POS);
+    register_property<ControlRod, float>("initialPercentOut", &ControlRod::initialPercentOut, DEFAULT_CUR_POS);
     register_property<ControlRod, float>("speed", &ControlRod::speed, SPEED);
     register_property<ControlRod, float>("scramSpeed", &ControlRod::scramSpeed, SPEED_SCRAM);
     

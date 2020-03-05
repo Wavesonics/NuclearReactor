@@ -4,6 +4,7 @@ class_name RealTimeGraph
 var data := []
 var size := 100
 var nextWrite := 0
+var scale := 1.0
 
 func _ready():
 	self.data.resize(100)
@@ -22,6 +23,6 @@ func _draw():
 	for ii in range(0, size-1):
 		var n = self.data[ii]
 		if ii == nextWrite:
-			draw_line(Vector2(ii, 0), Vector2(ii, n), Color.orange)
+			draw_line(Vector2(ii, 0), Vector2(ii, n/scale), Color.orange)
 		else:
-			draw_line(Vector2(ii, 0), Vector2(ii, n), Color.red)
+			draw_line(Vector2(ii, 0), Vector2(ii, n/scale), Color.red)

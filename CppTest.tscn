@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://actors/neutron/NeutronFieldCpp.gdns" type="Script" id=1]
+[ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://CppTest.gd" type="Script" id=2]
 [ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=3]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
@@ -22,12 +22,12 @@ z_index = 1
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
 biproductMapPath = NodePath("../BiproductMap")
-biproduct = 0.1
+enableRendering = false
 
 [node name="ReactorCore" type="Node2D" parent="."]
-position = Vector2( 168.019, 51.3604 )
+position = Vector2( 170, 50 )
 script = ExtResource( 3 )
-area = Rect2( 0, 0, 500, 500 )
+area = Rect2( 0, 0, 400, 500 )
 
 [node name="FuelRod0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 110, 150 )
@@ -54,14 +54,17 @@ script = ExtResource( 6 )
 [node name="ControlRod0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 250, 150 )
 script = ExtResource( 7 )
+initialPercentOut = 1.0
 
 [node name="ControlRod1" type="Node2D" parent="ReactorCore"]
 position = Vector2( 150, 150 )
 script = ExtResource( 7 )
+initialPercentOut = 1.0
 
 [node name="BiproductMap" type="Node2D" parent="."]
 position = Vector2( 13.6037, 14.9641 )
 script = ExtResource( 8 )
+enableRendering = false
 
 [node name="FpsLabel" type="Label" parent="."]
 margin_left = 967.226
@@ -74,10 +77,10 @@ __meta__ = {
 }
 
 [node name="NeutronPopulation" type="VBoxContainer" parent="."]
-margin_left = 818.945
-margin_top = 74.8206
-margin_right = 877.945
-margin_bottom = 114.821
+margin_left = 794.601
+margin_top = 11.8138
+margin_right = 853.601
+margin_bottom = 51.8142
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -93,3 +96,41 @@ anchor_bottom = 0.0
 margin_top = 18.0
 margin_right = 59.0
 margin_bottom = 18.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 2.59248
+margin_top = 2.28456
+margin_right = 166.592
+margin_bottom = 16.2846
+text = "Fission Biproduct Density"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 8.47137
+margin_top = 575.87
+margin_right = 142.471
+margin_bottom = 589.87
+text = "SPACE BAR = scramw"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 4.36646
+margin_top = 515.937
+margin_right = 106.366
+margin_bottom = 546.937
+text = "UP ARROW:
+control rods out"
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 5.13873
+margin_top = 474.066
+margin_right = 194.139
+margin_bottom = 505.066
+text = "DOWN ARROW:
+wcontrol rods in"
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 819.0
+margin_top = 557.0
+margin_right = 1014.0
+margin_bottom = 588.0
+text = "Neutrons artificially capped at:
+200,000"

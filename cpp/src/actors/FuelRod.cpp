@@ -33,9 +33,9 @@ void FuelRod::_ready()
 {
 	NeutronRegion::_ready();
 	
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	add_to_group(GROUP);
 
-	add_to_group("fuel_rod");
+	if (Engine::get_singleton()->is_editor_hint()) return;
 
 	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if (neutronField == nullptr) Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");

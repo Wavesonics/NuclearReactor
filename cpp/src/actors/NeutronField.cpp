@@ -17,7 +17,6 @@ using namespace godot;
 
 static const Color NEUTRON_THERMAL_COLOR = Color(0.5, 0.5, 0.5);
 static const Color NEUTRON_RELATIVISTIC_COLOR = Color(0.8, 0.5, 0.0);
-//const string NeutronField::GROUP = "neutron_field";
 
 template<class Container, class Iterator>
 Iterator reorderingErase(Container &c, Iterator it)
@@ -55,10 +54,9 @@ void NeutronField::_init()
 
 void NeutronField::_ready()
 {
+	add_to_group(GROUP);
+
 	if (Engine::get_singleton()->is_editor_hint()) return;
-
-	add_to_group("neutron_field");
-
 	reactorCore = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
 	if (reactorCore == nullptr) Godot::print("FAILED TO GET REACTOR CORE!!");
 

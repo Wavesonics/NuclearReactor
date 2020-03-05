@@ -19,6 +19,7 @@ namespace nuclearPhysics
 		float fullOutPositionDelta;
 		float fullInPosition;
 		float currentPositionDelta;
+		float initialPercentOut;
 
 		float speed = SPEED;
 		float scramSpeed = SPEED_SCRAM;
@@ -40,6 +41,7 @@ namespace nuclearPhysics
 		static constexpr float CROSS_SECTION = 0.1f;
 		static constexpr float SPEED = 10.0f;
 		static constexpr float SPEED_SCRAM = 100.0f;
+		inline static const char* GROUP = "control_rod";
 	};
 }
 

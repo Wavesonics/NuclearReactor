@@ -27,6 +27,7 @@ namespace nuclearPhysics
 
 		static void _register_methods();
 		static constexpr float CROSS_SECTION_RELATIVISTIC = 0.1f;
+		inline static const char* GROUP = "moderator";
 	};
 }
 

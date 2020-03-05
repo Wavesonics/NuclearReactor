@@ -1,4 +1,12 @@
 godot_headers/
 godot-cpp/
-lib/
+.sconsign.dblite
 *.obj
+*.exp
+*.ilk
+*.pdb
+*.lib
+*.o
+*.d
+*.idb
+*.pdb

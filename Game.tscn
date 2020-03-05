@@ -3,8 +3,9 @@
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://actors/reactor/Reactor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/neutron/NeutronField.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/neutron_field/NeutronField.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://vr/Ubuntu-Medium.ttf"
