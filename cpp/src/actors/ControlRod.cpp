@@ -126,9 +126,9 @@ void ControlRod::_register_methods()
     register_property<ControlRod, float>("speed", &ControlRod::speed, SPEED);
     register_property<ControlRod, float>("scramSpeed", &ControlRod::scramSpeed, SPEED_SCRAM);
     
-    register_method("percentOut", &ControlRod::percentOut);
-    register_method("moveOut", &ControlRod::moveOut);
-    register_method("moveIn", &ControlRod::moveIn);
+    register_method("percent_out", &ControlRod::percentOut);
+    register_method("move_out", &ControlRod::moveOut);
+    register_method("move_in", &ControlRod::moveIn);
     
     register_method("_init", &ControlRod::_init);
     register_method("_ready", &ControlRod::_ready);

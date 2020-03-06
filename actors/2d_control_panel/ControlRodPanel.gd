@@ -3,7 +3,7 @@ class_name ControlRodPanel
 
 var lightScene := preload("res://actors/2d_control_panel/IndicatorLight.tscn")
 
-var controlRod: ControlRod
+var controlRod = null
 var numLights := 10
 
 
@@ -22,9 +22,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	if $HBoxContainer/UpButton.is_pressed:
-		controlRod.move_up(delta)
+		controlRod.move_out(delta, controlRod.speed)
 	elif $HBoxContainer/DownButton.is_pressed:
-		controlRod.move_down(delta)
+		controlRod.move_in(delta, controlRod.speed)
 
 
 func turn_lights_on(n: int):

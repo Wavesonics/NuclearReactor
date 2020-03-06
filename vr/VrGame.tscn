@@ -1,17 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://vr/VrGame.gd" type="Script" id=2]
-[ext_resource path="res://CppTest.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameCpp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OQ_Toolkit/OQ_Interactables/OQ_ButtonPressable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/momentary_vr_button/MomentaryVrButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://vr/vr_button_released.tres" type="Material" id=7]
+[ext_resource path="res://vr/vr_button_pressed.tres" type="Material" id=8]
 
-[sub_resource type="VisualShaderNodeColorConstant" id=3]
+[sub_resource type="VisualShaderNodeColorConstant" id=1]
 constant = Color( 0.617188, 0, 0, 1 )
 
-[sub_resource type="VisualShaderNodeInput" id=6]
+[sub_resource type="VisualShaderNodeInput" id=2]
 input_name = "uv"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=7]
+[sub_resource type="VisualShaderNodeScalarOp" id=3]
 operator = 2
 
 [sub_resource type="VisualShader" id=4]
@@ -50,11 +54,11 @@ void light() {
 
 }
 "
-nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/node = SubResource( 1 )
 nodes/fragment/2/position = Vector2( 40, 160 )
-nodes/fragment/3/node = SubResource( 6 )
+nodes/fragment/3/node = SubResource( 2 )
 nodes/fragment/3/position = Vector2( 0, 40 )
-nodes/fragment/4/node = SubResource( 7 )
+nodes/fragment/4/node = SubResource( 3 )
 nodes/fragment/4/position = Vector2( 200, 80 )
 nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 3, 0, 4, 0, 2, 1, 4, 1, 4, 0, 0, 1 )
 
@@ -65,7 +69,12 @@ shader = SubResource( 4 )
 script = ExtResource( 2 )
 
 [node name="OqVrPlayer" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.351711, 0, -0.936109, 0, 1, 0, 0.936109, 0, 0.351711, 0, -1.14566, 0.347217 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14566, 0.347217 )
+
+[node name="OQ_UI2DCanvas" parent="OqVrPlayer" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67561, -0.911729 )
+
+[node name="Simulation" parent="OqVrPlayer/OQ_UI2DCanvas" instance=ExtResource( 3 )]
 
 [node name="Floor" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.72448, 0 )
@@ -74,8 +83,13 @@ height = 0.002
 depth = 5.20727
 material = SubResource( 5 )
 
-[node name="OQ_UI2DCanvas" parent="." instance=ExtResource( 4 )]
-editor_live_update = false
-transparent = false
+[node name="TestButton" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 1.49012e-08, 0, 0, 1, -5.96046e-08, 0, 0, 1, 0, 0.00772792, -0.272007 )
+off_material = ExtResource( 8 )
+on_material = ExtResource( 7 )
 
-[node name="CppTest" parent="OQ_UI2DCanvas" instance=ExtResource( 3 )]
+[node name="OQ_ButtonPressable" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 1.49012e-08, 0, 0, 1, -5.96046e-08, 0, 0, 1, 0.347304, 0, -0.298554 )
+off_material = ExtResource( 7 )
+on_material = ExtResource( 8 )
+[connection signal="button_pressed" from="TestButton" to="." method="_on_TestButton_button_pressed"]

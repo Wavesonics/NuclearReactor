@@ -31,17 +31,17 @@ void HeatMap::addHeat(float heat, const int x, const int y)
     if (x < mapSize && y < mapSize && x >= 0 && y >= 0)
     {
         map[y][x] = clamp(map[y][x] + heat, 0.0f, 1.0f);
-        // update(); // Happens to often to do this every time
     }
     else
     {
-        Godot::print("HeatMap:: index out of range");
+        Godot::print("HeatMap:: index out of range {0}, {1} | {2}", x, y, mapSize);
     }
 }
 
 void HeatMap::_init()
 {
     mapSize = DEFAULT_MAP_SIZE;
+    enableRendering = true;
 }
 
 void HeatMap::_ready()
@@ -55,8 +55,6 @@ void HeatMap::_ready()
             map[yy][xx] = 0.0f;
         }
     }
-    
-    update();
 }
 
 void HeatMap::_draw()

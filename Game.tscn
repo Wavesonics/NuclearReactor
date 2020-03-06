@@ -6,7 +6,6 @@
 [ext_resource path="res://actors/neutron_field/NeutronField.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://vr/Ubuntu-Medium.ttf"
 
@@ -50,8 +49,8 @@ __meta__ = {
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 196.0
-margin_bottom = 146.0
+margin_right = 163.0
+margin_bottom = 113.0
 size_flags_vertical = 3
 
 [node name="Text" type="VBoxContainer" parent="."]

@@ -1,0 +1,135 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=1]
+[ext_resource path="res://GameCpp.gd" type="Script" id=2]
+[ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=3]
+[ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/fuel_rod/FuelRodcpp.gdns" type="Script" id=5]
+[ext_resource path="res://actors/moderator/Moderator.gdns" type="Script" id=6]
+[ext_resource path="res://actors/control_rod/ControlRodCpp.gdns" type="Script" id=7]
+[ext_resource path="res://actors/HeatMap.gdns" type="Script" id=8]
+[ext_resource path="res://vr/Ubuntu-Medium.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[node name="CppTest" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NeutronField" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource( 1 )
+reactorCorePath = NodePath("../ReactorCore")
+biproductMapPath = NodePath("../BiproductMap")
+
+[node name="ReactorCore" type="Node2D" parent="."]
+position = Vector2( 0, 50 )
+script = ExtResource( 3 )
+area = Rect2( 0, 0, 400, 500 )
+
+[node name="FuelRod0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 110, 150 )
+script = ExtResource( 5 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="FuelRod1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 290, 150 )
+script = ExtResource( 5 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Moderator0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 50, 150 )
+script = ExtResource( 6 )
+
+[node name="Moderator1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 190, 150 )
+script = ExtResource( 6 )
+
+[node name="Moderator2" type="Node2D" parent="ReactorCore"]
+position = Vector2( 330, 150 )
+script = ExtResource( 6 )
+
+[node name="ControlRod0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 150, 150 )
+script = ExtResource( 7 )
+
+[node name="ControlRod1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 250, 150 )
+script = ExtResource( 7 )
+
+[node name="BiproductMap" type="Node2D" parent="."]
+position = Vector2( 810.222, 136.021 )
+script = ExtResource( 8 )
+
+[node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
+autostart = true
+
+[node name="FpsLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -269.0
+margin_bottom = 113.0
+custom_fonts/font = SubResource( 1 )
+text = "144 fps"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NeutronPopulation" type="VBoxContainer" parent="."]
+margin_left = 405.0
+margin_right = 464.0
+margin_bottom = 47.9371
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Readout" type="Label" parent="NeutronPopulation"]
+margin_right = 59.0
+margin_bottom = 14.0
+text = "Neutrons"
+
+[node name="Graph" parent="NeutronPopulation" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 59.0
+margin_bottom = 18.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 809.022
+margin_top = 117.304
+margin_right = 973.022
+margin_bottom = 131.304
+text = "Fission Biproduct Density"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="."]
+margin_right = 195.0
+margin_bottom = 31.0
+text = "Neutrons artificially capped at:
+500,000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlPanel" parent="." instance=ExtResource( 10 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.0
+margin_top = -300.0
+margin_right = 0.0
+margin_bottom = 0.0
+[connection signal="timeout" from="BiproductMap/BiproductUpdateTimer" to="." method="_on_BiproductUpdateTimer_timeout"]

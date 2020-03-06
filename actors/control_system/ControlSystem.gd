@@ -17,14 +17,16 @@ func _process(delta):
 	var allIn := true
 	for rod in controlRods:
 		if scram:
-			rod.moveIn(delta, rod.scramSpeed)
-			if rod.percentOut() > 0.0:
+			rod.move_in(delta, rod.scramSpeed)
+			if rod.percent_out() > 0.0:
 				allIn = false
+	"""
 		else:
 			if Input.is_action_pressed("ui_up"):
-				rod.moveOut(delta, rod.speed)
+				rod.move_out(delta, rod.speed)
 			elif Input.is_action_pressed("ui_down"):
-				rod.moveIn(delta, rod.speed)
+				rod.move_in(delta, rod.speed)
+	"""
 	
 	if allIn and scram:
 		scram = false

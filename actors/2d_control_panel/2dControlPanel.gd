@@ -7,3 +7,7 @@ func _ready():
 		var node := controlRodPanelScene.instance()
 		node.controlRod = rod
 		add_child(node)
+
+
+func _on_ScramButton_pressed():
+	ControlSystem.scram = true
