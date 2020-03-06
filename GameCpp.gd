@@ -32,7 +32,7 @@ func _input(event):
 func _process(delta):
 	$FpsLabel.text = "%d fps" % Engine.get_frames_per_second()
 	
-	var neutrons: int = $NeutronField.numNeutrons()
+	var neutrons: int = $NeutronField.num_neutrons()
 	var scaleTrip := 500
 	var scale := 1
 	if neutrons > scaleTrip:

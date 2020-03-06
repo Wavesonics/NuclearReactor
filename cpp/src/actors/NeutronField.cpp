@@ -331,11 +331,11 @@ void NeutronField::_register_methods()
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
 	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
 
-	register_method("setCapacity", &NeutronField::setCapacity);
-	register_method("numNeutrons", &NeutronField::numNeutrons);
-	register_method("createNeutron", &NeutronField::createNeutron);
-	register_method("addNeutronRegion", &NeutronField::addNeutronRegion);
-	register_method("addFissionBiproduct", &NeutronField::addFissionBiproduct);
+	register_method("set_capacity", &NeutronField::setCapacity);
+	register_method("num_neutrons", &NeutronField::numNeutrons);
+	register_method("create_neutron", &NeutronField::createNeutron);
+	register_method("add_neutron_region", &NeutronField::addNeutronRegion);
+	register_method("add_fission_biproduct", &NeutronField::addFissionBiproduct);
 	register_method("_init", &NeutronField::_init);
 	register_method("_ready", &NeutronField::_ready);
 	register_method("_physics_process", &NeutronField::_physics_process);

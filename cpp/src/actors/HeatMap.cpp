@@ -86,7 +86,7 @@ void HeatMap::_register_methods()
     register_property<HeatMap, int>("mapSize", &HeatMap::mapSize, DEFAULT_MAP_SIZE);
     register_property<HeatMap, bool>("enableRendering", &HeatMap::enableRendering, true);
 
-    register_method("addHeat", &HeatMap::addHeat);
+    register_method("add_heat", &HeatMap::addHeat);
     register_method("_init", &HeatMap::_init);
     register_method("_ready", &HeatMap::_ready);
     register_method("_draw", &HeatMap::_draw);
