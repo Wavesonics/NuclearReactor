@@ -4,7 +4,7 @@ onready var controlRodPanelScene := preload("res://actors/3d_control_panel/Contr
 
 
 func _ready():
-	var initialXoffset := -0.55
+	var initialXoffset := 0.0
 	var width := 0.3
 	
 	if Engine.editor_hint:
