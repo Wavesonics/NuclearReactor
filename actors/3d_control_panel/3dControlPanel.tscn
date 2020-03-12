@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/3d_control_panel/3dControlPanel.gd" type="Script" id=1]
+[ext_resource path="res://actors/3d_control_panel/dark_gray_metal.tres" type="Material" id=2]
+[ext_resource path="res://OQ_Toolkit/OQ_Interactables/OQ_ButtonPressable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=4]
+
+[node name="ControlPanel" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="BackPlate" type="CSGBox" parent="."]
+width = 1.44734
+height = 1.04552
+depth = 0.05
+material = ExtResource( 2 )
+
+[node name="ControlRods" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0277235 )
+
+[node name="ScramButton" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 1.49012e-08, 0, 0, 1, -5.96046e-08, 0, 0, 1, -0.756863, -0.0100244, 0.0392848 )
+
+[node name="OQ_UILabel" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768854, 0.0476276, 0.0395808 )
+text = "SCRAM"
+margin = 16
+billboard = false
+depth_test = true
+resize_mode = 0
+font_size_multiplier = 1.0
+font_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0, 0, 0, 1 )
+transparent = false
+[connection signal="button_pressed" from="ScramButton" to="." method="_on_ScramButton_button_pressed"]

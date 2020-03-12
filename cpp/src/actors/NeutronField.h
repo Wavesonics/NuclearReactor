@@ -28,7 +28,7 @@ namespace nuclearPhysics
 		std::vector<int> toRemove;
 		std::vector<std::vector<int>*> workerScratchSpace;
 
-		int maxPopulation = 500000;
+		int maxPopulation = 150000;
 		bool enableRendering = true;
 		int maxRender = DEFAULT_MAX_RENDER;
 

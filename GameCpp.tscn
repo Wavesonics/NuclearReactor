@@ -30,6 +30,7 @@ z_index = 1
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
 biproductMapPath = NodePath("../BiproductMap")
+enableRendering = false
 
 [node name="ReactorCore" type="Node2D" parent="."]
 position = Vector2( 0, 50 )
@@ -69,6 +70,7 @@ script = ExtResource( 7 )
 [node name="BiproductMap" type="Node2D" parent="."]
 position = Vector2( 810.222, 136.021 )
 script = ExtResource( 8 )
+enableRendering = false
 
 [node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
 autostart = true
