@@ -16,6 +16,8 @@ namespace nuclearPhysics
 		GODOT_CLASS(HeatMap, godot::Node2D)
 	private:
 		bool enableRendering = true;
+	protected:
+		float drawRectSize;
 	public:
 		int mapSize = DEFAULT_MAP_SIZE;
 		float cellWidth = 1.0f;

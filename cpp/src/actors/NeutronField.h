@@ -12,6 +12,7 @@
 #include "ReactorCore.h"
 #include "NeutronRegion.h"
 #include "HeatMap.h"
+#include "DiffusingHeatMap.h"
 #include "../util/ThreadPool.h"
 
 
@@ -51,6 +52,9 @@ namespace nuclearPhysics
 		godot::NodePath biproductMapPath;
 		nuclearPhysics::HeatMap* biproductMap = NULL;
 
+		godot::NodePath thermalMapPath;
+		nuclearPhysics::DiffusingHeatMap* thermalMap = NULL;
+
 		int neutronFlux = 0;
 
 		void processFissionBiproducts();
@@ -66,6 +70,7 @@ namespace nuclearPhysics
 		NeutronField();
 		~NeutronField();
 
+		int getMaxPopulation() const;
 		void setCapacity(int capacity);
 		void addNeutronRegion(nuclearPhysics::NeutronRegion* region);
 		void addNeutron(const nuclearPhysics::Neutron& neutron);
@@ -73,6 +78,7 @@ namespace nuclearPhysics
 		int numNeutrons() const;
 		int getNeutronFlux() const;
 		void addFissionBiproduct(const godot::Vector2 &globalPos);
+		void addHeat(const godot::Vector2 &globalPos);
 		virtual void _init();
 		virtual void _ready();
 		virtual void _physics_process(float delta);

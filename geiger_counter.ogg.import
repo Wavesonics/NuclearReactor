@@ -11,5 +11,5 @@ dest_files=[ "res://.import/geiger_counter.ogg-8dc2d2a14cdb5ebc7f1d542e37dd21e8.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -52,6 +52,11 @@ NeutronField::NeutronField() : Node2D()
 	
 }
 
+int NeutronField::getMaxPopulation() const
+{
+	return maxPopulation;
+}
+
 void NeutronField::_init()
 {
 	neutronThermalColor = NEUTRON_THERMAL_COLOR;
@@ -70,9 +75,12 @@ void NeutronField::_ready()
 	add_to_group(GROUP);
 
 	if (Engine::get_singleton()->is_editor_hint()) return;
+
+	// Get the reactor core
 	reactorCore = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
 	if (reactorCore == nullptr) Godot::print("FAILED TO GET REACTOR CORE!!");
 
+	// Get the biproduct map
 	biproductMap = Object::cast_to<HeatMap>(get_node(biproductMapPath));
 	if (biproductMap == nullptr) Godot::print("FAILED TO GET BIPRODUCT MAP!!");
 	else
@@ -80,6 +88,15 @@ void NeutronField::_ready()
 		biproductMap->calculateCellSizes(reactorCore->area);
 	}
 
+	// Get the thermal map
+	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
+	if (thermalMap == nullptr) Godot::print("FAILED TO GET THERMAL MAP!!");
+	else
+	{
+		thermalMap->calculateCellSizes(reactorCore->area);
+	}
+
+	// Register the NeutronField with the control system
     Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
     if (obj != nullptr)
     {
@@ -151,6 +168,16 @@ void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
 	const int gridY = (int)floor(pos.y / biproductMap->cellHeight);
 
 	biproductMap->addHeat(biproduct, gridX, gridY);
+}
+
+void NeutronField::addHeat(const Vector2 &globalPos)
+{
+	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
+
+	const int gridX = (int)floor(pos.x / thermalMap->cellWidth);
+	const int gridY = (int)floor(pos.y / thermalMap->cellHeight);
+
+	thermalMap->addHeat(0.1f, gridX, gridY);
 }
 
 void NeutronField::_physics_process(float delta)
@@ -336,7 +363,6 @@ void NeutronField::_draw()
 
 			if (n.isThermalized())
 			{
-				
 				draw_primitive(point, neutronThermalColorArray, emptyArray);
 			}
 			else
@@ -360,6 +386,7 @@ void NeutronField::_register_methods()
 {
 	register_property<NeutronField, NodePath>("reactorCorePath", &NeutronField::reactorCorePath, NULL);
 	register_property<NeutronField, NodePath>("biproductMapPath", &NeutronField::biproductMapPath, NULL);
+	register_property<NeutronField, NodePath>("thermalMapPath", &NeutronField::thermalMapPath, NULL);
 	register_property<NeutronField, float>("biproduct", &NeutronField::biproduct, NeutronField::DEFAULT_BIPRODUCT);
 	register_property<NeutronField, float>("biproductFissionRate", &NeutronField::biproductFissionRate, NeutronField::DEFAULT_BIPRODUCT_FISSION_RATE);
 	register_property<NeutronField, float>("biproductDecayRate", &NeutronField::biproductDecayRate, NeutronField::DEFAULT_BIPRODUCT_DECAY_RATE);
@@ -367,11 +394,13 @@ void NeutronField::_register_methods()
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
 	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
 
-	register_method("set_capacity", &NeutronField::setCapacity);
+	register_method("get_max_population", &NeutronField::getMaxPopulation);
+	//register_method("set_capacity", &NeutronField::setCapacity);
 	register_method("num_neutrons", &NeutronField::numNeutrons);
 	register_method("create_neutron", &NeutronField::createNeutron);
 	register_method("add_neutron_region", &NeutronField::addNeutronRegion);
 	register_method("add_fission_biproduct", &NeutronField::addFissionBiproduct);
+	register_method("add_heat", &NeutronField::addHeat);
 	register_method("get_neutron_flux", &NeutronField::getNeutronFlux);
 	
 	register_method("_init", &NeutronField::_init);

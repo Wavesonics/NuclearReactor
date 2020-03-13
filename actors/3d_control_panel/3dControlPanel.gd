@@ -35,4 +35,5 @@ func _on_FluxUpdateTimer_timeout():
 	$NeutronFluxLabel.set_label_text("Neutron Flux: %d" % flux)
 	
 	if flux > 0:
-		$GeigerCounter.play()
+		for ii in range(0, flux):
+			$GeigerCounter.play()

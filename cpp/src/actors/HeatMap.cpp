@@ -42,6 +42,7 @@ void HeatMap::_init()
 {
     mapSize = DEFAULT_MAP_SIZE;
     enableRendering = true;
+    drawRectSize = 2.0f;
 }
 
 void HeatMap::_ready()
@@ -61,19 +62,18 @@ void HeatMap::_draw()
 {
     if(!enableRendering) return;
 
-    constexpr float rectSize = 2.0f;
-    auto drawRect = Rect2(Vector2(), Vector2(rectSize, rectSize));
+    auto drawRect = Rect2(Vector2(), Vector2(drawRectSize, drawRectSize));
     auto color = Color();
 
     for (int yy = 0; yy < mapSize; ++yy)
     {
-        drawRect.position.y = yy * rectSize;
+        drawRect.position.y = yy * drawRectSize;
         
         for (int xx = 0; xx < mapSize; ++xx)
         {
             const float heat = map[yy][xx];
 
-            drawRect.position.x = xx * rectSize;
+            drawRect.position.x = xx * drawRectSize;
             color.r = heat;
             
             draw_rect(drawRect, color);

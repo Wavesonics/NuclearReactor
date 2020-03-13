@@ -9,6 +9,7 @@
 #include <Godot.hpp>
 #include "NeutronRegion.h"
 #include "NeutronField.h"
+#include "DiffusingHeatMap.h"
 
 namespace nuclearPhysics
 {
@@ -18,6 +19,9 @@ namespace nuclearPhysics
 	private:
 		godot::NodePath neutronFieldPath;
 		NeutronField* neutronField = NULL;
+
+		godot::NodePath thermalMapPath;
+		nuclearPhysics::DiffusingHeatMap* thermalMap = NULL;
 
 		float timeSinceLastFission = 0.0f;
 

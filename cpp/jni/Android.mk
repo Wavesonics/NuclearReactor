@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := \
 ../src/actors/ControlRod.cpp \
 ../src/actors/FuelRod.cpp \
 ../src/actors/HeatMap.cpp \
+../src/actors/DiffusingHeatMap.cpp \
 ../src/actors/Moderator.cpp \
 ../src/actors/Neutron.cpp \
 ../src/actors/NeutronField.cpp \

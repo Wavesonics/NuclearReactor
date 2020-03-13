@@ -15,6 +15,7 @@ func _ready():
 		$NeutronField.enableRendering = false
 		$BiproductMap.enableRendering = false
 
+	$MaxPopulationLabel.text = "Max neutron population: %d" % $NeutronField.get_max_population()
 """
 	for ii in range(0,100000):
 		var velocity = random_direction() * 10.0
@@ -52,3 +53,7 @@ func _process(delta):
 
 func _on_BiproductUpdateTimer_timeout():
 	$BiproductMap.update()
+
+
+func _on_ThermalMapTimer_timeout():
+	$ThermalMap.update()

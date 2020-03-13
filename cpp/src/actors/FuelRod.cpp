@@ -39,6 +39,10 @@ void FuelRod::_ready()
 
 	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if (neutronField == nullptr) Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
+
+	// Get the thermal map
+	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
+	if (thermalMap == nullptr) Godot::print("FAILED TO GET THERMAL MAP!!");
 }
 
 void FuelRod::_draw()
@@ -74,6 +78,8 @@ bool FuelRod::handleNeutron(Neutron &neutron)
 	{
 		//Godot::print("FISSION!");
 		neutronField->addFissionBiproduct(neutron.position);
+		neutronField->addHeat(neutron.position);
+
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);
 	}
@@ -102,6 +108,7 @@ FuelRod::~FuelRod() = default;
 void FuelRod::_register_methods()
 {
 	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, NULL);
+	register_property<FuelRod, NodePath>("thermalMapPath", &FuelRod::thermalMapPath, NULL);
 	register_property<FuelRod, godot::Color>("drawColor", &FuelRod::drawColor, DEFAULT_COLOR);
 
 	register_method("_init", &FuelRod::_init);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://GameCpp.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://actors/HeatMap.gdns" type="Script" id=8]
 [ext_resource path="res://vr/Ubuntu-Medium.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/ThermalMap.gdns" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -20,6 +21,8 @@ font_data = ExtResource( 9 )
 [node name="CppTest" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -2.86395
+margin_bottom = -2.86395
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -30,6 +33,7 @@ z_index = 1
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
 biproductMapPath = NodePath("../BiproductMap")
+thermalMapPath = NodePath("../ThermalMap")
 biproductDecayRate = 0.001
 
 [node name="ReactorCore" type="Node2D" parent="."]
@@ -41,11 +45,13 @@ area = Rect2( 0, 0, 400, 500 )
 position = Vector2( 110, 150 )
 script = ExtResource( 5 )
 neutronFieldPath = NodePath("../../NeutronField")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="FuelRod1" type="Node2D" parent="ReactorCore"]
 position = Vector2( 290, 150 )
 script = ExtResource( 5 )
 neutronFieldPath = NodePath("../../NeutronField")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="Moderator0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 50, 150 )
@@ -74,6 +80,33 @@ script = ExtResource( 8 )
 [node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
 autostart = true
 
+[node name="Label" type="Label" parent="BiproductMap"]
+margin_left = -1.20001
+margin_top = -18.717
+margin_right = 162.8
+margin_bottom = -4.717
+text = "Fission Biproduct Density"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThermalMap" type="Node2D" parent="."]
+position = Vector2( 608.589, 127.446 )
+script = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="ThermalMap"]
+margin_left = -10.0238
+margin_top = -21.4796
+margin_right = 72.9762
+margin_bottom = -7.47961
+text = "Thermal Map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThermalMapTimer" type="Timer" parent="ThermalMap"]
+autostart = true
+
 [node name="FpsLabel" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -86,9 +119,10 @@ __meta__ = {
 }
 
 [node name="NeutronPopulation" type="VBoxContainer" parent="."]
-margin_left = 405.0
-margin_right = 464.0
-margin_bottom = 47.9371
+margin_left = 409.0
+margin_top = 8.00002
+margin_right = 468.0
+margin_bottom = 55.9371
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -106,9 +140,10 @@ margin_right = 59.0
 margin_bottom = 18.0
 
 [node name="NeutronFlux" type="VBoxContainer" parent="."]
-margin_left = 538.823
-margin_right = 597.823
-margin_bottom = 47.9371
+margin_left = 542.823
+margin_top = 8.00002
+margin_right = 601.823
+margin_bottom = 55.9371
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,19 +160,11 @@ margin_top = 18.0
 margin_right = 59.0
 margin_bottom = 18.0
 
-[node name="Label" type="Label" parent="."]
-margin_left = 809.022
-margin_top = 117.304
-margin_right = 973.022
-margin_bottom = 131.304
-text = "Fission Biproduct Density"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label5" type="Label" parent="."]
-margin_right = 195.0
-margin_bottom = 31.0
+[node name="MaxPopulationLabel" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 8.00002
+margin_right = 199.0
+margin_bottom = 39.0
 text = "Neutrons artificially capped at:
 500,000"
 __meta__ = {
@@ -154,3 +181,4 @@ margin_top = -300.0
 margin_right = 0.0
 margin_bottom = 0.0
 [connection signal="timeout" from="BiproductMap/BiproductUpdateTimer" to="." method="_on_BiproductUpdateTimer_timeout"]
+[connection signal="timeout" from="ThermalMap/ThermalMapTimer" to="." method="_on_ThermalMapTimer_timeout"]
