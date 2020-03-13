@@ -33,3 +33,6 @@ func _on_ScramButton_button_pressed():
 func _on_FluxUpdateTimer_timeout():
 	var flux := ControlSystem.neutronField.get_neutron_flux() as int
 	$NeutronFluxLabel.set_label_text("Neutron Flux: %d" % flux)
+	
+	if flux > 0:
+		$GeigerCounter.play()

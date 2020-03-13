@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/3d_control_panel/3dControlPanel.gd" type="Script" id=1]
 [ext_resource path="res://actors/3d_control_panel/dark_gray_metal.tres" type="Material" id=2]
 [ext_resource path="res://OQ_Toolkit/OQ_Interactables/OQ_ButtonPressable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://geiger_counter.ogg" type="AudioStream" id=5]
 
 [node name="ControlPanel" type="Spatial"]
 script = ExtResource( 1 )
@@ -49,5 +50,8 @@ transparent = false
 [node name="FluxUpdateTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="GeigerCounter" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
 [connection signal="button_pressed" from="ScramGroup/ScramButton" to="." method="_on_ScramButton_button_pressed"]
 [connection signal="timeout" from="FluxUpdateTimer" to="." method="_on_FluxUpdateTimer_timeout"]
