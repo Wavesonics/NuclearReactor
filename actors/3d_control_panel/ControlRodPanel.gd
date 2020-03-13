@@ -7,12 +7,6 @@ var numLights: int
 
 func _ready():
 	numLights = $IndicatorLights.get_child_count()
-	"""
-	# Create lights
-	for ii in range(0, numLights):
-		var node := lightScene.instance()
-		$LightsContainer.add_child(node)
-	"""
 
 
 func set_control_rod(rod, number):

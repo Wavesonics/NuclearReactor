@@ -1,5 +1,7 @@
 extends Node
 
+var neutronField = null
+
 var scram: bool = false
 var controlRods := []
 
@@ -34,3 +36,7 @@ func _process(delta):
 
 func add_control_rod(rod):
 	controlRods.push_back(rod);
+
+
+func set_neutron_field(field):
+	neutronField = field

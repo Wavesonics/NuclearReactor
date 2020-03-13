@@ -30,7 +30,7 @@ z_index = 1
 script = ExtResource( 1 )
 reactorCorePath = NodePath("../ReactorCore")
 biproductMapPath = NodePath("../BiproductMap")
-enableRendering = false
+biproductDecayRate = 0.001
 
 [node name="ReactorCore" type="Node2D" parent="."]
 position = Vector2( 0, 50 )
@@ -70,7 +70,6 @@ script = ExtResource( 7 )
 [node name="BiproductMap" type="Node2D" parent="."]
 position = Vector2( 810.222, 136.021 )
 script = ExtResource( 8 )
-enableRendering = false
 
 [node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
 autostart = true
@@ -100,6 +99,26 @@ margin_bottom = 14.0
 text = "Neutrons"
 
 [node name="Graph" parent="NeutronPopulation" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 59.0
+margin_bottom = 18.0
+
+[node name="NeutronFlux" type="VBoxContainer" parent="."]
+margin_left = 538.823
+margin_right = 597.823
+margin_bottom = 47.9371
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Readout" type="Label" parent="NeutronFlux"]
+margin_right = 59.0
+margin_bottom = 14.0
+text = "N Flux"
+
+[node name="Graph" parent="NeutronFlux" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0

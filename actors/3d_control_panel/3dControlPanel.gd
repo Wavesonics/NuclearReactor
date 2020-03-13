@@ -2,7 +2,6 @@ extends Spatial
 
 onready var controlRodPanelScene := preload("res://actors/3d_control_panel/ControlRodPanel.tscn")
 
-
 func _ready():
 	var initialXoffset := 0.0
 	var width := 0.3
@@ -29,3 +28,8 @@ func _ready():
 
 func _on_ScramButton_button_pressed():
 	ControlSystem.scram = true
+
+
+func _on_FluxUpdateTimer_timeout():
+	var flux := ControlSystem.neutronField.get_neutron_flux() as int
+	$NeutronFluxLabel.set_label_text("Neutron Flux: %d" % flux)

@@ -11,13 +11,16 @@ func random_direction() -> Vector2:
 
 
 func _ready():
-	#set_process_input(true)
-	return
-	
+	if OS.has_feature("vr"):
+		$NeutronField.enableRendering = false
+		$BiproductMap.enableRendering = false
+
+"""
 	for ii in range(0,100000):
 		var velocity = random_direction() * 10.0
 		var position = Vector2(rand_range(50.0, 450.0), rand_range(50.0, 450.0))
 		$NeutronField.createNeutron(position, velocity)
+"""
 
 """
 func _input(event):
@@ -31,6 +34,11 @@ func _input(event):
 
 func _process(delta):
 	$FpsLabel.text = "%d fps" % Engine.get_frames_per_second()
+	
+	var flux := $NeutronField.get_neutron_flux() as int
+	$NeutronFlux/Readout.text = "Nuetron Flux: %d" % flux
+	$NeutronFlux/Graph.write_data((flux * 2) + 1) # +1 so it's visible when zero
+	
 	
 	var neutrons: int = $NeutronField.num_neutrons()
 	var scaleTrip := 500

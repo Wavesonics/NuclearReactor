@@ -5,6 +5,9 @@
 #include "NeutronField.h"
 #include "../util/Utils.h"
 #include <Engine.hpp>
+#include <SceneTree.hpp>
+#include <Viewport.hpp>
+#include <Variant.hpp>
 #include <Texture.hpp>
 #include <iostream>
 #include <algorithm>
@@ -17,6 +20,16 @@ using namespace godot;
 
 static const Color NEUTRON_THERMAL_COLOR = Color(0.5, 0.5, 0.5);
 static const Color NEUTRON_RELATIVISTIC_COLOR = Color(0.8, 0.5, 0.0);
+
+BatchResult::BatchResult() = default;
+
+BatchResult::BatchResult(std::vector<int>* list) : toRemove(list)
+{
+
+}
+
+BatchResult::~BatchResult() = default;
+
 
 template<class Container, class Iterator>
 Iterator reorderingErase(Container &c, Iterator it)
@@ -66,6 +79,16 @@ void NeutronField::_ready()
 	{
 		biproductMap->calculateCellSizes(reactorCore->area);
 	}
+
+    Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
+    if (obj != nullptr)
+    {
+        obj->call("set_neutron_field", Variant(this));
+    }
+    else
+    {
+        Godot::print("Failed to get ControlSystem");
+    }
 }
 
 void NeutronField::setCapacity(int capacity)
@@ -115,6 +138,11 @@ int NeutronField::numNeutrons() const
 	return neutrons.size();
 }
 
+int NeutronField::getNeutronFlux() const
+{
+	return neutronFlux;
+}
+
 void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
 {
 	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
@@ -132,7 +160,7 @@ void NeutronField::_physics_process(float delta)
 	const int n = neutrons.size();
 	int batchSize = n / numWorkers;
 
-	vector<future<vector<int>*>> results;
+	vector<future<nuclearPhysics::BatchResult>> results;
 	if (n >= numWorkers)
 	{
 		results.reserve(numWorkers);
@@ -171,10 +199,15 @@ void NeutronField::_physics_process(float delta)
 		);
 	}
 
+	neutronFlux = 0;
+
 	// Collect results
-	for(auto& result : results)
+	for(auto& future : results)
 	{
-		const auto &removals = result.get();
+		const auto &result = future.get();
+		neutronFlux += result.escapedNeutrons;
+
+		auto removals = result.toRemove;
 		copy(removals->begin(), removals->end(), back_inserter(toRemove));
 		removals->clear();
 	}
@@ -193,8 +226,10 @@ void NeutronField::_physics_process(float delta)
 	processFissionBiproducts();
 }
 
-vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, int end, float delta)
+BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, int end, float delta)
 {
+	BatchResult result = BatchResult(removal);
+
 	for(int ii = start; ii < end; ++ii)
 	{
 		auto & neutron = neutrons[ii];
@@ -203,6 +238,7 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 
 		if(reactorCore != NULL && !reactorCore->contains(neutron.position))
 		{
+			result.escapedNeutrons++;
 			removal->push_back(ii);
 		}
 		else
@@ -220,7 +256,7 @@ vector<int>* NeutronField::processNeutronBatch(vector<int> *removal, int start, 
 		}
 	}
 
-	return removal;
+	return result;
 }
 
 void NeutronField::processFissionBiproducts()
@@ -336,6 +372,8 @@ void NeutronField::_register_methods()
 	register_method("create_neutron", &NeutronField::createNeutron);
 	register_method("add_neutron_region", &NeutronField::addNeutronRegion);
 	register_method("add_fission_biproduct", &NeutronField::addFissionBiproduct);
+	register_method("get_neutron_flux", &NeutronField::getNeutronFlux);
+	
 	register_method("_init", &NeutronField::_init);
 	register_method("_ready", &NeutronField::_ready);
 	register_method("_physics_process", &NeutronField::_physics_process);

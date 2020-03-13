@@ -17,6 +17,16 @@
 
 namespace nuclearPhysics
 {
+	struct BatchResult
+	{
+		int escapedNeutrons = 0;
+		std::vector<int>* toRemove;
+
+		BatchResult();
+		BatchResult(std::vector<int>* list);
+		~BatchResult();
+	};
+
 	class NeutronField : public godot::Node2D
 	{
 		GODOT_CLASS(NeutronField, godot::Node2D)
@@ -41,12 +51,14 @@ namespace nuclearPhysics
 		godot::NodePath biproductMapPath;
 		nuclearPhysics::HeatMap* biproductMap = NULL;
 
+		int neutronFlux = 0;
+
 		void processFissionBiproducts();
 		bool processFissionBiproductBatch(float* row, int yy);
 
 		std::vector<nuclearPhysics::NeutronRegion*> regions;
 
-		std::vector<int>* processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
+		BatchResult processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
 
 		godot::Color neutronThermalColor;
 		godot::Color neutronRelativisticColor;
@@ -59,6 +71,7 @@ namespace nuclearPhysics
 		void addNeutron(const nuclearPhysics::Neutron& neutron);
 		void createNeutron(const godot::Vector2 position, const godot::Vector2 velocity);
 		int numNeutrons() const;
+		int getNeutronFlux() const;
 		void addFissionBiproduct(const godot::Vector2 &globalPos);
 		virtual void _init();
 		virtual void _ready();
