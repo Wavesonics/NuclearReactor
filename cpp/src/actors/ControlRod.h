@@ -14,7 +14,6 @@ namespace nuclearPhysics
 	class ControlRod : public NeutronRegion
 	{
 		GODOT_CLASS(ControlRod, nuclearPhysics::NeutronRegion)
-
 	private:
 		float fullOutPositionDelta;
 		float fullInPosition;

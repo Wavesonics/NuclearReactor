@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/control_room_00.map-fde7f88e94a997cc5a90ca12ea11dce4.tres"
+
+[deps]
+
+source_file="res://vr/art/control_room/control_room_00.map"
+dest_files=[ "res://.import/control_room_00.map-fde7f88e94a997cc5a90ca12ea11dce4.tres" ]
+
+[params]
+
