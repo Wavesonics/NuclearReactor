@@ -170,14 +170,14 @@ void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
 	biproductMap->addHeat(biproduct, gridX, gridY);
 }
 
-void NeutronField::addHeat(const Vector2 &globalPos)
+void NeutronField::addHeat(const Vector2 &globalPos, const float heat)
 {
 	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
 
 	const int gridX = (int)floor(pos.x / thermalMap->cellWidth);
 	const int gridY = (int)floor(pos.y / thermalMap->cellHeight);
 
-	thermalMap->addHeat(0.1f, gridX, gridY);
+	thermalMap->addHeat(heat, gridX, gridY);
 }
 
 void NeutronField::_physics_process(float delta)
@@ -340,7 +340,6 @@ bool NeutronField::processFissionBiproductBatch(float *row, int yy)
 
 	return true;
 }
-
 
 void NeutronField::_draw()
 {

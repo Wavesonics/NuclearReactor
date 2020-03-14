@@ -14,6 +14,9 @@ func _ready():
 	if OS.has_feature("vr"):
 		$NeutronField.enableRendering = false
 		$BiproductMap.enableRendering = false
+		$ThermalMap.enableRendering = false
+
+	#set_process_input(true)
 
 	$MaxPopulationLabel.text = "Max neutron population: %d" % $NeutronField.get_max_population()
 """
@@ -24,6 +27,11 @@ func _ready():
 """
 
 """
+func _input(ev):
+if Input.is_key_pressed(KEY_SPACE):
+		$NeutronField.add_heat(Vector2(200.0, 200.0), 100.0)
+		$ThermalMap.update()
+		
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
@@ -40,7 +48,6 @@ func _process(delta):
 	$NeutronFlux/Readout.text = "Nuetron Flux: %d" % flux
 	$NeutronFlux/Graph.write_data((flux * 2) + 1) # +1 so it's visible when zero
 	
-	
 	var neutrons: int = $NeutronField.num_neutrons()
 	var scaleTrip := 500
 	var scale := 1
@@ -53,7 +60,3 @@ func _process(delta):
 
 func _on_BiproductUpdateTimer_timeout():
 	$BiproductMap.update()
-
-
-func _on_ThermalMapTimer_timeout():
-	$ThermalMap.update()

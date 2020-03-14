@@ -39,7 +39,7 @@ biproductDecayRate = 0.001
 [node name="ReactorCore" type="Node2D" parent="."]
 position = Vector2( 0, 50 )
 script = ExtResource( 3 )
-area = Rect2( 0, 0, 400, 500 )
+area = Rect2( 0, 0, 400, 400 )
 
 [node name="FuelRod0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 110, 150 )
@@ -74,7 +74,7 @@ position = Vector2( 250, 150 )
 script = ExtResource( 7 )
 
 [node name="BiproductMap" type="Node2D" parent="."]
-position = Vector2( 810.222, 136.021 )
+position = Vector2( 890, 128 )
 script = ExtResource( 8 )
 
 [node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
@@ -85,27 +85,23 @@ margin_left = -1.20001
 margin_top = -18.717
 margin_right = 162.8
 margin_bottom = -4.717
-text = "Fission Biproduct Density"
+text = "Fission Biprod. Density"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ThermalMap" type="Node2D" parent="."]
-position = Vector2( 608.589, 127.446 )
+position = Vector2( 750, 128 )
 script = ExtResource( 11 )
 
 [node name="Label" type="Label" parent="ThermalMap"]
-margin_left = -10.0238
-margin_top = -21.4796
-margin_right = 72.9762
-margin_bottom = -7.47961
+margin_top = -20.0
+margin_right = 83.0
+margin_bottom = -6.0
 text = "Thermal Map"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ThermalMapTimer" type="Timer" parent="ThermalMap"]
-autostart = true
 
 [node name="FpsLabel" type="Label" parent="."]
 anchor_left = 1.0
@@ -140,9 +136,9 @@ margin_right = 59.0
 margin_bottom = 18.0
 
 [node name="NeutronFlux" type="VBoxContainer" parent="."]
-margin_left = 542.823
-margin_top = 8.00002
-margin_right = 601.823
+margin_left = 550.0
+margin_top = 8.0
+margin_right = 609.0
 margin_bottom = 55.9371
 __meta__ = {
 "_edit_use_anchors_": false
@@ -181,4 +177,3 @@ margin_top = -300.0
 margin_right = 0.0
 margin_bottom = 0.0
 [connection signal="timeout" from="BiproductMap/BiproductUpdateTimer" to="." method="_on_BiproductUpdateTimer_timeout"]
-[connection signal="timeout" from="ThermalMap/ThermalMapTimer" to="." method="_on_ThermalMapTimer_timeout"]

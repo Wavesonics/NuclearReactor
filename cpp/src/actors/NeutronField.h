@@ -78,7 +78,7 @@ namespace nuclearPhysics
 		int numNeutrons() const;
 		int getNeutronFlux() const;
 		void addFissionBiproduct(const godot::Vector2 &globalPos);
-		void addHeat(const godot::Vector2 &globalPos);
+		void addHeat(const godot::Vector2 &globalPos, const float heat);
 		virtual void _init();
 		virtual void _ready();
 		virtual void _physics_process(float delta);
@@ -88,7 +88,7 @@ namespace nuclearPhysics
 		static constexpr int DEFAULT_MAX_RENDER = 1500;
 		static constexpr float DEFAULT_BIPRODUCT = 0.01f;
 		static constexpr float DEFAULT_BIPRODUCT_FISSION_RATE = 0.01f;
-		static constexpr float DEFAULT_BIPRODUCT_DECAY_RATE = 0.0005f;
+		static constexpr float DEFAULT_BIPRODUCT_DECAY_RATE = 0.00025f;
 		inline static const char* GROUP = "neutron_field";
 	};
 }

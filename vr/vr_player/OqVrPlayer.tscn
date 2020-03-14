@@ -17,6 +17,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02011, 0 )
 [node name="OQ_ARVROrigin" parent="." instance=ExtResource( 4 )]
 
 [node name="OQ_ARVRCamera" parent="OQ_ARVROrigin" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77783, 0 )
 
 [node name="OQ_LeftController" parent="OQ_ARVROrigin" instance=ExtResource( 1 )]
 enable_gesture_to_button = true
@@ -37,7 +38,8 @@ collision_body_active = true
 [node name="Locomotion_Stick" parent="OQ_ARVROrigin" instance=ExtResource( 7 )]
 
 [node name="Feature_Falling" parent="OQ_ARVROrigin" instance=ExtResource( 9 )]
+force_move_up = true
 
 [node name="Feature_PlayerCollision" parent="OQ_ARVROrigin" instance=ExtResource( 6 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.769977, 0 )
-capsule_radius = 1.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.769977, 0 )
+capsule_radius = 0.15
