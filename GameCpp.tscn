@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=1]
 [ext_resource path="res://GameCpp.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://vr/Ubuntu-Medium.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://actors/ThermalMap.gdns" type="Script" id=11]
+[ext_resource path="res://actors/Thermocouple.gdns" type="Script" id=12]
+[ext_resource path="res://vr/DefaultFont.tres" type="DynamicFont" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -72,6 +74,42 @@ script = ExtResource( 7 )
 [node name="ControlRod1" type="Node2D" parent="ReactorCore"]
 position = Vector2( 250, 150 )
 script = ExtResource( 7 )
+
+[node name="Thermocouple0" type="Node2D" parent="ReactorCore"]
+position = Vector2( 105, 175 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Thermocouple1" type="Node2D" parent="ReactorCore"]
+position = Vector2( 105, 340 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Thermocouple3" type="Node2D" parent="ReactorCore"]
+position = Vector2( 220, 175 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Thermocouple2" type="Node2D" parent="ReactorCore"]
+position = Vector2( 220, 340 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Thermocouple5" type="Node2D" parent="ReactorCore"]
+position = Vector2( 325, 175 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
+
+[node name="Thermocouple4" type="Node2D" parent="ReactorCore"]
+position = Vector2( 325, 340 )
+script = ExtResource( 12 )
+font = ExtResource( 13 )
+neutronFieldPath = NodePath("../../NeutronField")
 
 [node name="BiproductMap" type="Node2D" parent="."]
 position = Vector2( 890, 128 )

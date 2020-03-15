@@ -44,16 +44,16 @@ namespace nuclearPhysics
 		int maxRender = DEFAULT_MAX_RENDER;
 
 		godot::NodePath reactorCorePath;
-		nuclearPhysics::ReactorCore* reactorCore = NULL;
+		nuclearPhysics::ReactorCore* reactorCore = nullptr;
 
 		float biproduct = DEFAULT_BIPRODUCT;
 		float biproductDecayRate = DEFAULT_BIPRODUCT_DECAY_RATE;
 		float biproductFissionRate = DEFAULT_BIPRODUCT_FISSION_RATE;
 		godot::NodePath biproductMapPath;
-		nuclearPhysics::HeatMap* biproductMap = NULL;
+		nuclearPhysics::HeatMap* biproductMap = nullptr;
 
 		godot::NodePath thermalMapPath;
-		nuclearPhysics::DiffusingHeatMap* thermalMap = NULL;
+		nuclearPhysics::DiffusingHeatMap* thermalMap = nullptr;
 
 		int neutronFlux = 0;
 
@@ -77,8 +77,11 @@ namespace nuclearPhysics
 		void createNeutron(const godot::Vector2 position, const godot::Vector2 velocity);
 		int numNeutrons() const;
 		int getNeutronFlux() const;
+		godot::Point2 toBiproductGrid(const godot::Vector2 &globalPos) const;
 		void addFissionBiproduct(const godot::Vector2 &globalPos);
+		godot::Point2 toHeatGrid(const godot::Vector2 &globalPos) const;
 		void addHeat(const godot::Vector2 &globalPos, const float heat);
+		float readHeat(const godot::Vector2 &globalPos) const;
 		virtual void _init();
 		virtual void _ready();
 		virtual void _physics_process(float delta);

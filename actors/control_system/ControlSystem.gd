@@ -5,6 +5,8 @@ var neutronField = null
 var scram: bool = false
 var controlRods := []
 
+var thermocouples := []
+
 
 func _process(delta):
 	if Engine.is_editor_hint():
@@ -36,6 +38,10 @@ func _process(delta):
 
 func add_control_rod(rod):
 	controlRods.push_back(rod);
+
+
+func add_thermocouple(thermocouple):
+	thermocouples.push_back(thermocouple);
 
 
 func set_neutron_field(field):

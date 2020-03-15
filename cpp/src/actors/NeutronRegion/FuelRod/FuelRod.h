@@ -18,10 +18,10 @@ namespace nuclearPhysics
 		GODOT_CLASS(FuelRod, nuclearPhysics::NeutronRegion)
 	private:
 		godot::NodePath neutronFieldPath;
-		NeutronField* neutronField = NULL;
+		NeutronField* neutronField = nullptr;
 
 		godot::NodePath thermalMapPath;
-		nuclearPhysics::DiffusingHeatMap* thermalMap = NULL;
+		nuclearPhysics::DiffusingHeatMap* thermalMap = nullptr;
 
 		float timeSinceLastFission = 0.0f;
 

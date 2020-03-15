@@ -18,7 +18,7 @@ static const Color DEFAULT_COLOR = Color(1.0, 0.0, 0.0);
 
 FuelRod::FuelRod() : NeutronRegion()
 {
-	neutronField = NULL;
+	neutronField = nullptr;
 }
 
 void FuelRod::_init()
@@ -107,8 +107,8 @@ FuelRod::~FuelRod() = default;
 
 void FuelRod::_register_methods()
 {
-	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, NULL);
-	register_property<FuelRod, NodePath>("thermalMapPath", &FuelRod::thermalMapPath, NULL);
+	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, nullptr);
+	register_property<FuelRod, NodePath>("thermalMapPath", &FuelRod::thermalMapPath, nullptr);
 	register_property<FuelRod, godot::Color>("drawColor", &FuelRod::drawColor, DEFAULT_COLOR);
 
 	register_method("_init", &FuelRod::_init);

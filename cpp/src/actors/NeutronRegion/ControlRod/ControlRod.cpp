@@ -52,7 +52,8 @@ void ControlRod::_ready()
     fullInPosition = get_position().y;
     currentPositionDelta = (-fabs(fullOutPositionDelta * initialPercentOut));
     updatePosition();
-    
+
+    // Each control rod adds it's self to the global ControlSystem
     Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
     if (obj != nullptr)
     {
