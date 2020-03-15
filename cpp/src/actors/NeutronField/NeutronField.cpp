@@ -65,7 +65,7 @@ void NeutronField::_init()
 	biproduct = DEFAULT_BIPRODUCT;
 	biproductDecayRate = DEFAULT_BIPRODUCT_DECAY_RATE;
 
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
 	setCapacity(maxPopulation);
 }
@@ -74,7 +74,7 @@ void NeutronField::_ready()
 {
 	add_to_group(GROUP);
 
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
 	// Get the reactor core
 	reactorCore = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
@@ -200,7 +200,7 @@ float NeutronField::readHeat(const godot::Vector2 &globalPos) const
 
 void NeutronField::_physics_process(float delta)
 {
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
 	const int n = neutrons.size();
 	int batchSize = n / numWorkers;
@@ -295,6 +295,7 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 					if(region->handleNeutron(neutron))
 					{
 						removal->push_back(ii);
+						break; // No need to continue, we've been removed
 					}
 				}
 			}

@@ -46,7 +46,7 @@ void ControlRod::_ready()
 
     add_to_group(GROUP);
 
-    if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
     fullOutPositionDelta = area.size.height;
     fullInPosition = get_position().y;
@@ -104,7 +104,7 @@ void ControlRod::moveIn(float delta, float speed = SPEED)
 
 void ControlRod::updatePosition()
 {
-    if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
     currentPositionDelta = clamp(currentPositionDelta, -fullOutPositionDelta, 0.0f);
     

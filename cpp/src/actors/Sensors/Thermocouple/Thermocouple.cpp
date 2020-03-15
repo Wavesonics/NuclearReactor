@@ -3,6 +3,7 @@
 //
 
 #include "Thermocouple.h"
+#include "../../../util/Utils.h"
 #include <Engine.hpp>
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
@@ -20,14 +21,18 @@ void Thermocouple::_init()
 	drawColor = Color(0.8f, 0.2f, 0.0f);
 	drawRadius = 8.0f;
 	enableRendering = DEFAULT_RENDER;
+
+	font = Ref<DynamicFont>();
 }
 
 void Thermocouple::_ready()
 {
+	update();
+
+	EDITOR_GUARD_RETURN_HERE
+
 	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if(neutronField == nullptr) Godot::print("THERMOCOUPLE FAILED TO GET NEUTRON FIELD!!");
-
-	update();
 
 	// Each control rod adds it's self to the global ControlSystem
 	Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
@@ -51,13 +56,18 @@ void Thermocouple::_draw()
 
 	if(font.is_valid())
 	{
-		float reading = readTemperature();
-		draw_string(font, Point2(-drawRadius, negHalfR), String::num(reading, 1));
+		if (!Engine::get_singleton()->is_editor_hint())
+		{
+			float reading = readTemperature();
+			draw_string(font, Point2(-drawRadius, negHalfR), String::num(reading, 1));
+		}
 	}
 }
 
 void Thermocouple::_physics_process(const float delta)
 {
+	EDITOR_GUARD_RETURN_HERE
+
 	if(enableRendering)
 	{
 		update();
@@ -88,7 +98,6 @@ void Thermocouple::clearErrantReading()
 
 void Thermocouple::_register_methods()
 {
-
 	register_property<Thermocouple, Ref<DynamicFont>>("font", &Thermocouple::font, nullptr);
 	register_property<Thermocouple, NodePath>("neutronFieldPath", &Thermocouple::neutronFieldPath, nullptr);
 	register_property<Thermocouple, bool>("enableRendering", &Thermocouple::enableRendering, DEFAULT_RENDER);

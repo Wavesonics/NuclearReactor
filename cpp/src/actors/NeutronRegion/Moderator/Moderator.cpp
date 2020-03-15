@@ -35,7 +35,7 @@ void Moderator::_ready()
 {
     NeutronRegion::_ready();
 
-    if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
     add_to_group(GROUP);
 }

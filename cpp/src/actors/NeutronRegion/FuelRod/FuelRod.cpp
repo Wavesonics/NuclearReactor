@@ -32,10 +32,10 @@ void FuelRod::_init()
 void FuelRod::_ready()
 {
 	NeutronRegion::_ready();
-	
-	add_to_group(GROUP);
 
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
+
+	add_to_group(GROUP);
 
 	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
 	if (neutronField == nullptr) Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
@@ -52,7 +52,7 @@ void FuelRod::_draw()
 
 void FuelRod::_physics_process(float delta)
 {
-	if (Engine::get_singleton()->is_editor_hint()) return;
+	EDITOR_GUARD_RETURN_HERE
 
 	timeSinceLastFission += delta;
 	if (timeSinceLastFission >= SPONTANEUOS_FISION_RATE)

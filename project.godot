@@ -221,6 +221,11 @@ config/icon="res://icon.png"
 vr="*res://OQ_Toolkit/vr_autoload.gd"
 ControlSystem="*res://actors/control_system/ControlSystem.gd"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [editor_plugins]
 
 enabled=PoolStringArray( "qodot", "thread_pool" )
@@ -268,7 +273,12 @@ scram={
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation.mobile=2
 threads/thread_model=2
 vram_compression/import_etc=true
+quality/shadows/filter_mode.mobile=1
+quality/shading/force_vertex_shading.mobile=false
+quality/shading/force_lambert_over_burley.mobile=false
+quality/shading/force_blinn_over_ggx.mobile=false
 quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"

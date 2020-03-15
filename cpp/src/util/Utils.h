@@ -21,4 +21,6 @@ bool about_equal(float a, float b, float epsilon);
 std::ostream& operator<<(std::ostream& os, const godot::Vector2& v);
 std::ostream& operator<<(std::ostream& os, godot::Vector2& v);
 
+#define EDITOR_GUARD_RETURN_HERE if (Engine::get_singleton()->is_editor_hint()) return;
+
 #endif //REACTORCPP_UTILS_H
