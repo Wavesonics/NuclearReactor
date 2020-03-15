@@ -694,25 +694,25 @@ add_executable(cpp
         godot-cpp/include/gen/X509Certificate.hpp
         godot-cpp/include/gen/XMLParser.hpp
         godot-cpp/include/gen/YSort.hpp
-        src/actors/ControlRod.cpp
-        src/actors/ControlRod.h
-        src/actors/DiffusingHeatMap.cpp
-        src/actors/DiffusingHeatMap.h
-        src/actors/FuelRod.cpp
-        src/actors/FuelRod.h
-        src/actors/HeatMap.cpp
-        src/actors/HeatMap.h
-        src/actors/Moderator.cpp
-        src/actors/Moderator.h
-        src/actors/Neutron.cpp
-        src/actors/Neutron.h
-        src/actors/NeutronField.cpp
-        src/actors/NeutronField.h
-        src/actors/NeutronRegion.cpp
-        src/actors/NeutronRegion.h
-        src/actors/ReactorCore.cpp
-        src/actors/ReactorCore.h
+        src/actors/NeutronRegion/ControlRod/ControlRod.cpp
+        src/actors/NeutronRegion/ControlRod/ControlRod.h
+        src/actors/HeatMap/DiffusingHeatMap.cpp
+        src/actors/HeatMap/DiffusingHeatMap.h
+        src/actors/NeutronRegion/FuelRod/FuelRod.cpp
+        src/actors/NeutronRegion/FuelRod/FuelRod.h
+        src/actors/HeatMap/HeatMap.cpp
+        src/actors/HeatMap/HeatMap.h
+        src/actors/NeutronRegion/Moderator/Moderator.cpp
+        src/actors/NeutronRegion/Moderator/Moderator.h
+        src/actors/NeutronField/Neutron.cpp
+        src/actors/NeutronField/Neutron.h
+        src/actors/NeutronField/NeutronField.cpp
+        src/actors/NeutronField/NeutronField.h
+        src/actors/NeutronRegion/NeutronRegion.cpp
+        src/actors/NeutronRegion/NeutronRegion.h
+        src/actors/NeutronRegion/ReactorCore/ReactorCore.cpp
+        src/actors/NeutronRegion/ReactorCore/ReactorCore.h
         src/util/ThreadPool.h
         src/util/Utils.cpp
         src/util/Utils.h
-        src/init.cpp)
+        src/init.cpp src/actors/Sensors/Thermocouple/Thermocouple.cpp src/actors/Sensors/Thermocouple/Thermocouple.h)

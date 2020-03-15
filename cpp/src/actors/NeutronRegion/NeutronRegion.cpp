@@ -2,11 +2,9 @@
 // Created by Adam on 2/28/2020.
 //
 
-#include <utility>
 #include <iostream>
-#include <string>
 #include "NeutronRegion.h"
-#include "NeutronField.h"
+#include "../NeutronField/NeutronField.h"
 #include "SceneTree.hpp"
 #include "Engine.hpp"
 

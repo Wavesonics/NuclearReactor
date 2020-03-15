@@ -7,7 +7,7 @@
 
 
 #include <Godot.hpp>
-#include "NeutronRegion.h"
+#include "../NeutronRegion.h"
 
 namespace nuclearPhysics
 {

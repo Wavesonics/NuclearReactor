@@ -21,7 +21,6 @@ namespace nuclearPhysics
 		bool debugAdvance = false;
 
 		float **backBuffer;
-		float **currentMap;
 		float timeSinceLastDiffusion = 0.0f;
 		float diffusionTickRateSeconds = DEFAULT_TICK_RATE_SECONDS;
 
@@ -32,7 +31,6 @@ namespace nuclearPhysics
 		void diffuse(int x, int y);
 
 		inline float diffuseToCell(int x, int y, float heat, float diffuse);
-		inline bool rangeCheck(int x, int y);
 
 	public:
 

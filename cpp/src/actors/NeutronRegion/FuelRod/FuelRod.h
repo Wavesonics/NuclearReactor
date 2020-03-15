@@ -7,9 +7,9 @@
 
 
 #include <Godot.hpp>
-#include "NeutronRegion.h"
-#include "NeutronField.h"
-#include "DiffusingHeatMap.h"
+#include "../NeutronRegion.h"
+#include "../../NeutronField/NeutronField.h"
+#include "../../HeatMap/DiffusingHeatMap.h"
 
 namespace nuclearPhysics
 {

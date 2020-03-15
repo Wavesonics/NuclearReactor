@@ -3,7 +3,7 @@
 //
 
 #include "HeatMap.h"
-#include "../util/Utils.h"
+#include "../../util/Utils.h"
 #include <Engine.hpp>
 #include <iostream>
 #include <algorithm>
@@ -26,9 +26,14 @@ void HeatMap::calculateCellSizes(const godot::Rect2 &rect)
 	cellHeight = rect.size.height / (float) mapSize;
 }
 
+bool HeatMap::rangeCheck(const int x, const int y) const
+{
+	return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
+}
+
 void HeatMap::addHeat(float heat, const int x, const int y)
 {
-	if(x < mapSize && y < mapSize && x >= 0 && y >= 0)
+	if(rangeCheck(x, y))
 	{
 		map[y][x] = clamp(map[y][x] + heat, 0.0f, maxValue);
 	}
@@ -37,6 +42,19 @@ void HeatMap::addHeat(float heat, const int x, const int y)
 		Godot::print("HeatMap:: index out of range {0}, {1} | {2}", x, y, mapSize);
 	}
 }
+
+float HeatMap::readMagnitude(const int x, const int y) const
+{
+	if(rangeCheck(x, y))
+	{
+		return map[y][x];
+	}
+	else
+	{
+		return -1.0f;
+	}
+}
+
 
 void HeatMap::_init()
 {
@@ -103,6 +121,7 @@ void HeatMap::_register_methods()
 	register_property<HeatMap, bool>("enableRendering", &HeatMap::enableRendering, true);
 
 	register_method("add_heat", &HeatMap::addHeat);
+	register_method("read_magnitude", &HeatMap::readMagnitude);
 	register_method("_init", &HeatMap::_init);
 	register_method("_ready", &HeatMap::_ready);
 	register_method("_draw", &HeatMap::_draw);

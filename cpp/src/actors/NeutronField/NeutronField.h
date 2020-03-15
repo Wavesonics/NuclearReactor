@@ -9,11 +9,11 @@
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include "Neutron.h"
-#include "ReactorCore.h"
-#include "NeutronRegion.h"
-#include "HeatMap.h"
-#include "DiffusingHeatMap.h"
-#include "../util/ThreadPool.h"
+#include "../NeutronRegion/ReactorCore/ReactorCore.h"
+#include "../NeutronRegion/NeutronRegion.h"
+#include "../HeatMap/HeatMap.h"
+#include "../HeatMap/DiffusingHeatMap.h"
+#include "../../util/ThreadPool.h"
 
 
 namespace nuclearPhysics

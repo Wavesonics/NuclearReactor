@@ -7,7 +7,7 @@
 
 #include <Godot.hpp>
 #include <Node2D.hpp>
-#include "Neutron.h"
+#include "../NeutronField/Neutron.h"
 
 
 namespace nuclearPhysics

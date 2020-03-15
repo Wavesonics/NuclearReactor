@@ -1,12 +1,12 @@
 #include <Godot.hpp>
-#include "actors/NeutronField.h"
-#include "actors/NeutronRegion.h"
-#include "actors/ControlRod.h"
-#include "actors/FuelRod.h"
-#include "actors/Moderator.h"
-#include "actors/ReactorCore.h"
-#include "actors/HeatMap.h"
-#include "actors/DiffusingHeatMap.h"
+#include "actors/NeutronField/NeutronField.h"
+#include "actors/NeutronRegion/ControlRod/ControlRod.h"
+#include "actors/NeutronRegion/FuelRod/FuelRod.h"
+#include "actors/NeutronRegion/Moderator/Moderator.h"
+#include "actors/NeutronRegion/ReactorCore/ReactorCore.h"
+#include "actors/HeatMap/HeatMap.h"
+#include "actors/HeatMap/DiffusingHeatMap.h"
+#include "actors/Sensors/Thermocouple/Thermocouple.h"
 
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
@@ -27,4 +27,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
     godot::register_class<nuclearPhysics::Moderator>();
     godot::register_class<nuclearPhysics::HeatMap>();
     godot::register_class<nuclearPhysics::DiffusingHeatMap>();
+	godot::register_class<nuclearPhysics::Thermocouple>();
 }

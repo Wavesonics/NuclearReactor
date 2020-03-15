@@ -16,15 +16,16 @@ LOCAL_LDLIBS := -llog
 LOCAL_SRC_FILES := \
 ../src/init.cpp \
 ../src/util/Utils.cpp \
-../src/actors/ControlRod.cpp \
-../src/actors/FuelRod.cpp \
-../src/actors/HeatMap.cpp \
-../src/actors/DiffusingHeatMap.cpp \
-../src/actors/Moderator.cpp \
-../src/actors/Neutron.cpp \
-../src/actors/NeutronField.cpp \
-../src/actors/NeutronRegion.cpp \
-../src/actors/ReactorCore.cpp
+../src/actors/HeatMap/HeatMap.cpp \
+../src/actors/HeatMap/DiffusingHeatMap.cpp \
+../src/actors/NeutronRegion/NeutronRegion.cpp \
+../src/actors/NeutronRegion/ControlRod/ControlRod.cpp \
+../src/actors/NeutronRegion/FuelRod/FuelRod.cpp \
+../src/actors/NeutronRegion/Moderator/Moderator.cpp \
+../src/actors/NeutronRegion/ReactorCore/ReactorCore.cpp \
+../src/actors/NeutronField/Neutron.cpp \
+../src/actors/NeutronField/NeutronField.cpp \
+../src/actors/Sensors/Thermocouple/Thermocouple.cpp
 
 #LOCAL_SHARED_LIBRARIES := 
 

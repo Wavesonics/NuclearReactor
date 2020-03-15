@@ -3,15 +3,11 @@
 //
 
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 #include <Ref.hpp>
 #include <Font.hpp>
-#include <DynamicFont.hpp>
-#include <DynamicFontData.hpp>
-#include <ResourceLoader.hpp>
 #include <InputEvent.hpp>
 #include "DiffusingHeatMap.h"
-#include "../util/Utils.h"
 
 using namespace std;
 using namespace nuclearPhysics;
@@ -190,11 +186,6 @@ float DiffusingHeatMap::diffuseToCell(int x, int y, float heat, float diffuse)
 	return diffused;
 }
 
-bool DiffusingHeatMap::rangeCheck(int x, int y)
-{
-	return x >= 0 && y >= 0 && x < mapSize && y < mapSize;
-}
-
 void DiffusingHeatMap::_register_methods()
 {
 	register_property<DiffusingHeatMap, int>("mapSize", &DiffusingHeatMap::mapSize, DEFAULT_MAP_SIZE);
@@ -203,6 +194,7 @@ void DiffusingHeatMap::_register_methods()
 	register_property<DiffusingHeatMap, float>("diffusionTickRateSeconds", &DiffusingHeatMap::diffusionTickRateSeconds,
 											   DEFAULT_TICK_RATE_SECONDS);
 
+	register_method("read_magnitude", &DiffusingHeatMap::readMagnitude);
 	register_method("_init", &DiffusingHeatMap::_init);
 	register_method("_ready", &DiffusingHeatMap::_ready);
 	register_method("_physics_process", &DiffusingHeatMap::_physics_process);
