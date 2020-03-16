@@ -24,6 +24,8 @@ LOCAL_SRC_FILES := \
 ../src/actors/NeutronRegion/Moderator/Moderator.cpp \
 ../src/actors/NeutronRegion/ReactorCore/ReactorCore.cpp \
 ../src/actors/NeutronField/Neutron.cpp \
+../src/actors/NeutronField/BspRegion1dNode.cpp \
+../src/actors/NeutronField/BatchResult.cpp \
 ../src/actors/NeutronField/NeutronField.cpp \
 ../src/actors/Sensors/Thermocouple/Thermocouple.cpp
 

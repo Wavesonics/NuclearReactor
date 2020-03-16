@@ -31,9 +31,11 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1200, 1200 )
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport"]
-offset = Vector2( 1600, 1500 )
+offset = Vector2( 1600, 1200 )
 current = true
 zoom = Vector2( 3, 3 )
 

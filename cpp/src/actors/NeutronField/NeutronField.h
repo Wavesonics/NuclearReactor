@@ -9,6 +9,8 @@
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include "Neutron.h"
+#include "BatchResult.h"
+#include "BspRegion1dNode.h"
 #include "../NeutronRegion/ReactorCore/ReactorCore.h"
 #include "../NeutronRegion/NeutronRegion.h"
 #include "../HeatMap/HeatMap.h"
@@ -18,16 +20,6 @@
 
 namespace nuclearPhysics
 {
-	struct BatchResult
-	{
-		int escapedNeutrons = 0;
-		std::vector<int>* toRemove;
-
-		BatchResult();
-		BatchResult(std::vector<int>* list);
-		~BatchResult();
-	};
-
 	class NeutronField : public godot::Node2D
 	{
 		GODOT_CLASS(NeutronField, godot::Node2D)
@@ -61,6 +53,13 @@ namespace nuclearPhysics
 		bool processFissionBiproductBatch(float* row, int yy);
 
 		std::vector<nuclearPhysics::NeutronRegion*> regions;
+		nuclearPhysics::BspRegion1dNode *bspTreeRoot = nullptr;
+		void initBspTree();
+		BspRegion1dNode* createBspBranch(float y, float height, float start, float width, int depth, int maxDepth);
+		const nuclearPhysics::BspRegion1dNode* getRegionsToCheck(const Neutron &neutron) const;
+		const nuclearPhysics::BspRegion1dNode* findRegions(const float x, const BspRegion1dNode *node) const;
+		void addToNode(NeutronRegion *region, BspRegion1dNode* node);
+		void debugTreeDraw(const BspRegion1dNode *node, int level);
 
 		BatchResult processNeutronBatch(std::vector<int>* removal, int start, int end, float delta);
 

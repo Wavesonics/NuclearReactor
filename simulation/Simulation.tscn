@@ -19,7 +19,6 @@
 script = ExtResource( 12 )
 
 [node name="ReactorCore" type="Node2D" parent="."]
-position = Vector2( 0, 90 )
 script = ExtResource( 8 )
 area = Rect2( 0, 0, 500, 500 )
 

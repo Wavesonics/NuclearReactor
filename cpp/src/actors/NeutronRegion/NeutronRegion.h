@@ -18,8 +18,8 @@ namespace nuclearPhysics
 	protected:
 		godot::Color drawColor;
 	public:
-		godot::Rect2 area;
 		godot::Rect2 globalArea;
+		godot::Rect2 area;
 
 		NeutronRegion();
 		virtual ~NeutronRegion();

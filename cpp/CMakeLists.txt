@@ -715,4 +715,4 @@ add_executable(cpp
         src/util/ThreadPool.h
         src/util/Utils.cpp
         src/util/Utils.h
-        src/init.cpp src/actors/Sensors/Thermocouple/Thermocouple.cpp src/actors/Sensors/Thermocouple/Thermocouple.h)
+        src/init.cpp src/actors/Sensors/Thermocouple/Thermocouple.cpp src/actors/Sensors/Thermocouple/Thermocouple.h src/actors/NeutronField/BspRegion1dNode.cpp src/actors/NeutronField/BspRegion1dNode.h src/actors/NeutronField/BatchResult.cpp src/actors/NeutronField/BatchResult.h)
