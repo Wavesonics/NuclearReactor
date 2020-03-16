@@ -5,7 +5,7 @@
 [ext_resource path="res://GameCpp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/3d_control_panel/3dControlPanel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://vr/art/reactor_room_console_only.scn" type="PackedScene" id=6]
+[ext_resource path="res://vr/art/reactor_room_console_large.glb" type="PackedScene" id=6]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=7]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/qodot/game-definitions/fgd/qodot_fgd.tres" type="Resource" id=9]
@@ -199,7 +199,7 @@ image_path = "res://vr/art/control_room"
 light_data = SubResource( 14 )
 
 [node name="reactor_room_console_only" parent="Room" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.855363, 0.267977, 0.0203575 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.855363, 1.10013, 0.0203575 )
 
 [node name="FpsLabel" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.736758, 0, 0.676156, 0, 1, 0, -0.676156, 0, 0.736758, -1.88431, 1.70778, -1.65245 )
