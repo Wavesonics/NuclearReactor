@@ -6,14 +6,20 @@ class_name CoolantPipe
 var numSegments := 10
 var segmentWidth := 16.0
 var segmentHeight := 32.0
+var boundingBox: Rect2
 
-var initialPressure := 10.0
+var maxPressure := 100.0
+var minPressure := 0.0
+
+var initialPressure := maxPressure
 
 export(NodePath) var previousPipePath: NodePath
 var previousPipe = null
 
 export(NodePath) var nextPipePath: NodePath
 var nextPipe = null
+
+export(bool) var enableRendering := true
 
 var outputSegment: float
 var segments := []
@@ -24,6 +30,8 @@ onready var debugFont := load("res://vr/DefaultFont.tres") as DynamicFont
 func _ready():
 	
 	add_to_group("pipes")
+	
+	boundingBox = Rect2(0.0, 0.0, segmentWidth, (segmentHeight * numSegments) + (numSegments*2.0))
 	
 	if nextPipePath != null:
 		nextPipe = get_node(nextPipePath)
@@ -37,15 +45,30 @@ func _ready():
 	update()
 
 
+func pressure_to_color(value: float, minimum: float, maximum: float) -> Color:
+	if value < minimum:
+		return Color.black;
+	else:
+		var halfmax := (maximum - minimum) / 2.0
+		var b = max(0.0, (1.0 - (value - minimum) / halfmax))
+		var r = max(0.0, ((value - minimum) / halfmax - 1))
+		var g = 1.0 - b - r
+		return Color(r, g, b);
+
+
 func _draw():
-	var c = Color.blue
+	if not enableRendering:
+		return
+	
 	for ii in range(numSegments):
 		var segmentPressure = segments[ii]
-		c.a = (segmentPressure / initialPressure)
+		var c = pressure_to_color(segmentPressure, minPressure, maxPressure)
 		var y := (ii * segmentHeight) + (ii*2.0)
 		draw_rect(Rect2(0.0, y, segmentWidth, segmentHeight), c)
 		draw_string(debugFont, Vector2(-20.0, y + (segmentHeight/2.0)), "[%d]" % ii)
 		draw_string(debugFont, Vector2(segmentWidth + 5.0, y + (segmentHeight/2.0)), "%d" % segmentPressure)
+		
+		#draw_rect(boundingBox, Color.red)
 
 
 func fluid_tick():
@@ -70,3 +93,38 @@ func update_from_prev():
 
 func consume_output() -> float:
 	return outputSegment
+
+
+func contains_point(globalPos: Vector2) -> bool:
+	var pos = to_local(globalPos)
+	return boundingBox.has_point(pos)
+
+
+func to_segment(globalPos: Vector2) -> int:
+	var pos = to_local(globalPos)
+	if pos.x >= 0.0 and pos.x <= segmentWidth:
+		var ii = floor(pos.y / (segmentHeight+2.0))
+		if ii >= 0 and ii < numSegments:
+			return ii
+		else:
+			return -1
+	else:
+		return -1
+
+
+func get_pressure(globalPos: Vector2) -> float:
+	var segmentIndex := to_segment(globalPos)
+	if segmentIndex > -1:
+		return segments[segmentIndex]
+	else:
+		return -1.0
+
+
+func set_pressure(segmentIndex: int, newValue: float):
+	segments[segmentIndex] = newValue
+
+
+func set_pressure_by_position(globalPos: Vector2, newValue: float):
+	var segmentIndex := to_segment(globalPos)
+	if segmentIndex > -1:
+		segments[segmentIndex] = newValue

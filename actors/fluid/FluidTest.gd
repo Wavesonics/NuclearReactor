@@ -5,9 +5,23 @@ const TASK_TAG := "fluid_worker"
 var tasksFinished := 0
 
 
-func _process(delta):
-	if Input.is_action_just_released("scram"): # Just for debugging
-		tick_fluid_sim()
+func _ready():
+	set_process_input(true)
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == 1 and event.is_pressed():
+			for pipe in pipes:
+				if pipe.contains_point(event.global_position):
+					#var ii = pipe.to_segment(event.global_position)
+					var p = pipe.get_pressure(event.global_position)
+					pipe.set_pressure_by_position(event.global_position, pipe.maxPressure)
+
+
+#func _process(delta):
+#	if Input.is_action_just_released("scram"): # Just for debugging
+#		tick_fluid_sim()
 
 
 func tick_fluid_sim():
