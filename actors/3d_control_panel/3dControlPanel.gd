@@ -1,3 +1,4 @@
+tool
 extends Spatial
 
 onready var controlRodPanelScene := preload("res://actors/3d_control_panel/ControlRodPanel.tscn")
@@ -10,9 +11,8 @@ func _ready():
 		var ii := 0
 		for rod in range(0, 2):
 			var node := controlRodPanelScene.instance()
-			node.set_control_rod(null, ii)
 			$ControlRods.add_child(node)
-			node.position.x = initialXoffset - (width * ii)
+			node.translation.x = initialXoffset - (width * ii)
 			ii += 1
 	else:
 		var ii := 0

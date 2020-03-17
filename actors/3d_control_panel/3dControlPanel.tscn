@@ -16,7 +16,7 @@ depth = 0.025
 material = ExtResource( 2 )
 
 [node name="ControlRods" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.462684, -0.173787, 0.0283998 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.251818, -0.173787, 0.0283998 )
 
 [node name="ScramGroup" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650793, 0, 0.0127676 )
