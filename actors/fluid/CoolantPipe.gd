@@ -1,6 +1,7 @@
 tool
 extends Node2D
-class_name CoolanPipe
+class_name CoolantPipe
+
 
 var numSegments := 10
 var segmentWidth := 16.0
@@ -21,6 +22,7 @@ onready var debugFont := load("res://vr/DefaultFont.tres") as DynamicFont
 
 
 func _ready():
+	
 	add_to_group("pipes")
 	
 	if nextPipePath != null:
@@ -33,6 +35,7 @@ func _ready():
 		segments.push_back(randf() * initialPressure)
 	
 	update()
+
 
 func _draw():
 	var c = Color.blue
@@ -56,7 +59,6 @@ func fluid_tick():
 	# Just fill the input with emptyness, this should be filled in
 	# during the next step
 	segments[0] = 0.0
-	#update()
 
 
 func update_from_prev():

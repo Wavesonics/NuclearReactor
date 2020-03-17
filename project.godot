@@ -20,7 +20,7 @@ _global_script_classes=[ {
 "path": "res://actors/2d_control_panel/ControlRodPanel.gd"
 }, {
 "base": "Node2D",
-"class": "CoolanPipe",
+"class": "CoolantPipe",
 "language": "GDScript",
 "path": "res://actors/fluid/CoolantPipe.gd"
 }, {
@@ -182,7 +182,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ControlRod": "",
 "ControlRodPanel": "",
-"CoolanPipe": "",
+"CoolantPipe": "",
 "Feature_RigidBodyGrab": "",
 "FuelRod": "",
 "Moderator": "",
@@ -226,6 +226,7 @@ config/icon="res://icon.png"
 
 vr="*res://OQ_Toolkit/vr_autoload.gd"
 ControlSystem="*res://actors/control_system/ControlSystem.gd"
+GlobalThreadPool="*res://addons/thread_pool/thread_pool.gd"
 
 [display]
 

@@ -1,13 +1,8 @@
 extends Node2D
 
-#onready var pipes := get_tree().get_nodes_in_group("pipes")
-var pipes := []
-
-func _ready():
-	pipes.push_back($Pipe0)
-	pipes.push_back($Pipe1)
-	pipes.push_back($Pipe2)
-	pipes.push_back($Pipe3)
+onready var pipes := get_tree().get_nodes_in_group("pipes")
+const TASK_TAG := "fluid_worker"
+var tasksFinished := 0
 
 
 func _process(delta):
@@ -16,9 +11,18 @@ func _process(delta):
 
 
 func tick_fluid_sim():
+	var tasks := []
+	# Process each pipe individually
 	for pipe in pipes:
-		pipe.fluid_tick()
+		var task = GlobalThreadPool.submit_task_unparameterized(pipe, "fluid_tick", TASK_TAG)
+		tasks.push_back(task)
 	
+	# Wait for all pipes to finish
+	for task in tasks:
+		var result = task.wait_for_result()
+	
+	# Now back on the main thread, finish up
+	# Update each pipe from the pipe behind it
 	for pipe in pipes:
 		pipe.update_from_prev()
 		pipe.update()
@@ -26,4 +30,3 @@ func tick_fluid_sim():
 
 func _on_FluidSimTimer_timeout():
 	tick_fluid_sim()
-	pass
