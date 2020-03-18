@@ -14,12 +14,16 @@ var outputPressure := 0.0
 
 func set_prev_pipe(value):
 	previousPipePath = value
-	initialize()
+	
+	if Engine.editor_hint:
+		initialize()
 
 
 func set_next_pipes(value):
 	nextPipePaths = value
-	initialize()
+	
+	if Engine.editor_hint:
+		initialize()
 
 
 func _ready():

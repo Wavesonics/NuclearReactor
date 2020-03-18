@@ -32,6 +32,8 @@ namespace nuclearPhysics
 
 		inline float diffuseToCell(int x, int y, float heat, float diffuse);
 
+	protected:
+		bool rangeCheck(const int x, const int y) const override ;
 	public:
 
 		DiffusingHeatMap();
@@ -47,6 +49,10 @@ namespace nuclearPhysics
 		void _draw() override;
 
 		//virtual void _input(const godot::Ref<godot::InputEvent> event);
+
+		void addHeat(float heat, const int x, const int y) override;
+
+		float readMagnitude(const int x, const int y) const override;
 
 		static void _register_methods();
 

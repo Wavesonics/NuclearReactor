@@ -251,44 +251,50 @@ font = ExtResource( 11 )
 position = Vector2( 0, -90 )
 
 [node name="CoolantPipe0" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 30, 610 )
+position = Vector2( 30, 700 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 15
+numSegments = 20
+thermalMapPath = NodePath("../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
 [node name="CoolantPipe1" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 130, 610 )
+position = Vector2( 130, 700 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 15
+numSegments = 20
+thermalMapPath = NodePath("../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
 [node name="CoolantPipe2" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 325, 610 )
+position = Vector2( 330, 700 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 15
+numSegments = 20
+thermalMapPath = NodePath("../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
 [node name="CoolantPipe3" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 230, 610 )
+position = Vector2( 225, 700 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 15
+numSegments = 20
+thermalMapPath = NodePath("../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
 [node name="CoolantPipe4" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 430, 610 )
+position = Vector2( 430, 700 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 15
+numSegments = 20
+thermalMapPath = NodePath("../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
 [node name="PipeCombiner1" type="Node2D" parent="PrimaryCoolantLoop"]
 position = Vector2( 170, -40 )
 script = ExtResource( 2 )
 prevPipePaths = [ NodePath("../CoolantPipe0"), NodePath("../CoolantPipe1"), NodePath("../CoolantPipe2"), NodePath("../CoolantPipe3"), NodePath("../CoolantPipe4") ]
+enableRendering = true
 
 [node name="PipeSplit0" type="Node2D" parent="PrimaryCoolantLoop"]
 position = Vector2( 210, 770 )
@@ -296,6 +302,7 @@ rotation = 0.523598
 script = ExtResource( 1 )
 previousPipePath = NodePath("../CoolantPipe18")
 nextPipePaths = [ NodePath("../CoolantPipe0"), NodePath("../CoolantPipe1"), NodePath("../CoolantPipe3"), NodePath("../CoolantPipe2"), NodePath("../CoolantPipe5") ]
+enableRendering = true
 
 [node name="CoolantPipe" type="Node2D" parent="PrimaryCoolantLoop"]
 position = Vector2( 240, -50 )
@@ -325,6 +332,7 @@ previousPipePath = NodePath("../CoolantPipe20")
 position = Vector2( 770, 360 )
 script = ExtResource( 3 )
 previousPipePath = NodePath("../CoolantPipe19")
+enableRendering = true
 
 [node name="CoolantLoopSimulationTimer" type="Timer" parent="PrimaryCoolantLoop"]
 wait_time = 0.5

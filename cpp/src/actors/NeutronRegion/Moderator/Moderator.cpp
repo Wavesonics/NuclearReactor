@@ -51,9 +51,10 @@ bool Moderator::handleNeutron(Neutron &neutron)
     {
         if(CROSS_SECTION_RELATIVISTIC > randPercent())
         {
+        	const float MAX_ANGLE = 0.45;
             auto reflected = neutron.velocity.normalized() * -1.0f;
-            reflected.x += randf(-0.25f, 0.25f);
-            reflected.y += randf(-0.25f, 0.25f);
+            reflected.x += randf(-MAX_ANGLE, MAX_ANGLE);
+            reflected.y += randf(-MAX_ANGLE, MAX_ANGLE);
 
             neutron.velocity = reflected.normalized() * Neutron::SPEED_THERMAL;
         }

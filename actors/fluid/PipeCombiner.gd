@@ -12,7 +12,8 @@ var outputPressure := 0.0
 func set_prev_pipe_paths(value):
 	prevPipePaths = value
 	
-	initialize()
+	if Engine.editor_hint:
+		initialize()
 
 
 func initialize():

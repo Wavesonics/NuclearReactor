@@ -22,7 +22,7 @@ namespace nuclearPhysics
 		float maxValue = 1.0f;
 		float drawRectSize;
 
-		bool rangeCheck(const int x, const int y) const;
+		virtual bool rangeCheck(const int x, const int y) const;
 	public:
 		int mapSize = DEFAULT_MAP_SIZE;
 		float cellWidth = 1.0f;
@@ -35,9 +35,9 @@ namespace nuclearPhysics
 
 		void calculateCellSizes(const godot::Rect2 &rect);
 
-		void addHeat(float heat, const int x, const int y);
+		virtual void addHeat(float heat, const int x, const int y);
 
-		float readMagnitude(const int x, const int y) const;
+		virtual float readMagnitude(const int x, const int y) const;
 
 		virtual void _init();
 

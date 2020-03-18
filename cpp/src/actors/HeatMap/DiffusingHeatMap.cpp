@@ -186,6 +186,21 @@ float DiffusingHeatMap::diffuseToCell(int x, int y, float heat, float diffuse)
 	return diffused;
 }
 
+void DiffusingHeatMap::addHeat(float heat, const int x, const int y)
+{
+	HeatMap::addHeat(heat, x, y);
+}
+
+float DiffusingHeatMap::readMagnitude(const int x, const int y) const
+{
+	return HeatMap::readMagnitude(x, y);
+}
+
+bool DiffusingHeatMap::rangeCheck(const int x, const int y) const
+{
+	return HeatMap::rangeCheck(x, y);
+}
+
 void DiffusingHeatMap::_register_methods()
 {
 	register_property<DiffusingHeatMap, int>("mapSize", &DiffusingHeatMap::mapSize, DEFAULT_MAP_SIZE);
@@ -194,7 +209,9 @@ void DiffusingHeatMap::_register_methods()
 	register_property<DiffusingHeatMap, float>("diffusionTickRateSeconds", &DiffusingHeatMap::diffusionTickRateSeconds,
 											   DEFAULT_TICK_RATE_SECONDS);
 
+	register_method("add_heat", &DiffusingHeatMap::addHeat);
 	register_method("read_magnitude", &DiffusingHeatMap::readMagnitude);
+	register_method("range_check", &DiffusingHeatMap::rangeCheck);
 	register_method("_init", &DiffusingHeatMap::_init);
 	register_method("_ready", &DiffusingHeatMap::_ready);
 	register_method("_physics_process", &DiffusingHeatMap::_physics_process);

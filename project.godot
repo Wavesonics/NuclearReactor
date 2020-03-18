@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
-"class": "ControlRod",
-"language": "GDScript",
-"path": "res://actors/control_rod/ControlRod.gd"
-}, {
 "base": "HBoxContainer",
 "class": "ControlRodPanel",
 "language": "GDScript",
@@ -29,25 +24,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://OQ_Toolkit/OQ_ARVRController/scripts/Feature_RigidBodyGrab.gd"
 }, {
-"base": "Area2D",
-"class": "FuelRod",
-"language": "GDScript",
-"path": "res://actors/fuel_rod/FuelRod.gd"
-}, {
-"base": "Area2D",
-"class": "Moderator",
-"language": "GDScript",
-"path": "res://actors/moderator/Moderator.gd"
-}, {
 "base": "Button",
 "class": "MomentaryButton",
 "language": "GDScript",
 "path": "res://actors/2d_control_panel/momentary_button.gd"
-}, {
-"base": "Node2D",
-"class": "NeutronField",
-"language": "GDScript",
-"path": "res://actors/neutron_field/NeutronField.gd"
 }, {
 "base": "RigidBody",
 "class": "OQClass_GrabbableRigidBody",
@@ -144,11 +124,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/qodot/src/import_plugins/quake_wad_import_plugin.gd"
 }, {
-"base": "Node2D",
-"class": "Reactor",
-"language": "GDScript",
-"path": "res://actors/reactor/Reactor.gd"
-}, {
 "base": "Control",
 "class": "RealTimeGraph",
 "language": "GDScript",
@@ -185,14 +160,10 @@ _global_script_classes=[ {
 "path": "res://Util.gd"
 } ]
 _global_script_class_icons={
-"ControlRod": "",
 "ControlRodPanel": "",
 "CoolantPipe": "",
 "Feature_RigidBodyGrab": "",
-"FuelRod": "",
-"Moderator": "",
 "MomentaryButton": "",
-"NeutronField": "",
 "OQClass_GrabbableRigidBody": "",
 "QodotEntity": "",
 "QodotFGDBaseClass": "",
@@ -212,7 +183,6 @@ _global_script_class_icons={
 "QuakePaletteImportPlugin": "",
 "QuakeWadFile": "",
 "QuakeWadImportPlugin": "",
-"Reactor": "",
 "RealTimeGraph": "",
 "ThreadPool": "",
 "TrenchBroomFaceAttrib": "",

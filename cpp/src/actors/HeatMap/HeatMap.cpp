@@ -122,6 +122,7 @@ void HeatMap::_register_methods()
 
 	register_method("add_heat", &HeatMap::addHeat);
 	register_method("read_magnitude", &HeatMap::readMagnitude);
+	register_method("range_check", &HeatMap::rangeCheck);
 	register_method("_init", &HeatMap::_init);
 	register_method("_ready", &HeatMap::_ready);
 	register_method("_draw", &HeatMap::_draw);

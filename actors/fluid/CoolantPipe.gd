@@ -11,10 +11,15 @@ var boundingBox: Rect2
 var maxPressure := 100.0
 var minPressure := 0.0
 
-var initialPressure := maxPressure
+var initialPressure := maxPressure / 10.0
+
+export(NodePath) var thermalMapPath: NodePath
+var thermalMap = null
 
 export(NodePath) var previousPipePath: NodePath setget set_prev_pipe
 var previousPipe = null
+
+var neutronField = null
 
 export(bool) var enableRendering := true
 export(bool) var enableDebugRendering := false
@@ -29,13 +34,16 @@ onready var debugFont := load("res://vr/DefaultFont.tres") as DynamicFont
 
 func set_num_segments(n: int):
 	numSegments = n
-	initialize()
+	
+	if Engine.editor_hint:
+		initialize()
 
 
 func set_prev_pipe(prevPath: NodePath):
 	previousPipePath = prevPath
 	
-	initialize()
+	if Engine.editor_hint:
+		initialize()
 
 
 func get_global_end_point() -> Vector2:
@@ -45,6 +53,9 @@ func initialize():
 	boundingBox = Rect2(0.0, 0.0, segmentWidth, (segmentHeight * numSegments) + (numSegments*2.0))
 	
 	endPoint = Vector2(boundingBox.size.x/2.0, boundingBox.size.y)
+	
+	if thermalMapPath != null:
+		thermalMap = get_node(thermalMapPath)
 	
 	segments.clear()
 	for ii in range(numSegments):
@@ -66,6 +77,30 @@ func _ready():
 		return
 	
 	add_to_group("pipes")
+	
+	neutronField = ControlSystem.get_neutron_field()
+
+
+func _physics_process(delta):
+	if Engine.editor_hint:
+		return
+	
+	var heatTransferAmmount := 1.0
+	
+	if thermalMap != null:
+		for ii in range(numSegments):
+			var x = segmentWidth / 2.0
+			var y = (ii * segmentHeight) + (ii*2.0)
+			var globalPos := to_global(Vector2(x, y))
+			var gridPos := neutronField.to_heat_grid(globalPos) as Vector2
+			var gridX := gridPos.x as int
+			var gridY := gridPos.y as int
+			
+			if thermalMap.range_check(gridX, gridY):
+				var heat := thermalMap.read_magnitude(gridX, gridY) as float
+				if heat > 0.0:
+					thermalMap.add_heat(-heatTransferAmmount, gridX, gridY)
+					add_pressure(ii, heatTransferAmmount)
 
 
 func _draw():
@@ -140,6 +175,10 @@ func get_pressure(globalPos: Vector2) -> float:
 		return segments[segmentIndex]
 	else:
 		return -1.0
+
+
+func add_pressure(segmentIndex: int, newValue: float):
+	segments[segmentIndex] += newValue
 
 
 func set_pressure(segmentIndex: int, newValue: float):

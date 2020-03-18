@@ -420,6 +420,7 @@ void NeutronField::_register_methods()
 	register_method("add_fission_biproduct", &NeutronField::addFissionBiproduct);
 	register_method("add_heat", &NeutronField::addHeat);
 	register_method("read_heat", &NeutronField::readHeat);
+	register_method("to_heat_grid", &NeutronField::toHeatGrid);
 	register_method("get_neutron_flux", &NeutronField::getNeutronFlux);
 	
 	register_method("_init", &NeutronField::_init);

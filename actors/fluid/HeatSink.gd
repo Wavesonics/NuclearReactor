@@ -13,7 +13,9 @@ const coolingFactor := 2.0
 
 func set_prev_pipe(value):
 	previousPipePath = value
-	initialize()
+	
+	if Engine.editor_hint:
+		initialize()
 
 
 func initialize():
