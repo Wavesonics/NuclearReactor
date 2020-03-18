@@ -31,6 +31,8 @@ void Thermocouple::_ready()
 
 	EDITOR_GUARD_RETURN_HERE
 
+	add_to_group("thermocouples");
+
 	Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
 	if (obj != nullptr)
 	{

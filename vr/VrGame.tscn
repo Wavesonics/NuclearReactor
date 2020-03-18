@@ -117,9 +117,6 @@ transparent = false
 [node name="OqVrPlayer" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0121542, 0 )
 
-[node name="ControlPanel" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.571, 1.3835, -1.66 )
-
 [node name="Room" type="Spatial" parent="."]
 
 [node name="QodotMap" type="Spatial" parent="Room"]
@@ -199,7 +196,10 @@ image_path = "res://vr/art/control_room"
 light_data = SubResource( 14 )
 
 [node name="middle_console_02" parent="Room" instance=ExtResource( 6 )]
-transform = Transform( -0.0241531, 0, -0.999708, 0, 1, 0, 0.999708, 0, -0.0241531, 3.24405, 1.29769, 3.48265 )
+transform = Transform( 4.47035e-08, 0, -1, 0, 1, 0, 1, 0, 4.47035e-08, 0, 0.959385, -1.94212 )
+
+[node name="ControlPanel" parent="Room/middle_console_02" instance=ExtResource( 5 )]
+transform = Transform( 4.47035e-08, -0.938619, 0.344954, 5.9655e-15, 0.344954, 0.93862, -0.999999, -4.19596e-08, 1.54207e-08, 0.380152, 0.212153, 0.570999 )
 
 [node name="FpsLabel" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.736758, 0, 0.676156, 0, 1, 0, -0.676156, 0, 0.736758, -1.88431, 1.70778, -1.65245 )
