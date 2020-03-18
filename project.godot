@@ -178,6 +178,11 @@ _global_script_classes=[ {
 "class": "TrenchBroomTag",
 "language": "GDScript",
 "path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_tag.gd"
+}, {
+"base": "Object",
+"class": "Util",
+"language": "GDScript",
+"path": "res://Util.gd"
 } ]
 _global_script_class_icons={
 "ControlRod": "",
@@ -213,7 +218,8 @@ _global_script_class_icons={
 "TrenchBroomFaceAttrib": "",
 "TrenchBroomGameConfigFile": "",
 "TrenchBroomGameConfigFolder": "",
-"TrenchBroomTag": ""
+"TrenchBroomTag": "",
+"Util": ""
 }
 
 [application]

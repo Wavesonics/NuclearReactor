@@ -23,7 +23,7 @@ func _ready():
 			prevPipes.push_back(get_node(pipePath))
 
 
-func fluid_tick():	
+func fluid_tick():
 	outputPressure = 0.0
 	
 	for pipe in prevPipes:

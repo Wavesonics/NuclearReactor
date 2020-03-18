@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/fluid/CoolantPipe.gd" type="Script" id=1]
 [ext_resource path="res://actors/fluid/FluidTest.gd" type="Script" id=2]
 [ext_resource path="res://actors/fluid/PipeSplit.gd" type="Script" id=3]
 [ext_resource path="res://actors/fluid/PipeCombiner.gd" type="Script" id=4]
+[ext_resource path="res://actors/fluid/HeatSink.gd" type="Script" id=5]
 
 [node name="TestRoot" type="Node2D"]
 script = ExtResource( 2 )
@@ -15,7 +16,7 @@ autostart = true
 [node name="Pipe0" type="Node2D" parent="."]
 position = Vector2( 106.382, 205.406 )
 script = ExtResource( 1 )
-previousPipePath = NodePath("../Pipe3")
+previousPipePath = NodePath("../Pipe4")
 
 [node name="Pipe1" type="Node2D" parent="."]
 position = Vector2( 107.829, 571.882 )
@@ -64,8 +65,21 @@ nextPipePath = NodePath("../Pipe3")
 prevPipePaths = [ NodePath("../Pipe2_1A"), NodePath("../Pipe2_1B") ]
 
 [node name="Pipe3" type="Node2D" parent="."]
-position = Vector2( 446.425, 160.914 )
+position = Vector2( 483.292, 160.057 )
 rotation = 1.57081
 script = ExtResource( 1 )
+numSegments = 5
 previousPipePath = NodePath("../Combiner0")
+
+[node name="Heatsink" type="Node2D" parent="."]
+position = Vector2( 304.743, 116.515 )
+script = ExtResource( 5 )
+previousPipePath = NodePath("../Pipe3")
+
+[node name="Pipe4" type="Node2D" parent="."]
+position = Vector2( 275.807, 160.914 )
+rotation = 1.57081
+script = ExtResource( 1 )
+numSegments = 5
+previousPipePath = NodePath("../Heatsink")
 [connection signal="timeout" from="FluidSimTimer" to="." method="_on_FluidSimTimer_timeout"]
