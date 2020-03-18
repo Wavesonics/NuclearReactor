@@ -31,13 +31,11 @@ void Thermocouple::_ready()
 
 	EDITOR_GUARD_RETURN_HERE
 
-	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
-	if(neutronField == nullptr) Godot::print("THERMOCOUPLE FAILED TO GET NEUTRON FIELD!!");
-
-	// Each control rod adds it's self to the global ControlSystem
 	Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
 	if (obj != nullptr)
 	{
+		// Each control rod adds it's self to the global ControlSystem
+		neutronField = Object::cast_to<NeutronField>(obj->call("get_neutron_field"));
 		obj->call("add_thermocouple", Variant(this));
 	}
 	else
@@ -99,7 +97,6 @@ void Thermocouple::clearErrantReading()
 void Thermocouple::_register_methods()
 {
 	register_property<Thermocouple, Ref<DynamicFont>>("font", &Thermocouple::font, nullptr);
-	register_property<Thermocouple, NodePath>("neutronFieldPath", &Thermocouple::neutronFieldPath, nullptr);
 	register_property<Thermocouple, bool>("enableRendering", &Thermocouple::enableRendering, DEFAULT_RENDER);
 
 	register_method("read_temperature", &Thermocouple::readTemperature);

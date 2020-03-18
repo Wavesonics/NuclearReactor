@@ -5,6 +5,9 @@
 #include "FuelRod.h"
 #include "../../../util/Utils.h"
 #include <Engine.hpp>
+#include <SceneTree.hpp>
+#include <Viewport.hpp>
+#include <Variant.hpp>
 #include <utility>
 #include <iostream>
 
@@ -37,8 +40,16 @@ void FuelRod::_ready()
 
 	add_to_group(GROUP);
 
-	neutronField = Object::cast_to<NeutronField>(get_node(neutronFieldPath));
-	if (neutronField == nullptr) Godot::print("FUEL ROD FAILED TO GET NEUTRON FIELD!!");
+	// Each control rod adds it's self to the global ControlSystem
+	Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
+	if (obj != nullptr)
+	{
+		neutronField = Object::cast_to<NeutronField>(obj->call("get_neutron_field"));
+	}
+	else
+	{
+		Godot::print("FuelRod: Failed to get ControlSystem");
+	}
 
 	// Get the thermal map
 	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
@@ -107,7 +118,6 @@ FuelRod::~FuelRod() = default;
 
 void FuelRod::_register_methods()
 {
-	register_property<FuelRod, NodePath>("neutronFieldPath", &FuelRod::neutronFieldPath, nullptr);
 	register_property<FuelRod, NodePath>("thermalMapPath", &FuelRod::thermalMapPath, nullptr);
 	register_property<FuelRod, godot::Color>("drawColor", &FuelRod::drawColor, DEFAULT_COLOR);
 

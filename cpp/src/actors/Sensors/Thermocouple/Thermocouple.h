@@ -20,7 +20,6 @@ namespace nuclearPhysics
 		godot::Color drawColor;
 		float drawRadius;
 
-		godot::NodePath neutronFieldPath;
 		NeutronField* neutronField = nullptr;
 
 		float errantReading = NO_ERROR;
