@@ -1,6 +1,8 @@
 extends Node2D
 
 onready var pipes := get_tree().get_nodes_in_group("pipes")
+onready var pipeJoints := get_tree().get_nodes_in_group("pipe_joints")
+
 const TASK_TAG := "fluid_worker"
 var tasksFinished := 0
 
@@ -14,14 +16,8 @@ func _input(event):
 		if event.button_index == 1 and event.is_pressed():
 			for pipe in pipes:
 				if pipe.contains_point(event.global_position):
-					#var ii = pipe.to_segment(event.global_position)
 					var p = pipe.get_pressure(event.global_position)
 					pipe.set_pressure_by_position(event.global_position, pipe.maxPressure)
-
-
-#func _process(delta):
-#	if Input.is_action_just_released("scram"): # Just for debugging
-#		tick_fluid_sim()
 
 
 func tick_fluid_sim():
@@ -34,6 +30,10 @@ func tick_fluid_sim():
 	# Wait for all pipes to finish
 	for task in tasks:
 		var result = task.wait_for_result()
+	
+	# These need to happen after all normal pipes
+	for joint in pipeJoints:
+		joint.fluid_tick()
 	
 	# Now back on the main thread, finish up
 	# Update each pipe from the pipe behind it

@@ -1,40 +1,71 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/fluid/CoolantPipe.gd" type="Script" id=1]
 [ext_resource path="res://actors/fluid/FluidTest.gd" type="Script" id=2]
+[ext_resource path="res://actors/fluid/PipeSplit.gd" type="Script" id=3]
+[ext_resource path="res://actors/fluid/PipeCombiner.gd" type="Script" id=4]
 
 [node name="TestRoot" type="Node2D"]
-position = Vector2( 102.263, -239.809 )
 script = ExtResource( 2 )
-
-[node name="Pipe0" type="Node2D" parent="."]
-position = Vector2( 52.118, 430 )
-script = ExtResource( 1 )
-previousPipePath = NodePath("../Pipe3")
-nextPipePath = NodePath("../Pipe1")
-
-[node name="Pipe1" type="Node2D" parent="."]
-position = Vector2( 53.5646, 796.476 )
-rotation = -1.57079
-script = ExtResource( 1 )
-previousPipePath = NodePath("../Pipe0")
-nextPipePath = NodePath("../Pipe2")
-
-[node name="Pipe2" type="Node2D" parent="."]
-position = Vector2( 385, 760 )
-rotation = 3.14159
-script = ExtResource( 1 )
-previousPipePath = NodePath("../Pipe1")
-nextPipePath = NodePath("../Pipe3")
-
-[node name="Pipe3" type="Node2D" parent="."]
-position = Vector2( 392.161, 385.508 )
-rotation = -4.71238
-script = ExtResource( 1 )
-previousPipePath = NodePath("../Pipe2")
-nextPipePath = NodePath("../Pipe0")
 
 [node name="FluidSimTimer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="Pipe0" type="Node2D" parent="."]
+position = Vector2( 106.382, 205.406 )
+script = ExtResource( 1 )
+previousPipePath = NodePath("../Pipe3")
+
+[node name="Pipe1" type="Node2D" parent="."]
+position = Vector2( 107.829, 571.882 )
+rotation = -1.57079
+script = ExtResource( 1 )
+previousPipePath = NodePath("../Pipe0")
+
+[node name="Splitter0" type="Node2D" parent="."]
+position = Vector2( 458.743, 563.41 )
+script = ExtResource( 3 )
+previousPipePath = NodePath("../Pipe1")
+nextPipePaths = [ NodePath("../Pipe2_0A"), NodePath("../Pipe2_0B") ]
+
+[node name="Pipe2_0A" type="Node2D" parent="."]
+position = Vector2( 477.754, 542.404 )
+rotation = -2.618
+script = ExtResource( 1 )
+numSegments = 5
+previousPipePath = NodePath("../Splitter0")
+
+[node name="Pipe2_1A" type="Node2D" parent="."]
+position = Vector2( 561.73, 369.785 )
+rotation = 2.61799
+script = ExtResource( 1 )
+numSegments = 5
+previousPipePath = NodePath("../Pipe2_0A")
+
+[node name="Pipe2_0B" type="Node2D" parent="."]
+position = Vector2( 439.264, 535.406 )
+rotation = 2.61799
+script = ExtResource( 1 )
+numSegments = 5
+previousPipePath = NodePath("../Splitter0")
+
+[node name="Pipe2_1B" type="Node2D" parent="."]
+position = Vector2( 352.954, 377.949 )
+rotation = -2.618
+script = ExtResource( 1 )
+numSegments = 5
+previousPipePath = NodePath("../Pipe2_0B")
+
+[node name="Combiner0" type="Node2D" parent="."]
+position = Vector2( 451.25, 209.95 )
+script = ExtResource( 4 )
+nextPipePath = NodePath("../Pipe3")
+prevPipePaths = [ NodePath("../Pipe2_1A"), NodePath("../Pipe2_1B") ]
+
+[node name="Pipe3" type="Node2D" parent="."]
+position = Vector2( 446.425, 160.914 )
+rotation = 1.57081
+script = ExtResource( 1 )
+previousPipePath = NodePath("../Combiner0")
 [connection signal="timeout" from="FluidSimTimer" to="." method="_on_FluidSimTimer_timeout"]

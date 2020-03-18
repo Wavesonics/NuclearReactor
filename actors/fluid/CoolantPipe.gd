@@ -3,7 +3,7 @@ extends Node2D
 class_name CoolantPipe
 
 
-var numSegments := 10
+export(int) var numSegments := 10
 var segmentWidth := 16.0
 var segmentHeight := 32.0
 var boundingBox: Rect2
@@ -16,33 +16,29 @@ var initialPressure := maxPressure
 export(NodePath) var previousPipePath: NodePath
 var previousPipe = null
 
-export(NodePath) var nextPipePath: NodePath
-var nextPipe = null
-
 export(bool) var enableRendering := true
 
-var outputSegment: float
+var outputPressure: float
 var segments := []
 
 onready var debugFont := load("res://vr/DefaultFont.tres") as DynamicFont
 
 
 func _ready():
-	
-	add_to_group("pipes")
+	update()
 	
 	boundingBox = Rect2(0.0, 0.0, segmentWidth, (segmentHeight * numSegments) + (numSegments*2.0))
-	
-	if nextPipePath != null:
-		nextPipe = get_node(nextPipePath)
-	
-	if previousPipePath != null:
-		previousPipe = get_node(previousPipePath)
 	
 	for ii in range(numSegments):
 		segments.push_back(randf() * initialPressure)
 	
-	update()
+	if Engine.editor_hint:
+		return
+	
+	add_to_group("pipes")
+	
+	if previousPipePath != null:
+		previousPipe = get_node(previousPipePath)
 
 
 func pressure_to_color(value: float, minimum: float, maximum: float) -> Color:
@@ -73,7 +69,7 @@ func _draw():
 
 func fluid_tick():
 	# Store the last segment for transfer to the next pipe
-	outputSegment = segments[numSegments-1]
+	outputPressure = segments[numSegments-1]
 	
 	# Start at the end and move each segment forward once
 	for ii in range(numSegments-1, 0, -1):
@@ -86,13 +82,13 @@ func fluid_tick():
 
 func update_from_prev():
 	if previousPipe != null:
-		segments[0] = previousPipe.consume_output()
+		segments[0] = previousPipe.consume_output(self)
 	else:
 		segments[0] = 0.0
 
 
-func consume_output() -> float:
-	return outputSegment
+func consume_output(consumer) -> float:
+	return outputPressure
 
 
 func contains_point(globalPos: Vector2) -> bool:
