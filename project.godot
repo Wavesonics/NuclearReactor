@@ -237,11 +237,11 @@ GlobalThreadPool="*res://addons/thread_pool/thread_pool.gd"
 [display]
 
 window/size/width=1280
-window/size/height=720
+window/size/height=700
 
 [editor_plugins]
 
-enabled=PoolStringArray( "qodot", "thread_pool" )
+enabled=PoolStringArray( "nuclear_reactor", "qodot", "thread_pool" )
 
 [gdnative]
 

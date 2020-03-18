@@ -14,7 +14,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="Pipe0" type="Node2D" parent="."]
-position = Vector2( 106.382, 205.406 )
+position = Vector2( 59.382, 205.406 )
 script = ExtResource( 1 )
 previousPipePath = NodePath("../Pipe4")
 
@@ -25,43 +25,42 @@ script = ExtResource( 1 )
 previousPipePath = NodePath("../Pipe0")
 
 [node name="Splitter0" type="Node2D" parent="."]
-position = Vector2( 458.743, 563.41 )
+position = Vector2( 510.185, 563.41 )
 script = ExtResource( 3 )
 previousPipePath = NodePath("../Pipe1")
 nextPipePaths = [ NodePath("../Pipe2_0A"), NodePath("../Pipe2_0B") ]
 
 [node name="Pipe2_0A" type="Node2D" parent="."]
-position = Vector2( 477.754, 542.404 )
+position = Vector2( 536.913, 529.543 )
 rotation = -2.618
 script = ExtResource( 1 )
 numSegments = 5
 previousPipePath = NodePath("../Splitter0")
 
 [node name="Pipe2_1A" type="Node2D" parent="."]
-position = Vector2( 561.73, 369.785 )
+position = Vector2( 620.889, 356.924 )
 rotation = 2.61799
 script = ExtResource( 1 )
 numSegments = 5
 previousPipePath = NodePath("../Pipe2_0A")
 
 [node name="Pipe2_0B" type="Node2D" parent="."]
-position = Vector2( 439.264, 535.406 )
+position = Vector2( 498.423, 522.545 )
 rotation = 2.61799
 script = ExtResource( 1 )
 numSegments = 5
 previousPipePath = NodePath("../Splitter0")
 
 [node name="Pipe2_1B" type="Node2D" parent="."]
-position = Vector2( 352.954, 377.949 )
+position = Vector2( 412.113, 365.088 )
 rotation = -2.618
 script = ExtResource( 1 )
 numSegments = 5
 previousPipePath = NodePath("../Pipe2_0B")
 
 [node name="Combiner0" type="Node2D" parent="."]
-position = Vector2( 451.25, 209.95 )
+position = Vector2( 510.409, 197.089 )
 script = ExtResource( 4 )
-nextPipePath = NodePath("../Pipe3")
 prevPipePaths = [ NodePath("../Pipe2_1A"), NodePath("../Pipe2_1B") ]
 
 [node name="Pipe3" type="Node2D" parent="."]
@@ -72,12 +71,12 @@ numSegments = 5
 previousPipePath = NodePath("../Combiner0")
 
 [node name="Heatsink" type="Node2D" parent="."]
-position = Vector2( 304.743, 116.515 )
+position = Vector2( 284.743, 116.515 )
 script = ExtResource( 5 )
 previousPipePath = NodePath("../Pipe3")
 
 [node name="Pipe4" type="Node2D" parent="."]
-position = Vector2( 275.807, 160.914 )
+position = Vector2( 245.807, 158.914 )
 rotation = 1.57081
 script = ExtResource( 1 )
 numSegments = 5

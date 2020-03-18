@@ -4,7 +4,6 @@ onready var pipes := get_tree().get_nodes_in_group("pipes")
 onready var pipeJoints := get_tree().get_nodes_in_group("pipe_joints")
 
 const TASK_TAG := "fluid_worker"
-var tasksFinished := 0
 
 
 func _ready():

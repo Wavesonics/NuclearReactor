@@ -53,7 +53,7 @@ void FuelRod::_ready()
 
 	// Get the thermal map
 	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
-	if (thermalMap == nullptr) Godot::print("FAILED TO GET THERMAL MAP!!");
+	if (thermalMap == nullptr) Godot::print("FuelRod: FAILED TO GET THERMAL MAP!!");
 }
 
 void FuelRod::_draw()

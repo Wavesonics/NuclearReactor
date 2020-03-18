@@ -3,7 +3,7 @@ extends Node2D
 class_name CoolantPipe
 
 
-export(int) var numSegments := 10
+export(int) var numSegments := 10 setget set_num_segments
 var segmentWidth := 16.0
 var segmentHeight := 32.0
 var boundingBox: Rect2
@@ -13,10 +13,13 @@ var minPressure := 0.0
 
 var initialPressure := maxPressure
 
-export(NodePath) var previousPipePath: NodePath
+export(NodePath) var previousPipePath: NodePath setget set_prev_pipe
 var previousPipe = null
 
 export(bool) var enableRendering := true
+export(bool) var enableDebugRendering := false
+
+var endPoint: Vector2
 
 var outputPressure: float
 var segments := []
@@ -24,21 +27,45 @@ var segments := []
 onready var debugFont := load("res://vr/DefaultFont.tres") as DynamicFont
 
 
+func set_num_segments(n: int):
+	numSegments = n
+	initialize()
+
+
+func set_prev_pipe(prevPath: NodePath):
+	previousPipePath = prevPath
+	
+	initialize()
+
+
+func get_global_end_point() -> Vector2:
+	return to_global(endPoint)
+
+func initialize():
+	boundingBox = Rect2(0.0, 0.0, segmentWidth, (segmentHeight * numSegments) + (numSegments*2.0))
+	
+	endPoint = Vector2(boundingBox.size.x/2.0, boundingBox.size.y)
+	
+	segments.clear()
+	for ii in range(numSegments):
+		segments.push_back(randf() * initialPressure)
+	
+	previousPipe = null
+	if previousPipePath != null:
+		previousPipe = get_node(previousPipePath)
+	
+	update()
+
+
 func _ready():
 	update()
 	
-	boundingBox = Rect2(0.0, 0.0, segmentWidth, (segmentHeight * numSegments) + (numSegments*2.0))
-	
-	for ii in range(numSegments):
-		segments.push_back(randf() * initialPressure)
+	initialize()
 	
 	if Engine.editor_hint:
 		return
 	
 	add_to_group("pipes")
-	
-	if previousPipePath != null:
-		previousPipe = get_node(previousPipePath)
 
 
 func _draw():
@@ -50,10 +77,20 @@ func _draw():
 		var c = Util.value_to_heatmap(segmentPressure, minPressure, maxPressure)
 		var y := (ii * segmentHeight) + (ii*2.0)
 		draw_rect(Rect2(0.0, y, segmentWidth, segmentHeight), c)
-		draw_string(debugFont, Vector2(-20.0, y + (segmentHeight/2.0)), "[%d]" % ii)
-		draw_string(debugFont, Vector2(segmentWidth + 5.0, y + (segmentHeight/2.0)), "%d" % segmentPressure)
 		
-		#draw_rect(boundingBox, Color.red)
+		if previousPipe != null:
+			if previousPipe.has_method("get_global_end_point"):
+				var toPos = to_local(previousPipe.get_global_end_point())
+				draw_line(Vector2(segmentWidth/2.0, 0.0), toPos, Color.blue, 4.0)
+			else:
+				var toPos = to_local(previousPipe.global_position)
+				draw_line(Vector2(segmentWidth/2.0, 0.0), toPos, Color.blue, 4.0)
+		
+		if enableDebugRendering:
+			draw_string(debugFont, Vector2(-20.0, y + (segmentHeight/2.0)), "[%d]" % ii)
+			draw_string(debugFont, Vector2(segmentWidth + 5.0, y + (segmentHeight/2.0)), "%d" % segmentPressure)
+			
+			#draw_rect(boundingBox, Color.red)
 
 
 func fluid_tick():

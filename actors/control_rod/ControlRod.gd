@@ -16,8 +16,10 @@ var currentPositionDelta: float = 0.0
 
 var scram := false
 
+
 func do_scram():
 	scram = true
+
 
 func _ready():
 	var size := collision_shape_node.shape.extents as Vector2

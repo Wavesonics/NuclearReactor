@@ -90,7 +90,7 @@ void NeutronField::_ready()
 
 	// Get the thermal map
 	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
-	if (thermalMap == nullptr) Godot::print("FAILED TO GET THERMAL MAP!!");
+	if (thermalMap == nullptr) Godot::print("NeutronField: FAILED TO GET THERMAL MAP!!");
 	else
 	{
 		thermalMap->calculateCellSizes(reactorCore->area);

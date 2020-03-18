@@ -1,18 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=1]
+[ext_resource path="res://simulation/Simulation.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameCpp.gd" type="Script" id=2]
-[ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=3]
 [ext_resource path="res://actors/real_time_graph/RealTimeGraph.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/fuel_rod/FuelRodcpp.gdns" type="Script" id=5]
-[ext_resource path="res://actors/moderator/Moderator.gdns" type="Script" id=6]
-[ext_resource path="res://actors/control_rod/ControlRodCpp.gdns" type="Script" id=7]
-[ext_resource path="res://actors/HeatMap.gdns" type="Script" id=8]
 [ext_resource path="res://vr/Ubuntu-Medium.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=10]
-[ext_resource path="res://actors/ThermalMap.gdns" type="Script" id=11]
-[ext_resource path="res://actors/Thermocouple.gdns" type="Script" id=12]
-[ext_resource path="res://vr/DefaultFont.tres" type="DynamicFont" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -30,267 +22,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NeutronField" type="Node2D" parent="."]
-z_index = 1
-script = ExtResource( 1 )
-reactorCorePath = NodePath("../ReactorCore")
-biproductMapPath = NodePath("../BiproductMap")
-thermalMapPath = NodePath("../ThermalMap")
-biproductDecayRate = 0.001
-
-[node name="ReactorCore" type="Node2D" parent="."]
-position = Vector2( 0, 50 )
-script = ExtResource( 3 )
-area = Rect2( 0, 0, 440, 500 )
-
-[node name="ComponentBank0" type="Node2D" parent="ReactorCore"]
-position = Vector2( 0, 40 )
-
-[node name="Moderator0" type="Node2D" parent="ReactorCore/ComponentBank0"]
-script = ExtResource( 6 )
-
-[node name="FuelRod0" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 50, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="ControlRod0" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 80, 0 )
-script = ExtResource( 7 )
-
-[node name="Moderator1" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 100, 0 )
-script = ExtResource( 6 )
-
-[node name="ControlRod1" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 140, 0 )
-script = ExtResource( 7 )
-
-[node name="FuelRod1" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 170, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="Moderator2" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 200, 0 )
-script = ExtResource( 6 )
-
-[node name="FuelRod3" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 248.894, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="ControlRod3" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 278.894, 0 )
-script = ExtResource( 7 )
-
-[node name="Moderator4" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 298.894, 0 )
-script = ExtResource( 6 )
-
-[node name="ControlRod2" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 338.894, 0 )
-script = ExtResource( 7 )
-
-[node name="FuelRod2" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 368.894, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="Moderator3" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 398.894, 0 )
-script = ExtResource( 6 )
-
-[node name="Thermocouple0" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 125, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple1" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 125, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple7" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 25, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple6" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 25, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple3" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 225, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple2" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 225, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple5" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 325, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple4" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 325, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple9" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 425, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple8" type="Node2D" parent="ReactorCore/ComponentBank0"]
-position = Vector2( 425, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="ComponentBank1" type="Node2D" parent="ReactorCore"]
-position = Vector2( 440, 462.864 )
-rotation = -3.14159
-
-[node name="Moderator0" type="Node2D" parent="ReactorCore/ComponentBank1"]
-script = ExtResource( 6 )
-
-[node name="FuelRod0" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 50, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="ControlRod0" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 80, 0 )
-script = ExtResource( 7 )
-
-[node name="Moderator1" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 100, 0 )
-script = ExtResource( 6 )
-
-[node name="ControlRod1" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 140, 0 )
-script = ExtResource( 7 )
-
-[node name="FuelRod1" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 170, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="Moderator2" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 200, 0 )
-script = ExtResource( 6 )
-
-[node name="FuelRod3" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 248.894, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="ControlRod3" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 278.894, 0 )
-script = ExtResource( 7 )
-
-[node name="Moderator4" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 298.894, 0 )
-script = ExtResource( 6 )
-
-[node name="ControlRod2" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 338.894, 0 )
-script = ExtResource( 7 )
-
-[node name="FuelRod2" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 368.894, 0 )
-script = ExtResource( 5 )
-thermalMapPath = NodePath("../../../ThermalMap")
-
-[node name="Moderator3" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 398.894, 0 )
-script = ExtResource( 6 )
-
-[node name="Thermocouple0" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 125, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple1" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 125, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple7" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 25, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple6" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 25, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple3" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 225, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple2" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 225, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple5" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 325, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple4" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 325, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple9" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 425, 40 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="Thermocouple8" type="Node2D" parent="ReactorCore/ComponentBank1"]
-position = Vector2( 425, 160 )
-script = ExtResource( 12 )
-font = ExtResource( 13 )
-
-[node name="BiproductMap" type="Node2D" parent="."]
-position = Vector2( 890, 128 )
-script = ExtResource( 8 )
-mapSize = 32
-drawRectSize = 4.0
-
-[node name="BiproductUpdateTimer" type="Timer" parent="BiproductMap"]
-autostart = true
-
-[node name="Label" type="Label" parent="BiproductMap"]
-margin_left = -1.20001
-margin_top = -18.717
-margin_right = 162.8
-margin_bottom = -4.717
-text = "Fission Biprod. Density"
+[node name="Simulation" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ThermalMap" type="Node2D" parent="."]
-position = Vector2( 750, 128 )
-script = ExtResource( 11 )
+[node name="Viewport" type="Viewport" parent="Simulation"]
+size = Vector2( 1280, 800 )
+handle_input_locally = false
+render_target_update_mode = 3
 
-[node name="Label" type="Label" parent="ThermalMap"]
-margin_top = -20.0
-margin_right = 83.0
-margin_bottom = -6.0
-text = "Thermal Map"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Camera2D" type="Camera2D" parent="Simulation/Viewport"]
+offset = Vector2( 1200, 400 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Simulation" parent="Simulation/Viewport" instance=ExtResource( 1 )]
 
 [node name="FpsLabel" type="Label" parent="."]
 anchor_left = 1.0
@@ -304,10 +54,10 @@ __meta__ = {
 }
 
 [node name="NeutronPopulation" type="VBoxContainer" parent="."]
-margin_left = 452.109
-margin_top = 8.00002
-margin_right = 511.109
-margin_bottom = 55.9371
+margin_left = 730.0
+margin_top = 12.864
+margin_right = 789.0
+margin_bottom = 60.801
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -325,10 +75,10 @@ margin_right = 59.0
 margin_bottom = 18.0
 
 [node name="NeutronFlux" type="VBoxContainer" parent="."]
-margin_left = 593.109
-margin_top = 8.0
-margin_right = 652.109
-margin_bottom = 55.9371
+margin_left = 871.0
+margin_top = 12.8639
+margin_right = 930.0
+margin_bottom = 60.801
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -365,4 +115,3 @@ margin_left = -568.0
 margin_top = -300.0
 margin_right = 0.0
 margin_bottom = 0.0
-[connection signal="timeout" from="BiproductMap/BiproductUpdateTimer" to="." method="_on_BiproductUpdateTimer_timeout"]
