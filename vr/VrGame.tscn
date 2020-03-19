@@ -2,7 +2,7 @@
 
 [ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://vr/VrGame.gd" type="Script" id=2]
-[ext_resource path="res://GameCpp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://simulation/Simulation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/3d_control_panel/3dControlPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://vr/art/middle_console/middle_console_03.glb" type="PackedScene" id=6]
@@ -113,7 +113,15 @@ visible = false
 editor_live_update = false
 transparent = false
 
-[node name="Simulation" parent="CoreSimulationCanvas" instance=ExtResource( 3 )]
+[node name="Control" type="Control" parent="CoreSimulationCanvas"]
+margin_right = 1200.0
+margin_bottom = 1200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Simulation" parent="CoreSimulationCanvas/Control" instance=ExtResource( 3 )]
+position = Vector2( 211.069, 159.294 )
 
 [node name="OqVrPlayer" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0121542, 0 )
