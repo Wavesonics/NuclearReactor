@@ -65,6 +65,14 @@ void HeatMap::_init()
 
 void HeatMap::_ready()
 {
+	// Get the reactor core
+	reactorCore = Object::cast_to<ReactorCore>(get_node(reactorCorePath));
+	if (reactorCore == nullptr) Godot::print("HeatMap: FAILED TO GET REACTOR CORE!!");
+	else
+	{
+		calculateCellSizes(reactorCore->globalArea);
+	}
+
 	map = new float *[mapSize];
 	for(int yy = 0; yy < mapSize; ++yy)
 	{
@@ -114,8 +122,19 @@ godot::Color HeatMap::calculateTempColor(const float value, const float minimum,
 	}
 }
 
+Point2 HeatMap::toGrid(const godot::Vector2 &globalPos) const
+{
+	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
+
+	const int gridX = (int)floor(pos.x / cellWidth);
+	const int gridY = (int)floor(pos.y / cellHeight);
+
+	return Point2(gridX, gridY);
+}
+
 void HeatMap::_register_methods()
 {
+	register_property<HeatMap, NodePath>("reactorCorePath", &HeatMap::reactorCorePath, nullptr);
 	register_property<HeatMap, int>("mapSize", &HeatMap::mapSize, DEFAULT_MAP_SIZE);
 	register_property<HeatMap, float>("drawRectSize", &HeatMap::drawRectSize, DEFAULT_DRAW_SIZE);
 	register_property<HeatMap, bool>("enableRendering", &HeatMap::enableRendering, true);
@@ -123,6 +142,7 @@ void HeatMap::_register_methods()
 	register_method("add_heat", &HeatMap::addHeat);
 	register_method("read_magnitude", &HeatMap::readMagnitude);
 	register_method("range_check", &HeatMap::rangeCheck);
+	register_method("to_grid", &HeatMap::toGrid);
 	register_method("_init", &HeatMap::_init);
 	register_method("_ready", &HeatMap::_ready);
 	register_method("_draw", &HeatMap::_draw);

@@ -33,9 +33,10 @@ namespace nuclearPhysics
 
 		bool handleNeutron(Neutron &neutron) override;
 
-		virtual void _init();
-		virtual void _ready();
-		virtual void _draw();
+		void _init() override;
+		void _enter_tree() override;
+		void _ready() override;
+		void _draw() override;
 		virtual void _physics_process(float delta);
 
 		static void _register_methods();

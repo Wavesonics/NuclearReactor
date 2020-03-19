@@ -36,13 +36,16 @@ void NeutronRegion::_init()
 	area = DEFAULT_BOUNDS;
 }
 
-void NeutronRegion::_ready()
+void NeutronRegion::_enter_tree()
 {
 	// Create our global Rect2 for testing global points
 	Vector2 globalAreaPos = get_global_position() + area.position;
 	globalArea = Rect2(globalAreaPos, area.size);
-	update();
+}
 
+void NeutronRegion::_ready()
+{
+	update();
 	EDITOR_GUARD_RETURN_HERE
 
 	// Add every neutron region to the neutron field so it can be checked
@@ -73,6 +76,7 @@ void NeutronRegion::_register_methods()
 	
 	register_method("contains", &NeutronRegion::contains);
 	register_method("_init", &NeutronRegion::_init);
+	register_method("_enter_tree", &NeutronRegion::_enter_tree);
 	register_method("_ready", &NeutronRegion::_ready);
 	register_method("_draw", &NeutronRegion::_draw);
 }

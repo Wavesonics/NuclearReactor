@@ -77,7 +77,6 @@ namespace nuclearPhysics
 		void createNeutron(const godot::Vector2 position, const godot::Vector2 velocity);
 		int numNeutrons() const;
 		int getNeutronFlux() const;
-		godot::Point2 toBiproductGrid(const godot::Vector2 &globalPos) const;
 		void addFissionBiproduct(const godot::Vector2 &globalPos);
 		godot::Point2 toHeatGrid(const godot::Vector2 &globalPos) const;
 		void addHeat(const godot::Vector2 &globalPos, const float heat);

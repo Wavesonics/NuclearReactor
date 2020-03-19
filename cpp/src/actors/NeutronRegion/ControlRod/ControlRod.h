@@ -33,6 +33,7 @@ namespace nuclearPhysics
 		void updatePosition();
 
 		virtual void _init();
+		virtual void _enter_tree();
 		virtual void _ready();
 		virtual void _draw();
 

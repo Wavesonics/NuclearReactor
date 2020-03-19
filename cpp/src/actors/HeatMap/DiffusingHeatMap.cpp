@@ -201,8 +201,14 @@ bool DiffusingHeatMap::rangeCheck(const int x, const int y) const
 	return HeatMap::rangeCheck(x, y);
 }
 
+godot::Point2 DiffusingHeatMap::toGrid(const godot::Vector2 &globalPos) const
+{
+	return HeatMap::toGrid(globalPos);
+}
+
 void DiffusingHeatMap::_register_methods()
 {
+	register_property<DiffusingHeatMap, NodePath>("reactorCorePath", &DiffusingHeatMap::reactorCorePath, nullptr);
 	register_property<DiffusingHeatMap, int>("mapSize", &DiffusingHeatMap::mapSize, DEFAULT_MAP_SIZE);
 	register_property<DiffusingHeatMap, float>("drawRectSize", &DiffusingHeatMap::drawRectSize, DEFAULT_DRAW_SIZE);
 	register_property<DiffusingHeatMap, bool>("enableRendering", &DiffusingHeatMap::enableRendering, true);
@@ -212,6 +218,7 @@ void DiffusingHeatMap::_register_methods()
 	register_method("add_heat", &DiffusingHeatMap::addHeat);
 	register_method("read_magnitude", &DiffusingHeatMap::readMagnitude);
 	register_method("range_check", &DiffusingHeatMap::rangeCheck);
+	register_method("to_grid", &DiffusingHeatMap::toGrid);
 	register_method("_init", &DiffusingHeatMap::_init);
 	register_method("_ready", &DiffusingHeatMap::_ready);
 	register_method("_physics_process", &DiffusingHeatMap::_physics_process);

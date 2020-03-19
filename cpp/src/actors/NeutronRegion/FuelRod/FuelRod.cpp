@@ -32,6 +32,11 @@ void FuelRod::_init()
 	area = DEFAULT_BOUNDS;
 }
 
+void FuelRod::_enter_tree()
+{
+	NeutronRegion::_enter_tree();
+}
+
 void FuelRod::_ready()
 {
 	NeutronRegion::_ready();
@@ -122,6 +127,7 @@ void FuelRod::_register_methods()
 	register_property<FuelRod, godot::Color>("drawColor", &FuelRod::drawColor, DEFAULT_COLOR);
 
 	register_method("_init", &FuelRod::_init);
+	register_method("_enter_tree", &FuelRod::_enter_tree);
 	register_method("_ready", &FuelRod::_ready);
 	register_method("_draw", &FuelRod::_draw);
 	register_method("_physics_process", &FuelRod::_physics_process);

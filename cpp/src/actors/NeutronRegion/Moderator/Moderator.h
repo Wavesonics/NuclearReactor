@@ -19,9 +19,10 @@ namespace nuclearPhysics
 		Moderator();
 		~Moderator() override;
 
-		virtual void _init();
-		virtual void _ready();
-		virtual void _draw();
+		void _init() override;
+		void _enter_tree() override;
+		void _ready() override;
+		void _draw() override;
 
 		bool handleNeutron(nuclearPhysics::Neutron &neutron) override;
 

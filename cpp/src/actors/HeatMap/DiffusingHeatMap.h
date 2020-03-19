@@ -54,6 +54,8 @@ namespace nuclearPhysics
 
 		float readMagnitude(const int x, const int y) const override;
 
+		godot::Point2 toGrid(const godot::Vector2 &globalPos) const override;
+
 		static void _register_methods();
 
 		static constexpr int DEFAULT_MAP_SIZE = 32;

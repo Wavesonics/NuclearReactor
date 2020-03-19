@@ -18,9 +18,10 @@ namespace nuclearPhysics
 		ReactorCore();
 		~ReactorCore() override;
 
-		virtual void _init();
-		virtual void _ready();
-		virtual void _draw();
+		void _init() override;
+		void _enter_tree() override;
+		void _ready() override;
+		void _draw() override;
 		bool handleNeutron(Neutron& neutron) override;
 
 		static void _register_methods();

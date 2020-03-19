@@ -83,18 +83,10 @@ void NeutronField::_ready()
 	// Get the biproduct map
 	biproductMap = Object::cast_to<HeatMap>(get_node(biproductMapPath));
 	if (biproductMap == nullptr) Godot::print("FAILED TO GET BIPRODUCT MAP!!");
-	else
-	{
-		biproductMap->calculateCellSizes(reactorCore->area);
-	}
 
 	// Get the thermal map
 	thermalMap = Object::cast_to<DiffusingHeatMap>(get_node(thermalMapPath));
 	if (thermalMap == nullptr) Godot::print("NeutronField: FAILED TO GET THERMAL MAP!!");
-	else
-	{
-		thermalMap->calculateCellSizes(reactorCore->area);
-	}
 
 	// Register the NeutronField with the control system
     Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
@@ -160,41 +152,26 @@ int NeutronField::getNeutronFlux() const
 	return neutronFlux;
 }
 
-godot::Point2 NeutronField::toBiproductGrid(const godot::Vector2 &globalPos) const
-{
-	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
-
-	const int gridX = (int)floor(pos.x / biproductMap->cellWidth);
-	const int gridY = (int)floor(pos.y / biproductMap->cellHeight);
-
-	return Point2(gridX, gridY);
-}
-
 void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
 {
-	const Point2& grid = toBiproductGrid(globalPos);
+	const Point2& grid = biproductMap->toGrid(globalPos);
 	biproductMap->addHeat(biproduct, grid.x, grid.y);
 }
 
 Point2 NeutronField::toHeatGrid(const godot::Vector2 &globalPos) const
 {
-	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
-
-	const int gridX = (int)floor(pos.x / thermalMap->cellWidth);
-	const int gridY = (int)floor(pos.y / thermalMap->cellHeight);
-
-	return Point2(gridX, gridY);
+	return thermalMap->toGrid(globalPos);
 }
 
 void NeutronField::addHeat(const Vector2 &globalPos, const float heat)
 {
-	const Point2 &grid = toHeatGrid(globalPos);
+	const Point2 &grid = thermalMap->toGrid(globalPos);
 	thermalMap->addHeat(heat, grid.x, grid.y);
 }
 
 float NeutronField::readHeat(const godot::Vector2 &globalPos) const
 {
-	const Point2 &grid = toHeatGrid(globalPos);
+	const Point2 &grid = thermalMap->toGrid(globalPos);
 	return thermalMap->readMagnitude(grid.x, grid.y);
 }
 

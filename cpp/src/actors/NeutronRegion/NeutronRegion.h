@@ -16,10 +16,10 @@ namespace nuclearPhysics
 	{
 		GODOT_CLASS(NeutronRegion, godot::Node2D)
 	protected:
-		godot::Rect2 globalArea;
 		godot::Color drawColor;
 	public:
 		godot::Rect2 area;
+		godot::Rect2 globalArea;
 
 		NeutronRegion();
 		virtual ~NeutronRegion();
@@ -36,6 +36,7 @@ namespace nuclearPhysics
 		bool contains(const godot::Point2 &point) const;
 
 		virtual void _init();
+		virtual void _enter_tree();
 		virtual void _ready();
 		virtual void _draw();
 

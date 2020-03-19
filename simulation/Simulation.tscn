@@ -28,10 +28,10 @@ biproductDecayRate = 0.001
 
 [node name="ReactorCore" type="Node2D" parent="."]
 script = ExtResource( 8 )
-area = Rect2( 0, 0, 440, 500 )
+area = Rect2( 0, 0, 500, 500 )
 
 [node name="ComponentBank0" type="Node2D" parent="ReactorCore"]
-position = Vector2( 0, 40 )
+position = Vector2( 30, 40 )
 
 [node name="Moderator0" type="Node2D" parent="ReactorCore/ComponentBank0"]
 script = ExtResource( 5 )
@@ -139,7 +139,7 @@ script = ExtResource( 9 )
 font = ExtResource( 11 )
 
 [node name="ComponentBank1" type="Node2D" parent="ReactorCore"]
-position = Vector2( 440, 462.864 )
+position = Vector2( 470, 470 )
 rotation = -3.14159
 
 [node name="Moderator0" type="Node2D" parent="ReactorCore/ComponentBank1"]
@@ -248,7 +248,7 @@ script = ExtResource( 9 )
 font = ExtResource( 11 )
 
 [node name="PrimaryCoolantLoop" type="Node2D" parent="."]
-position = Vector2( 0, -90 )
+position = Vector2( 30, -90 )
 
 [node name="CoolantPipe0" type="Node2D" parent="PrimaryCoolantLoop"]
 position = Vector2( 30, 700 )
@@ -345,6 +345,7 @@ autostart = true
 [node name="BiproductMap" type="Node2D" parent="."]
 position = Vector2( 1040, 90 )
 script = ExtResource( 13 )
+reactorCorePath = NodePath("../ReactorCore")
 mapSize = 32
 drawRectSize = 4.0
 
@@ -354,5 +355,6 @@ autostart = true
 [node name="ThermalMap" type="Node2D" parent="."]
 position = Vector2( 1040, 400 )
 script = ExtResource( 14 )
+reactorCorePath = NodePath("../ReactorCore")
 [connection signal="timeout" from="CoolantLoopSimulationTimer" to="." method="_on_CoolantLoopSimulationTimer_timeout"]
 [connection signal="timeout" from="BiproductMap/BiproductMapUpdateTimer" to="." method="_on_BiproductMapUpdateTimer_timeout"]

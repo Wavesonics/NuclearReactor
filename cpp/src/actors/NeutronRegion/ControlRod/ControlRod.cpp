@@ -40,6 +40,11 @@ void ControlRod::_init()
     scramSpeed = SPEED_SCRAM;
 }
 
+void ControlRod::_enter_tree()
+{
+	NeutronRegion::_enter_tree();
+}
+
 void ControlRod::_ready()
 {
     NeutronRegion::_ready();
@@ -131,6 +136,7 @@ void ControlRod::_register_methods()
     register_method("move_in", &ControlRod::moveIn);
     
     register_method("_init", &ControlRod::_init);
+	register_method("_enter_tree", &ControlRod::_enter_tree);
     register_method("_ready", &ControlRod::_ready);
     register_method("_draw", &ControlRod::_draw);
 }

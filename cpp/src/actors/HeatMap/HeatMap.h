@@ -8,6 +8,7 @@
 
 #include <Godot.hpp>
 #include <Node2D.hpp>
+#include "../NeutronRegion/ReactorCore/ReactorCore.h"
 
 namespace nuclearPhysics
 {
@@ -17,6 +18,9 @@ namespace nuclearPhysics
 	private:
 		inline godot::Color calculateTempColor(const float value, const float min, const float max) const;
 	protected:
+		godot::NodePath reactorCorePath;
+		nuclearPhysics::ReactorCore* reactorCore = nullptr;
+
 		bool enableRendering = true;
 		float minValue = 0.01f;
 		float maxValue = 1.0f;
@@ -34,6 +38,8 @@ namespace nuclearPhysics
 		~HeatMap();
 
 		void calculateCellSizes(const godot::Rect2 &rect);
+
+		virtual godot::Point2 toGrid(const godot::Vector2 &globalPos) const;
 
 		virtual void addHeat(float heat, const int x, const int y);
 

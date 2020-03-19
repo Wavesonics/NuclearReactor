@@ -31,6 +31,11 @@ void Moderator::_init()
     area = DEFAULT_BOUNDS;
 }
 
+void Moderator::_enter_tree()
+{
+	NeutronRegion::_enter_tree();
+}
+
 void Moderator::_ready()
 {
     NeutronRegion::_ready();
@@ -68,6 +73,7 @@ void Moderator::_register_methods()
     register_property<Moderator, godot::Color>("drawColor", &Moderator::drawColor, DEFAULT_COLOR);
 
     register_method("_init", &Moderator::_init);
+	register_method("_enter_tree", &Moderator::_enter_tree);
     register_method("_ready", &Moderator::_ready);
     register_method("_draw", &Moderator::_draw);
 }

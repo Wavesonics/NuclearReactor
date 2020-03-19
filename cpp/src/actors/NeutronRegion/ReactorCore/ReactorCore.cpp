@@ -31,6 +31,11 @@ void ReactorCore::_init()
     drawColor = DEFAULT_COLOR;
 }
 
+void ReactorCore::_enter_tree()
+{
+	NeutronRegion::_enter_tree();
+}
+
 void ReactorCore::_ready()
 {
     NeutronRegion::_ready();
@@ -47,6 +52,7 @@ void ReactorCore::_register_methods()
     register_property<ReactorCore, godot::Color>("drawColor", &ReactorCore::drawColor, DEFAULT_COLOR);
 
     register_method("_init", &ReactorCore::_init);
+	register_method("_enter_tree", &ReactorCore::_enter_tree);
     register_method("_ready", &ReactorCore::_ready);
     register_method("_draw", &ReactorCore::_draw);
 }
