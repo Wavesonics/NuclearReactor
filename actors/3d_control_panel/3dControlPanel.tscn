@@ -10,6 +10,7 @@
 script = ExtResource( 1 )
 
 [node name="BackPlate" type="CSGBox" parent="."]
+visible = false
 width = 1.44734
 height = 0.5
 depth = 0.025

@@ -202,6 +202,7 @@ config/icon="res://icon.png"
 
 vr="*res://OQ_Toolkit/vr_autoload.gd"
 ControlSystem="*res://actors/control_system/ControlSystem.gd"
+GlobalThreadPool="*res://addons/thread_pool/thread_pool.gd"
 
 [display]
 
