@@ -25,6 +25,7 @@ namespace nuclearPhysics
 		float errantReading = NO_ERROR;
 
 		bool enableRendering = DEFAULT_RENDER;
+		float lastDraw = 0.0f;
 	public:
 		Thermocouple();
 		~Thermocouple();
@@ -41,6 +42,7 @@ namespace nuclearPhysics
 		static void _register_methods();
 		static constexpr float NO_ERROR = -1.0f;
 		static constexpr bool DEFAULT_RENDER = true;
+		static constexpr float DRAW_INTERVAL = 1.0f;
 	};
 }
 

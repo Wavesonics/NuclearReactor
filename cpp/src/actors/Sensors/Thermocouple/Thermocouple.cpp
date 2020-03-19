@@ -70,7 +70,12 @@ void Thermocouple::_physics_process(const float delta)
 
 	if(enableRendering)
 	{
-		update();
+		lastDraw += delta;
+		if(lastDraw < DRAW_INTERVAL)
+		{
+			lastDraw = 0.0f;
+			update();
+		}
 	}
 }
 
