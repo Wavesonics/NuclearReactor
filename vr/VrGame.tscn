@@ -1,11 +1,11 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://vr/VrGame.gd" type="Script" id=2]
 [ext_resource path="res://GameCpp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/3d_control_panel/3dControlPanel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://vr/art/middle_console_02.glb" type="PackedScene" id=6]
+[ext_resource path="res://vr/art/middle_console/middle_console_03.glb" type="PackedScene" id=6]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=7]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/qodot/game-definitions/fgd/qodot_fgd.tres" type="Resource" id=9]
@@ -15,6 +15,7 @@
 [ext_resource path="res://textures/base/wall_02.jpg" type="Texture" id=13]
 [ext_resource path="res://addons/qodot/game-definitions/fgd/point_classes/light.gd" type="Script" id=14]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_entity.gd" type="Script" id=15]
+[ext_resource path="res://vr/art/wall_console/wall_console_01.glb" type="PackedScene" id=16]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -118,7 +119,40 @@ transparent = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0121542, 0 )
 
 [node name="ControlPanel" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.571, 1.3835, -1.66 )
+transform = Transform( 0.981948, -0.017079, 0.188381, 0.0118437, 0.999513, 0.0288818, -0.188782, -0.0261293, 0.981672, -2.69118, -1.95704, -1.27658 )
+
+[node name="wall_console_01" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( 0.981213, -0.000436144, -0.192928, 0.00200463, 0.999966, 0.00793463, 0.192918, -0.00817231, 0.981181, -3.14489, 3.22329, -3.3107 )
+
+[node name="wall_console_02" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( 0.98911, 0.00437998, -0.147113, -0.00412209, 0.999989, 0.00205767, 0.14712, -0.00142881, 0.989118, -3.38736, 3.19193, -2.12583 )
+
+[node name="wall_console_03" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( 0.992177, 0.00369847, -0.124785, -0.00351319, 0.999993, 0.00170454, 0.12479, -0.00125279, 0.992182, -2.94222, 3.25999, -4.50052 )
+
+[node name="wall_console_04" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.180551, 0.0428447, -0.982632, -0.0143573, 0.99883, 0.0461889, 0.98346, 0.0224475, -0.179724, -0.707756, 3.24888, -5.19542 )
+
+[node name="wall_console_05" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.17838, 0.0423692, -0.983049, -0.0144661, 0.998852, 0.0456752, 0.983854, 0.0223685, -0.177562, 0.431803, 3.22906, -4.9768 )
+
+[node name="wall_console_06" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.176301, 0.0423555, -0.983424, -0.0145016, 0.998854, 0.0456196, 0.984228, 0.0223041, -0.175485, 1.54335, 3.20972, -4.76356 )
+
+[node name="wall_console_07" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.172985, 0.0423332, -0.984014, -0.0145578, 0.998857, 0.0455309, 0.984816, 0.0222014, -0.172171, 2.64144, 3.17254, -4.54259 )
+
+[node name="wall_console_08" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.172985, 0.0423332, -0.984014, -0.0145578, 0.998857, 0.0455309, 0.984816, 0.0222014, -0.172171, 3.73052, 3.1536, -4.33365 )
+
+[node name="wall_console_09" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.172985, 0.0423332, -0.984014, -0.0145578, 0.998857, 0.0455309, 0.984816, 0.0222014, -0.172171, 4.83163, 3.13445, -4.12241 )
+
+[node name="wall_console_10" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.172986, 0.0423332, -0.984014, -0.0145578, 0.998857, 0.0455309, 0.984816, 0.0222014, -0.172171, 5.93203, 3.11531, -3.91131 )
+
+[node name="wall_console_11" parent="ControlPanel" instance=ExtResource( 16 )]
+transform = Transform( -0.172986, 0.0423332, -0.984014, -0.0145578, 0.998858, 0.0455309, 0.984816, 0.0222014, -0.172171, 7.01617, 3.09645, -3.70332 )
 
 [node name="Room" type="Spatial" parent="."]
 
@@ -198,9 +232,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68237, 0 )
 image_path = "res://vr/art/control_room"
 light_data = SubResource( 14 )
 
-[node name="middle_console_02" parent="Room" instance=ExtResource( 6 )]
-transform = Transform( -0.0241531, 0, -0.999708, 0, 1, 0, 0.999708, 0, -0.0241531, 3.24405, 1.29769, 3.48265 )
-
 [node name="FpsLabel" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.736758, 0, 0.676156, 0, 1, 0, -0.676156, 0, 0.736758, -1.88431, 1.70778, -1.65245 )
 text = "FPS"
@@ -215,4 +246,7 @@ transparent = false
 
 [node name="FpsTimer" type="Timer" parent="FpsLabel"]
 autostart = true
+
+[node name="middle_console_03" parent="." instance=ExtResource( 6 )]
+transform = Transform( -0.0971313, 0, -0.995272, 0, 1, 0, 0.995272, 0, -0.0971313, 1.9393, 0.9625, 0.465545 )
 [connection signal="timeout" from="FpsLabel/FpsTimer" to="." method="_on_FpsTimer_timeout"]
