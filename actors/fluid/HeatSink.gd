@@ -59,7 +59,7 @@ func _draw():
 	var size := 60.0
 	var inset := 10.0
 	
-	var c = Util.value_to_heatmap(pressure, 0.0, 100.0)
+	var c = Util.value_to_heatmap(pressure, 0.0, 1000.0)
 	var c2 = Util.value_to_heatmap(pressure/coolingFactor, 0.0, 100.0)
 	
 	draw_rect(Rect2(Vector2(-size/2.0, -size/2.0), Vector2(size, size)),  Color.whitesmoke)
