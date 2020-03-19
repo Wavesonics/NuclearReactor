@@ -5,4 +5,4 @@ func _ready():
 		get_tree().change_scene("res://vr/VrGame.tscn")
 	else:
 		vr.queue_free()
-		get_tree().change_scene("res://GameCpp.tscn")
+		get_tree().change_scene("res://entry/2d/GameCpp.tscn")
