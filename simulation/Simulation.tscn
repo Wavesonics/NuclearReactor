@@ -18,17 +18,18 @@
 [node name="Simulation" type="Node2D"]
 script = ExtResource( 12 )
 
-[node name="NeutronField" type="Node2D" parent="."]
-z_index = 1
-script = ExtResource( 6 )
-reactorCorePath = NodePath("../../Simulation/ReactorCore")
-biproductMapPath = NodePath("../BiproductMap")
-thermalMapPath = NodePath("../ThermalMap")
-biproductDecayRate = 0.001
-
 [node name="ReactorCore" type="Node2D" parent="."]
+position = Vector2( 0, 90 )
 script = ExtResource( 8 )
 area = Rect2( 0, 0, 500, 500 )
+
+[node name="NeutronField" type="Node2D" parent="ReactorCore"]
+z_index = 1
+script = ExtResource( 6 )
+reactorCorePath = NodePath("..")
+biproductMapPath = NodePath("../../BiproductMap")
+thermalMapPath = NodePath("../../ThermalMap")
+biproductDecayRate = 0.001
 
 [node name="ComponentBank0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 30, 40 )
@@ -247,94 +248,93 @@ position = Vector2( 425, 160 )
 script = ExtResource( 9 )
 font = ExtResource( 11 )
 
-[node name="PrimaryCoolantLoop" type="Node2D" parent="."]
+[node name="PrimaryCoolantLoop" type="Node2D" parent="ReactorCore"]
 position = Vector2( 30, -90 )
 
-[node name="CoolantPipe0" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 30, 700 )
+[node name="CoolantPipe0" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 30, 590 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 20
-thermalMapPath = NodePath("../../ThermalMap")
+numSegments = 15
+thermalMapPath = NodePath("../../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
-[node name="CoolantPipe1" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 130, 700 )
+[node name="CoolantPipe1" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 130, 590 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 20
-thermalMapPath = NodePath("../../ThermalMap")
+numSegments = 15
+thermalMapPath = NodePath("../../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
-[node name="CoolantPipe2" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 330, 700 )
+[node name="CoolantPipe2" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 330, 590 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 20
-thermalMapPath = NodePath("../../ThermalMap")
+numSegments = 15
+thermalMapPath = NodePath("../../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
-[node name="CoolantPipe3" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 225, 700 )
+[node name="CoolantPipe3" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 225, 590 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 20
-thermalMapPath = NodePath("../../ThermalMap")
+numSegments = 15
+thermalMapPath = NodePath("../../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
-[node name="CoolantPipe4" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 430, 700 )
+[node name="CoolantPipe4" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 430, 590 )
 rotation = -3.14159
 script = ExtResource( 4 )
-numSegments = 20
-thermalMapPath = NodePath("../../ThermalMap")
+numSegments = 15
+thermalMapPath = NodePath("../../../ThermalMap")
 previousPipePath = NodePath("../PipeSplit0")
 
-[node name="PipeCombiner1" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 170, -40 )
+[node name="PipeCombiner1" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 210, -40 )
 script = ExtResource( 2 )
 prevPipePaths = [ NodePath("../CoolantPipe0"), NodePath("../CoolantPipe1"), NodePath("../CoolantPipe2"), NodePath("../CoolantPipe3"), NodePath("../CoolantPipe4") ]
-enableRendering = true
 
-[node name="PipeSplit0" type="Node2D" parent="PrimaryCoolantLoop"]
+[node name="PipeSplit0" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
 position = Vector2( 210, 770 )
 rotation = 0.523598
 script = ExtResource( 1 )
 previousPipePath = NodePath("../CoolantPipe18")
-nextPipePaths = [ NodePath("../CoolantPipe0"), NodePath("../CoolantPipe1"), NodePath("../CoolantPipe3"), NodePath("../CoolantPipe2"), NodePath("../CoolantPipe5") ]
+nextPipePaths = [ NodePath("../CoolantPipe0"), NodePath("../CoolantPipe1"), NodePath("../CoolantPipe2"), NodePath("../CoolantPipe3"), NodePath("../CoolantPipe4") ]
 enableRendering = true
 
-[node name="CoolantPipe" type="Node2D" parent="PrimaryCoolantLoop"]
-position = Vector2( 240, -50 )
+[node name="CoolantPipe" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
+position = Vector2( 260, -50 )
 rotation = -1.57079
 script = ExtResource( 4 )
 numSegments = 15
 previousPipePath = NodePath("../PipeCombiner1")
 
-[node name="CoolantPipe19" type="Node2D" parent="PrimaryCoolantLoop"]
+[node name="CoolantPipe19" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
 position = Vector2( 770, -20 )
 script = ExtResource( 4 )
 previousPipePath = NodePath("../CoolantPipe")
 
-[node name="CoolantPipe20" type="Node2D" parent="PrimaryCoolantLoop"]
+[node name="CoolantPipe20" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
 position = Vector2( 770, 410 )
 script = ExtResource( 4 )
 previousPipePath = NodePath("../HeatSink")
 
-[node name="CoolantPipe18" type="Node2D" parent="PrimaryCoolantLoop"]
+[node name="CoolantPipe18" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
 position = Vector2( 780, 770 )
 rotation = -4.71238
 script = ExtResource( 4 )
 numSegments = 15
 previousPipePath = NodePath("../CoolantPipe20")
 
-[node name="HeatSink" type="Node2D" parent="PrimaryCoolantLoop"]
+[node name="HeatSink" type="Node2D" parent="ReactorCore/PrimaryCoolantLoop"]
 position = Vector2( 770, 360 )
 script = ExtResource( 3 )
 previousPipePath = NodePath("../CoolantPipe19")
 enableRendering = true
 
-[node name="CoolantLoopSimulationTimer" type="Timer" parent="PrimaryCoolantLoop"]
+[node name="CoolantLoopSimulationTimer" type="Timer" parent="ReactorCore/PrimaryCoolantLoop"]
 wait_time = 0.5
 autostart = true
 
@@ -343,7 +343,7 @@ wait_time = 0.25
 autostart = true
 
 [node name="BiproductMap" type="Node2D" parent="."]
-position = Vector2( 1040, 90 )
+position = Vector2( 540, 60 )
 script = ExtResource( 13 )
 reactorCorePath = NodePath("../ReactorCore")
 mapSize = 32
@@ -353,7 +353,7 @@ drawRectSize = 4.0
 autostart = true
 
 [node name="ThermalMap" type="Node2D" parent="."]
-position = Vector2( 1040, 400 )
+position = Vector2( 540, 270 )
 script = ExtResource( 14 )
 reactorCorePath = NodePath("../ReactorCore")
 [connection signal="timeout" from="CoolantLoopSimulationTimer" to="." method="_on_CoolantLoopSimulationTimer_timeout"]

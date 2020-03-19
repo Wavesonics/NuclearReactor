@@ -258,7 +258,9 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 		Vector2 scaledVelocity = neutron.velocity * delta;
 		neutron.position += scaledVelocity;
 
-		if(reactorCore != nullptr && !reactorCore->contains(neutron.position))
+		const Vector2 &globalPos = to_global(neutron.position);
+		//const Vector2 &reactorLocalPos = reactorCore->to_local(globalPos);
+		if(!reactorCore->contains(globalPos))
 		{
 			result.escapedNeutrons++;
 			removal->push_back(ii);
@@ -267,7 +269,8 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 		{
 			for(auto region : regions)
 			{
-				if(region->contains(neutron.position))
+				//const Vector2 &localPos = region->to_local(globalPos);
+				if(region->contains(globalPos))
 				{
 					if(region->handleNeutron(neutron))
 					{

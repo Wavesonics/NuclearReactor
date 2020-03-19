@@ -27,7 +27,8 @@ NeutronRegion::~NeutronRegion() = default;
 
 bool NeutronRegion::contains(const Vector2 &point) const
 {
-	return globalArea.has_point(point);
+	const auto localPoint = to_local(point);
+	return area.has_point(localPoint);
 }
 
 void NeutronRegion::_init()

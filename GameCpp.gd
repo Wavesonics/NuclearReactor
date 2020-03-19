@@ -15,7 +15,7 @@ func _ready():
 
 	#set_process_input(true)
 	pass
-	$MaxPopulationLabel.text = "Max neutron population: %d" % $Simulation/Viewport/Simulation/NeutronField.get_max_population()
+	$MaxPopulationLabel.text = "Max neutron population: %d" % $Simulation/ReactorCore/NeutronField.get_max_population()
 """
 	for ii in range(0,100000):
 		var velocity = random_direction() * 10.0
@@ -41,11 +41,11 @@ func _input(event):
 func _process(delta):
 	$FpsLabel.text = "%d fps" % Engine.get_frames_per_second()
 	
-	var flux := $Simulation/Viewport/Simulation/NeutronField.get_neutron_flux() as int
+	var flux := $Simulation/ReactorCore/NeutronField.get_neutron_flux() as int
 	$NeutronFlux/Readout.text = "Nuetron Flux: %d" % flux
 	$NeutronFlux/Graph.write_data((flux * 2) + 1) # +1 so it's visible when zero
 	
-	var neutrons: int = $Simulation/Viewport/Simulation/NeutronField.num_neutrons()
+	var neutrons: int = $Simulation/ReactorCore/NeutronField.num_neutrons()
 	var scaleTrip := 500
 	var scale := 1
 	if neutrons > scaleTrip:

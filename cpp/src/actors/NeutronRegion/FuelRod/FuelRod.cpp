@@ -93,8 +93,9 @@ bool FuelRod::handleNeutron(Neutron &neutron)
 	if(fission)
 	{
 		//Godot::print("FISSION!");
-		neutronField->addFissionBiproduct(neutron.position);
-		neutronField->addHeat(neutron.position, 1.0f);
+		auto globalPos = neutronField->to_global(neutron.position);
+		neutronField->addFissionBiproduct(globalPos);
+		neutronField->addHeat(globalPos, 1.0f);
 
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);
@@ -114,8 +115,10 @@ void FuelRod::spawnSpontaneousNeutron()
 {
 	auto position = rand_vec2(area.position.x, area.size.width, area.position.y, area.size.height);
 	auto globalPos = to_global(position);
+	auto nfLocalPos = neutronField->to_local(globalPos);
+
 	auto velocity = rand_vec2(-1.0f, 1.0f) * Neutron::SPEED_RELATIVISTIC;
-	auto newNeutron = Neutron(globalPos, velocity);
+	auto newNeutron = Neutron(nfLocalPos, velocity);
 	neutronField->addNeutron(newNeutron);
 }
 

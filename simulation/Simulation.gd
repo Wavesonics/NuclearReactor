@@ -6,14 +6,25 @@ const TASK_TAG := "fluid_worker"
 
 
 func _ready():
+	set_process_input(true)
+	
 	if OS.has_feature("vr"):
-		$NeutronField.enableRendering = false
+		$ReactorCore/NeutronField.enableRendering = false
 		$BiproductMap.enableRendering = false
 		$ThermalMap.enableRendering = false
 		
 		var thermocouples := get_tree().get_nodes_in_group("thermocouples")
 		for thermocouple in thermocouples:
 			thermocouple.enableRendering = false
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			
+			var pos := event.global_position as Vector2
+			print("Add heat to " + String(pos))
+			$ReactorCore/NeutronField.add_heat(pos, 1000.0)
 
 
 func _on_CoolantLoopSimulationTimer_timeout():

@@ -1,6 +1,7 @@
 extends Node
 
 var neutronField = null
+var reactorCore = null
 
 var scram: bool = false
 var controlRods := []

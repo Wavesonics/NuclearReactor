@@ -31,6 +31,16 @@ bool HeatMap::rangeCheck(const int x, const int y) const
 	return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
 }
 
+Point2 HeatMap::toGrid(const godot::Vector2 &globalPos) const
+{
+	const Vector2 pos = reactorCore->to_local(globalPos);
+
+	const int gridX = (int)floor(pos.x / cellWidth);
+	const int gridY = (int)floor(pos.y / cellHeight);
+
+	return Point2(gridX, gridY);
+}
+
 void HeatMap::addHeat(float heat, const int x, const int y)
 {
 	if(rangeCheck(x, y))
@@ -54,7 +64,6 @@ float HeatMap::readMagnitude(const int x, const int y) const
 		return -1.0f;
 	}
 }
-
 
 void HeatMap::_init()
 {
@@ -92,13 +101,13 @@ void HeatMap::_draw()
 
 	for(int yy = 0; yy < mapSize; ++yy)
 	{
-		drawRect.position.y = yy * drawRectSize;
+		drawRect.position.y = (yy * drawRectSize);
 
 		for(int xx = 0; xx < mapSize; ++xx)
 		{
 			//const float heat = map[yy][xx] / maxValue;
 
-			drawRect.position.x = xx * drawRectSize;
+			drawRect.position.x = (xx * drawRectSize);
 			//color.r = heat;
 
 			draw_rect(drawRect, calculateTempColor(map[yy][xx], minValue, maxValue));
@@ -120,16 +129,6 @@ godot::Color HeatMap::calculateTempColor(const float value, const float minimum,
 		const float g = 1.0f - b - r;
 		return Color(r, g, b);
 	}
-}
-
-Point2 HeatMap::toGrid(const godot::Vector2 &globalPos) const
-{
-	const Vector2 pos = reactorCore->to_local(globalPos) + reactorCore->area.position;
-
-	const int gridX = (int)floor(pos.x / cellWidth);
-	const int gridY = (int)floor(pos.y / cellHeight);
-
-	return Point2(gridX, gridY);
 }
 
 void HeatMap::_register_methods()
