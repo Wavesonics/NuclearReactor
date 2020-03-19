@@ -15,7 +15,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1 and event.is_pressed():
 			for pipe in pipes:
-				if pipe.contains_point(event.global_position):
+				if pipe.has_method("contains_point") and pipe.contains_point(event.global_position):
 					var p = pipe.get_pressure(event.global_position)
 					pipe.set_pressure_by_position(event.global_position, pipe.maxPressure)
 

@@ -15,6 +15,10 @@ func _ready():
 		$NeutronField.enableRendering = false
 		$BiproductMap.enableRendering = false
 		$ThermalMap.enableRendering = false
+		
+		var thermocouples := get_tree().get_nodes_in_group("thermocouples")
+		for thermocouple in thermocouples:
+			thermocouple.enableRendering = false
 
 	#set_process_input(true)
 

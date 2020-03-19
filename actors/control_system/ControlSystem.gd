@@ -46,3 +46,7 @@ func add_thermocouple(thermocouple):
 
 func set_neutron_field(field):
 	neutronField = field
+
+
+func get_neutron_field():
+	return neutronField

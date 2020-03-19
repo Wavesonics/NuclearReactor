@@ -17,7 +17,6 @@ namespace nuclearPhysics
 	{
 		GODOT_CLASS(FuelRod, nuclearPhysics::NeutronRegion)
 	private:
-		godot::NodePath neutronFieldPath;
 		NeutronField* neutronField = nullptr;
 
 		godot::NodePath thermalMapPath;

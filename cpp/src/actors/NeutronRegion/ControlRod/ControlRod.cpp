@@ -44,9 +44,9 @@ void ControlRod::_ready()
 {
     NeutronRegion::_ready();
 
-    add_to_group(GROUP);
-
 	EDITOR_GUARD_RETURN_HERE
+
+	add_to_group(GROUP);
 
     fullOutPositionDelta = area.size.height;
     fullInPosition = get_position().y;

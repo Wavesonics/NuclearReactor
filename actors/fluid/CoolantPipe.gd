@@ -41,24 +41,13 @@ func _ready():
 		previousPipe = get_node(previousPipePath)
 
 
-func pressure_to_color(value: float, minimum: float, maximum: float) -> Color:
-	if value < minimum:
-		return Color.black;
-	else:
-		var halfmax := (maximum - minimum) / 2.0
-		var b = max(0.0, (1.0 - (value - minimum) / halfmax))
-		var r = max(0.0, ((value - minimum) / halfmax - 1))
-		var g = 1.0 - b - r
-		return Color(r, g, b);
-
-
 func _draw():
 	if not enableRendering:
 		return
 	
 	for ii in range(numSegments):
 		var segmentPressure = segments[ii]
-		var c = pressure_to_color(segmentPressure, minPressure, maxPressure)
+		var c = Util.value_to_heatmap(segmentPressure, minPressure, maxPressure)
 		var y := (ii * segmentHeight) + (ii*2.0)
 		draw_rect(Rect2(0.0, y, segmentWidth, segmentHeight), c)
 		draw_string(debugFont, Vector2(-20.0, y + (segmentHeight/2.0)), "[%d]" % ii)

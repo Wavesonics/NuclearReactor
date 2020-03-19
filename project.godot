@@ -178,6 +178,11 @@ _global_script_classes=[ {
 "class": "TrenchBroomTag",
 "language": "GDScript",
 "path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_tag.gd"
+}, {
+"base": "Object",
+"class": "Util",
+"language": "GDScript",
+"path": "res://Util.gd"
 } ]
 _global_script_class_icons={
 "ControlRod": "",
@@ -213,7 +218,8 @@ _global_script_class_icons={
 "TrenchBroomFaceAttrib": "",
 "TrenchBroomGameConfigFile": "",
 "TrenchBroomGameConfigFolder": "",
-"TrenchBroomTag": ""
+"TrenchBroomTag": "",
+"Util": ""
 }
 
 [application]
@@ -279,12 +285,8 @@ scram={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation.mobile=2
 threads/thread_model=2
 vram_compression/import_etc=true
-quality/shadows/filter_mode.mobile=1
-quality/shading/force_vertex_shading.mobile=false
-quality/shading/force_lambert_over_burley.mobile=false
-quality/shading/force_blinn_over_ggx.mobile=false
-quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
