@@ -8,7 +8,7 @@ var segmentWidth := 16.0
 var segmentHeight := 32.0
 var boundingBox: Rect2
 
-var maxPressure := 100.0
+var maxPressure := 1000.0
 var minPressure := 0.0
 
 var initialPressure := maxPressure / 10.0
@@ -85,7 +85,7 @@ func _physics_process(delta):
 	if Engine.editor_hint:
 		return
 	
-	var heatTransferAmmount := 1.0
+	var heatTransferAmmount := 2.0
 	
 	if thermalMap != null:
 		for ii in range(numSegments):
@@ -96,11 +96,18 @@ func _physics_process(delta):
 			var gridX := gridPos.x as int
 			var gridY := gridPos.y as int
 			
-			if thermalMap.range_check(gridX, gridY):
-				var heat := thermalMap.read_magnitude(gridX, gridY) as float
-				if heat > 0.0:
-					thermalMap.add_heat(-heatTransferAmmount, gridX, gridY)
-					add_pressure(ii, heatTransferAmmount)
+			absorbe_heat(ii, gridX, gridY, heatTransferAmmount)
+			# Also absorbe heat from the immedately neighbor
+			absorbe_heat(ii, gridX-1, gridY, heatTransferAmmount)
+			absorbe_heat(ii, gridX+1, gridY, heatTransferAmmount)
+
+
+func absorbe_heat(index: int, gridX: int, gridY: int, heatTransferAmmount: float):
+	if thermalMap.range_check(gridX, gridY):
+		var heat := thermalMap.read_magnitude(gridX, gridY) as float
+		if heat > 0.0:
+			thermalMap.add_heat(-heatTransferAmmount, gridX, gridY)
+			add_pressure(index, heatTransferAmmount)
 
 
 func _draw():
