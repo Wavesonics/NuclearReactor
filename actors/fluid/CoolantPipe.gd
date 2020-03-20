@@ -180,6 +180,10 @@ func to_segment(globalPos: Vector2) -> int:
 		return -1
 
 
+func read_initial_pressure() -> float:
+	return segments[0]
+
+
 func get_pressure(globalPos: Vector2) -> float:
 	var segmentIndex := to_segment(globalPos)
 	if segmentIndex > -1:

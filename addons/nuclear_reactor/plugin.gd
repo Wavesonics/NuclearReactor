@@ -13,6 +13,7 @@ func _enter_tree():
 	add_custom_type("PipeSplit", "Node2D", preload("res://actors/fluid/PipeSplit.gd"), preload("res://addons/nuclear_reactor/node.png"))
 	add_custom_type("PipeCombiner", "Node2D", preload("res://actors/fluid/PipeCombiner.gd"), preload("res://addons/nuclear_reactor/node.png"))
 	add_custom_type("HeatSink", "Node2D", preload("res://actors/fluid/HeatSink.gd"), preload("res://addons/nuclear_reactor/node.png"))
+	add_custom_type("PressureSensor", "Node2D", preload("res://actors/fluid/PressureSensor.gd"), preload("res://addons/nuclear_reactor/node.png"))
 	
 	add_custom_type("Heatmap", "Node2D", preload("res://actors/HeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 	add_custom_type("DiffusingHeatMap", "Node2D", preload("res://actors/DiffusingHeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
@@ -31,6 +32,7 @@ func _exit_tree():
 	remove_custom_type("PipeSplit")
 	remove_custom_type("PipeCombiner")
 	remove_custom_type("HeatSink")
+	remove_custom_type("PressureSensor")
 	
 	remove_custom_type("Heatmap")
 	remove_custom_type("DiffusingHeatMap")

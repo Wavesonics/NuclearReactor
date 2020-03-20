@@ -58,6 +58,10 @@ func consume_output(consumer) -> float:
 	return outputPressure / nextPipes.size()
 
 
+func read_initial_pressure() -> float:
+	return outputPressure
+
+
 func _draw():
 	if not enableRendering:
 		return

@@ -42,6 +42,10 @@ func fluid_tick():
 		outputPressure += pipe.consume_output(self)
 
 
+func read_initial_pressure() -> float:
+	return outputPressure
+
+
 func consume_output(consumer) -> float:
 	return outputPressure
 

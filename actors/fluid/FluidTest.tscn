@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/fluid/CoolantPipe.gd" type="Script" id=1]
 [ext_resource path="res://actors/fluid/FluidTest.gd" type="Script" id=2]
 [ext_resource path="res://actors/fluid/PipeSplit.gd" type="Script" id=3]
 [ext_resource path="res://actors/fluid/PipeCombiner.gd" type="Script" id=4]
 [ext_resource path="res://actors/fluid/HeatSink.gd" type="Script" id=5]
+[ext_resource path="res://actors/fluid/PressureSensor.gd" type="Script" id=6]
+[ext_resource path="res://vr/DefaultFont.tres" type="DynamicFont" id=7]
 
 [node name="TestRoot" type="Node2D"]
 script = ExtResource( 2 )
@@ -81,4 +83,11 @@ rotation = 1.57081
 script = ExtResource( 1 )
 numSegments = 5
 previousPipePath = NodePath("../Heatsink")
+
+[node name="Sensor0" type="Node2D" parent="."]
+position = Vector2( 487.412, 98.2191 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Pipe3")
+font = ExtResource( 7 )
+updateThreshold = 0.1
 [connection signal="timeout" from="FluidSimTimer" to="." method="_on_FluidSimTimer_timeout"]
