@@ -132,13 +132,6 @@ void debugTree(const BspRegion1dNode *node)
 
 void NeutronField::initBspTree()
 {
-	/*
-	float y = reactorCore->globalArea.position.y;
-	float height = reactorCore->globalArea.size.height;
-
-	float regionStart = reactorCore->globalArea.position.x;
-	float regionWidth = reactorCore->globalArea.size.width;
-	*/
 	const auto &globalPos = reactorCore->to_global(reactorCore->area.get_position());
 	const auto &localPos = to_local(globalPos);
 	float y = localPos.y;
@@ -146,8 +139,6 @@ void NeutronField::initBspTree()
 
 	float regionStart = localPos.x;
 	float regionWidth = reactorCore->area.size.width;
-
-	//Godot::print("Init BSP tree: regionStart: {0} regionWidth: {1}", regionStart, regionWidth);
 
 	// Root
 	bspTreeRoot = createBspBranch(y, height, regionStart, regionWidth, 0, 3);
@@ -168,10 +159,7 @@ BspRegion1dNode *
 NeutronField::createBspBranch(float y, float height, float start, float parentWidth, int depth, int maxDepth)
 {
 	const float halfWidth = (parentWidth / 2.0f);
-
 	auto *node = new BspRegion1dNode(start + halfWidth, Rect2(start, y, parentWidth, height));
-
-	//Godot::print("Creating node depth: {0} | start: {3} | X: {1} | halfWidth: {2}", depth, node->divider, halfWidth, start);
 
 	if(depth < maxDepth)
 	{
@@ -194,13 +182,6 @@ void NeutronField::addToNode(NeutronRegion *region, BspRegion1dNode *node)
 		// If we intersect in anyway, add our region to this leaf
 		if(node->area.intersects(localArea))
 		{
-/*
-			Godot::print("Adding region: | {0}, {1}  | to node: {2}, {3}",
-						 globalArea.position.x,
-						 globalArea.position.y,
-						 node->area.position.x,
-						 node->area.position.y);
-*/
 			node->includedRegions.push_back(region);
 		}
 	}
@@ -540,10 +521,8 @@ void NeutronField::_register_methods()
 										   NeutronField::DEFAULT_BIPRODUCT_DECAY_RATE);
 	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
-	//register_property<NeutronField, int>("maxPopulation", &NeutronField::maxPopulation, 100000);
 
 	register_method("get_max_population", &NeutronField::getMaxPopulation);
-	//register_method("set_capacity", &NeutronField::setCapacity);
 	register_method("num_neutrons", &NeutronField::numNeutrons);
 	register_method("create_neutron", &NeutronField::createNeutron);
 	register_method("add_neutron_region", &NeutronField::addNeutronRegion);
