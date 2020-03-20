@@ -26,18 +26,19 @@ ControlRod::ControlRod() : NeutronRegion()
 
 void ControlRod::_init()
 {
-    NeutronRegion::_init();
+	NeutronRegion::_init();
 
-    drawColor = DEFAULT_COLOR;
-    area = DEFAULT_BOUNDS;
+	drawColor = DEFAULT_COLOR;
+	area = DEFAULT_BOUNDS;
 
-    fullOutPositionDelta = 0.0f;
-    fullInPosition = 0.0f;
-    currentPositionDelta = 0.0f;
-    initialPercentOut = 0.0f;
+	fullOutPositionDelta = 0.0f;
+	fullInPosition = 0.0f;
+	currentPositionDelta = 0.0f;
+	initialPercentOut = 0.0f;
 
-    speed = SPEED;
-    scramSpeed = SPEED_SCRAM;
+	upsideDown = false;
+	speed = SPEED;
+	scramSpeed = SPEED_SCRAM;
 }
 
 void ControlRod::_enter_tree()
@@ -47,32 +48,32 @@ void ControlRod::_enter_tree()
 
 void ControlRod::_ready()
 {
-    NeutronRegion::_ready();
+	NeutronRegion::_ready();
 
 	EDITOR_GUARD_RETURN_HERE
 
 	add_to_group(GROUP);
 
-    fullOutPositionDelta = area.size.height;
-    fullInPosition = get_position().y;
-    currentPositionDelta = (-fabs(fullOutPositionDelta * initialPercentOut));
-    updatePosition();
+	fullOutPositionDelta = area.size.height;
+	fullInPosition = get_position().y;
+	currentPositionDelta = (-fabs(fullOutPositionDelta * initialPercentOut));
+	updatePosition();
 
-    // Each control rod adds it's self to the global ControlSystem
-    Node* obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
-    if (obj != nullptr)
-    {
-        obj->call("add_control_rod", Variant(this));
-    }
-    else
-    {
-        Godot::print("Failed to get ControlSystem");
-    }
+	// Each control rod adds it's self to the global ControlSystem
+	Node *obj = get_tree()->get_root()->find_node("ControlSystem", true, false);
+	if(obj != nullptr)
+	{
+		obj->call("add_control_rod", Variant(this));
+	}
+	else
+	{
+		Godot::print("Failed to get ControlSystem");
+	}
 }
 
 void ControlRod::_draw()
 {
-    NeutronRegion::_draw();
+	NeutronRegion::_draw();
 }
 
 bool ControlRod::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
@@ -82,61 +83,69 @@ bool ControlRod::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 
 float ControlRod::percentOut() const
 {
-    const float totalDistance = fabs(fullOutPositionDelta);
-    const float curPos = fabs(currentPositionDelta);
+	const float totalDistance = fabs(fullOutPositionDelta);
+	const float curPos = fabs(currentPositionDelta);
 
-    if (curPos > 0.0f)
-    {
-        return curPos / totalDistance;
-    }
-    else
-    {
-        return 0.0f;
-    }
+	if(curPos > 0.0f)
+	{
+		return curPos / totalDistance;
+	}
+	else
+	{
+		return 0.0f;
+	}
 }
 
 void ControlRod::moveOut(float delta, float speed = SPEED)
 {
-    currentPositionDelta -= speed * delta;
-    updatePosition();
+	currentPositionDelta -= speed * delta;
+	updatePosition();
 }
 
 void ControlRod::moveIn(float delta, float speed = SPEED)
 {
-    currentPositionDelta += speed * delta;
-    updatePosition();
+	currentPositionDelta += speed * delta;
+	updatePosition();
 }
 
 void ControlRod::updatePosition()
 {
 	EDITOR_GUARD_RETURN_HERE
 
-    currentPositionDelta = clamp(currentPositionDelta, -fullOutPositionDelta, 0.0f);
-    
-    Vector2 pos = get_position();
-    pos.y = fullInPosition + currentPositionDelta;
-    set_position(pos);
+	currentPositionDelta = clamp(currentPositionDelta, -fullOutPositionDelta, 0.0f);
 
-    // Now update our cached rect used for checking
-    Vector2 globalAreaPos = get_position() + area.position;
-    globalArea = Rect2(globalAreaPos, area.size);
+	Vector2 pos = get_position();
+	if(upsideDown)
+	{
+		pos.y = fullInPosition - currentPositionDelta;
+	}
+	else
+	{
+		pos.y = fullInPosition + currentPositionDelta;
+	}
+	set_position(pos);
+
+	// Now update our cached rect used for checking
+	Vector2 globalAreaPos = get_position() + area.position;
+	globalArea = Rect2(globalAreaPos, area.size);
 }
 
 ControlRod::~ControlRod() = default;
 
 void ControlRod::_register_methods()
 {
-    register_property<ControlRod, godot::Color>("drawColor", &ControlRod::drawColor, DEFAULT_COLOR);
-    register_property<ControlRod, float>("initialPercentOut", &ControlRod::initialPercentOut, DEFAULT_CUR_POS);
-    register_property<ControlRod, float>("speed", &ControlRod::speed, SPEED);
-    register_property<ControlRod, float>("scramSpeed", &ControlRod::scramSpeed, SPEED_SCRAM);
-    
-    register_method("percent_out", &ControlRod::percentOut);
-    register_method("move_out", &ControlRod::moveOut);
-    register_method("move_in", &ControlRod::moveIn);
-    
-    register_method("_init", &ControlRod::_init);
+	register_property<ControlRod, godot::Color>("drawColor", &ControlRod::drawColor, DEFAULT_COLOR);
+	register_property<ControlRod, float>("initialPercentOut", &ControlRod::initialPercentOut, DEFAULT_CUR_POS);
+	register_property<ControlRod, float>("speed", &ControlRod::speed, SPEED);
+	register_property<ControlRod, float>("scramSpeed", &ControlRod::scramSpeed, SPEED_SCRAM);
+	register_property<ControlRod, bool>("upsideDown", &ControlRod::upsideDown, false);
+
+	register_method("percent_out", &ControlRod::percentOut);
+	register_method("move_out", &ControlRod::moveOut);
+	register_method("move_in", &ControlRod::moveIn);
+
+	register_method("_init", &ControlRod::_init);
 	register_method("_enter_tree", &ControlRod::_enter_tree);
-    register_method("_ready", &ControlRod::_ready);
-    register_method("_draw", &ControlRod::_draw);
+	register_method("_ready", &ControlRod::_ready);
+	register_method("_draw", &ControlRod::_draw);
 }

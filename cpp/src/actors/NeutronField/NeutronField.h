@@ -56,6 +56,7 @@ namespace nuclearPhysics
 
 		std::vector<nuclearPhysics::NeutronRegion *> regions;
 		nuclearPhysics::BspTree bspTree;
+		int bspTreeDepth;
 
 		void initBspTree();
 
@@ -102,6 +103,7 @@ namespace nuclearPhysics
 
 		static void _register_methods();
 
+		static constexpr int DEFAULT_BSP_TREE_DEPTH = 3;
 		static constexpr int DEFAULT_MAX_RENDER = 1500;
 		static constexpr float DEFAULT_BIPRODUCT = 0.01f;
 		static constexpr float DEFAULT_BIPRODUCT_FISSION_RATE = 0.01f;

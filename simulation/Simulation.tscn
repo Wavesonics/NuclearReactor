@@ -37,7 +37,7 @@ script = ExtResource( 5 )
 [node name="FuelRod0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 80, 40 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="ControlRod0" type="Node2D" parent="ReactorCore"]
 position = Vector2( 110, 40 )
@@ -54,7 +54,7 @@ script = ExtResource( 10 )
 [node name="FuelRod1" type="Node2D" parent="ReactorCore"]
 position = Vector2( 200, 40 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="Moderator2" type="Node2D" parent="ReactorCore"]
 position = Vector2( 230, 40 )
@@ -63,7 +63,7 @@ script = ExtResource( 5 )
 [node name="FuelRod3" type="Node2D" parent="ReactorCore"]
 position = Vector2( 278.894, 40 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="ControlRod3" type="Node2D" parent="ReactorCore"]
 position = Vector2( 308.894, 40 )
@@ -80,7 +80,7 @@ script = ExtResource( 10 )
 [node name="FuelRod2" type="Node2D" parent="ReactorCore"]
 position = Vector2( 398.894, 40 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="Moderator3" type="Node2D" parent="ReactorCore"]
 position = Vector2( 428.894, 40 )
@@ -143,11 +143,12 @@ script = ExtResource( 5 )
 [node name="FuelRod4" type="Node2D" parent="ReactorCore"]
 position = Vector2( 80, 270 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="ControlRod4" type="Node2D" parent="ReactorCore"]
 position = Vector2( 110, 270 )
 script = ExtResource( 10 )
+upsideDown = true
 
 [node name="Moderator6" type="Node2D" parent="ReactorCore"]
 position = Vector2( 130, 270 )
@@ -156,11 +157,12 @@ script = ExtResource( 5 )
 [node name="ControlRod5" type="Node2D" parent="ReactorCore"]
 position = Vector2( 170, 270 )
 script = ExtResource( 10 )
+upsideDown = true
 
 [node name="FuelRod5" type="Node2D" parent="ReactorCore"]
 position = Vector2( 200, 270 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="Moderator7" type="Node2D" parent="ReactorCore"]
 position = Vector2( 230, 270 )
@@ -169,11 +171,12 @@ script = ExtResource( 5 )
 [node name="FuelRod6" type="Node2D" parent="ReactorCore"]
 position = Vector2( 278.894, 270 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="ControlRod6" type="Node2D" parent="ReactorCore"]
 position = Vector2( 308.894, 270 )
 script = ExtResource( 10 )
+upsideDown = true
 
 [node name="Moderator8" type="Node2D" parent="ReactorCore"]
 position = Vector2( 328.894, 270 )
@@ -182,11 +185,12 @@ script = ExtResource( 5 )
 [node name="ControlRod7" type="Node2D" parent="ReactorCore"]
 position = Vector2( 368.894, 270 )
 script = ExtResource( 10 )
+upsideDown = true
 
 [node name="FuelRod7" type="Node2D" parent="ReactorCore"]
 position = Vector2( 398.894, 270 )
 script = ExtResource( 7 )
-thermalMapPath = NodePath("../../../ThermalMap")
+thermalMapPath = NodePath("../../ThermalMap")
 
 [node name="Moderator9" type="Node2D" parent="ReactorCore"]
 position = Vector2( 428.894, 270 )

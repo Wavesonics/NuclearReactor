@@ -14,13 +14,11 @@ namespace nuclearPhysics
 	{
 	private:
 		nuclearPhysics::BspTreeNode *root = nullptr;
-		int maxDepth;
-
 	public:
-		BspTree(int maxDepth);
+		BspTree();
 		~BspTree();
 
-		void initBspTree(const godot::Rect2 &area, const std::vector<nuclearPhysics::NeutronRegion *> &regions,
+		void initBspTree(const int maxDepth, const godot::Rect2 &area, const std::vector<nuclearPhysics::NeutronRegion *> &regions,
 						 const nuclearPhysics::NeutronRegion *exclude);
 
 		BspTreeNode *createBspBranch(float y, float height, float start, float width, int depth, int maxDepth);

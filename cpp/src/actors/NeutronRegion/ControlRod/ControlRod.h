@@ -22,6 +22,7 @@ namespace nuclearPhysics
 
 		float speed = SPEED;
 		float scramSpeed = SPEED_SCRAM;
+		bool upsideDown;
 	public:
 		ControlRod();
 		~ControlRod() override;

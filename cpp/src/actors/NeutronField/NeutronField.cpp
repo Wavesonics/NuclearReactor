@@ -38,7 +38,7 @@ Iterator reorderingErase(Container &c, Iterator it)
 	}
 }
 
-NeutronField::NeutronField() : Node2D(), bspTree(BspTree(3))
+NeutronField::NeutronField() : Node2D(), bspTree(BspTree())
 {
 
 }
@@ -55,6 +55,7 @@ void NeutronField::_init()
 	maxRender = DEFAULT_MAX_RENDER;
 	biproduct = DEFAULT_BIPRODUCT;
 	biproductDecayRate = DEFAULT_BIPRODUCT_DECAY_RATE;
+	bspTreeDepth = DEFAULT_BSP_TREE_DEPTH;
 
 	EDITOR_GUARD_RETURN_HERE
 
@@ -115,7 +116,7 @@ void NeutronField::setCapacity(int capacity)
 
 void NeutronField::initBspTree()
 {
-	bspTree.initBspTree(reactorCore->globalArea, regions, reactorCore);
+	bspTree.initBspTree(bspTreeDepth, reactorCore->globalArea, regions, reactorCore);
 }
 
 void NeutronField::addNeutronRegion(NeutronRegion *region)
@@ -412,6 +413,7 @@ void NeutronField::_register_methods()
 										   NeutronField::DEFAULT_BIPRODUCT_DECAY_RATE);
 	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
+	register_property<NeutronField, int>("bspTreeDepth", &NeutronField::bspTreeDepth, NeutronField::DEFAULT_BSP_TREE_DEPTH);
 
 	register_method("get_max_population", &NeutronField::getMaxPopulation);
 	register_method("num_neutrons", &NeutronField::numNeutrons);

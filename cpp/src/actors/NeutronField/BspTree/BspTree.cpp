@@ -14,10 +14,12 @@ void debugTree(const BspTreeNode *node)
 	if(node->isLeaf())
 	{
 		Godot::print("Leaf, x: {0} children: {1}", node->area.get_position().x, node->includedRegions.size());
+		/*
 		for(auto region : node->includedRegions)
 		{
 			Godot::print("Region: {0}", region);
 		}
+		*/
 	}
 	else
 	{
@@ -26,7 +28,17 @@ void debugTree(const BspTreeNode *node)
 	}
 }
 
-void BspTree::initBspTree(const Rect2 &area, const vector<NeutronRegion *> &regions, const NeutronRegion *exclude)
+BspTree::BspTree()
+{
+
+}
+
+BspTree::~BspTree()
+{
+	delete root;
+}
+
+void BspTree::initBspTree(const int maxDepth, const Rect2 &area, const vector<NeutronRegion *> &regions, const NeutronRegion *exclude)
 {
 	const auto &pos = area.get_position();
 	float y = pos.y;
@@ -117,14 +129,4 @@ const BspTreeNode *BspTree::findRegions(const float x, const BspTreeNode *node) 
 			return findRegions(x, node->rightRegion);
 		}
 	}
-}
-
-BspTree::BspTree(int depth) : maxDepth(depth)
-{
-
-}
-
-BspTree::~BspTree()
-{
-	delete root;
 }
