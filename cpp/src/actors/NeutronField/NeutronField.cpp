@@ -38,7 +38,7 @@ Iterator reorderingErase(Container &c, Iterator it)
 	}
 }
 
-NeutronField::NeutronField() : Node2D()
+NeutronField::NeutronField() : Node2D(), bspTree(BspTree(3))
 {
 
 }
@@ -113,115 +113,9 @@ void NeutronField::setCapacity(int capacity)
 	}
 }
 
-void debugTree(const BspRegion1dNode *node)
-{
-	if(node->isLeaf())
-	{
-		Godot::print("Leaf, x: {0} children: {1}", node->area.get_position().x, node->includedRegions.size());
-		for(auto region : node->includedRegions)
-		{
-			Godot::print("Region: {0}", region);
-		}
-	}
-	else
-	{
-		debugTree(node->leftRegion);
-		debugTree(node->rightRegion);
-	}
-}
-
 void NeutronField::initBspTree()
 {
-	const auto &pos = reactorCore->area.get_position();
-	float y = pos.y;
-	float height = reactorCore->area.size.height;
-
-	float regionStart = pos.x;
-	float regionWidth = reactorCore->area.size.width;
-
-	// Root
-	bspTreeRoot = createBspBranch(y, height, regionStart, regionWidth, 0, 3);
-
-	// Parse all regions into the leaf's they belong to
-	for(auto &region : regions)
-	{
-		if(region != reactorCore)
-		{
-			addToNode(region, bspTreeRoot);
-		}
-	}
-
-	debugTree(bspTreeRoot);
-}
-
-BspRegion1dNode *
-NeutronField::createBspBranch(float y, float height, float start, float parentWidth, int depth, int maxDepth)
-{
-	const float halfWidth = (parentWidth / 2.0f);
-	auto *node = new BspRegion1dNode(start + halfWidth, Rect2(start, y, parentWidth, height));
-
-	if(depth < maxDepth)
-	{
-		node->leftRegion = createBspBranch(y, height, start, halfWidth, depth + 1, maxDepth);
-		node->rightRegion = createBspBranch(y, height, start + halfWidth, halfWidth, depth + 1, maxDepth);
-	}
-
-	return node;
-}
-
-void NeutronField::addToNode(NeutronRegion *region, BspRegion1dNode *node)
-{
-	// If this is a leaf, test to see if we belong here
-	if(node->isLeaf())
-	{
-		Vector2 pos = region->area.position + region->get_position();
-		Rect2 area = Rect2(pos, region->area.size);
-
-		// If we intersect in anyway, add our region to this leaf
-		if(node->area.intersects(area))
-		{
-			node->includedRegions.push_back(region);
-		}
-	}
-		// If this node is not a leaf, just pass the region on down
-		// until we get to a leaf
-	else
-	{
-		if(node->leftRegion != nullptr)
-		{
-			addToNode(region, node->leftRegion);
-		}
-
-		if(node->rightRegion != nullptr)
-		{
-			addToNode(region, node->rightRegion);
-		}
-	}
-}
-
-const BspRegion1dNode *NeutronField::getRegionsToCheck(const Neutron &neutron) const
-{
-	const float x = neutron.position.x;
-	return findRegions(x, bspTreeRoot);
-}
-
-const BspRegion1dNode *NeutronField::findRegions(const float x, const BspRegion1dNode *node) const
-{
-	if(node->isLeaf())
-	{
-		return node;
-	}
-	else
-	{
-		if(node->isInLeft(x))
-		{
-			return findRegions(x, node->leftRegion);
-		}
-		else
-		{
-			return findRegions(x, node->rightRegion);
-		}
-	}
+	bspTree.initBspTree(reactorCore->globalArea, regions, reactorCore);
 }
 
 void NeutronField::addNeutronRegion(NeutronRegion *region)
@@ -369,12 +263,11 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 		}
 		else
 		{
-			const BspRegion1dNode *node = getRegionsToCheck(neutron);
-
+			const BspTreeNode *node = bspTree.getRegionsToCheck(neutron);
 			if(!node->includedRegions.empty())
 			{
 				//for(auto &region : regions)
-				for(auto &region : node->includedRegions)
+				for(NeutronRegion *region : node->includedRegions)
 				{
 					if(region->contains(pos))
 					{
@@ -447,7 +340,7 @@ bool NeutronField::processFissionBiproductBatch(float *row, int yy)
 	return true;
 }
 
-void NeutronField::debugTreeDraw(const BspRegion1dNode *node, int level)
+void NeutronField::debugTreeDraw(const BspTreeNode *node, int level)
 {
 	if(node->isLeaf())
 	{
@@ -464,7 +357,7 @@ void NeutronField::debugTreeDraw(const BspRegion1dNode *node, int level)
 void NeutronField::_draw()
 {
 	//srand(0);
-	//debugTreeDraw(bspTreeRoot, 0);
+	//debugTreeDraw(root, 0);
 
 	if(enableRendering && !neutrons.empty())
 	{
@@ -504,7 +397,7 @@ void NeutronField::_draw()
 
 NeutronField::~NeutronField()
 {
-	delete bspTreeRoot;
+
 }
 
 void NeutronField::_register_methods()
