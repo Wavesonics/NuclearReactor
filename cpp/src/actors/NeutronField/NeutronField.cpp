@@ -270,7 +270,7 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 			{
 				if(region->contains(globalPos))
 				{
-					if(region->handleNeutron(neutron))
+					if(region->handleNeutron(neutron, globalPos))
 					{
 						removal->push_back(ii);
 						break; // No need to continue, we've been removed

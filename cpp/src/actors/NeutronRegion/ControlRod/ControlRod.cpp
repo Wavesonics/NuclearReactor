@@ -75,7 +75,7 @@ void ControlRod::_draw()
     NeutronRegion::_draw();
 }
 
-bool ControlRod::handleNeutron(Neutron &neutron)
+bool ControlRod::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 {
 	return CROSS_SECTION > randPercent();
 }

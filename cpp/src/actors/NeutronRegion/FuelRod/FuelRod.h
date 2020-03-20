@@ -31,7 +31,7 @@ namespace nuclearPhysics
 		FuelRod();
 		~FuelRod() override;
 
-		bool handleNeutron(Neutron &neutron) override;
+		bool handleNeutron(nuclearPhysics::Neutron &neutron, const godot::Vector2 &globalPosition) override;
 
 		void _init() override;
 		void _enter_tree() override;

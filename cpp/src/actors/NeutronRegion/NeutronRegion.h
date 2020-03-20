@@ -30,7 +30,7 @@ namespace nuclearPhysics
 		 * @param neutron
 		 * @return true if the Neutron should be removed from the simulation
 		 */
-		virtual bool handleNeutron(nuclearPhysics::Neutron &neutron) = 0;
+		virtual bool handleNeutron(nuclearPhysics::Neutron &neutron, const godot::Vector2 &globalPosition) = 0;
 
 		// Convenience method for checking the area
 		bool contains(const godot::Point2 &globalPoint) const;

@@ -78,7 +78,7 @@ void FuelRod::_physics_process(float delta)
 	}
 }
 
-bool FuelRod::handleNeutron(Neutron &neutron)
+bool FuelRod::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 {
 	bool fission = false;
 	if(neutron.isThermalized())
@@ -93,9 +93,8 @@ bool FuelRod::handleNeutron(Neutron &neutron)
 	if(fission)
 	{
 		//Godot::print("FISSION!");
-		auto globalPos = neutronField->to_global(neutron.position);
-		neutronField->addFissionBiproduct(globalPos);
-		neutronField->addHeat(globalPos, 1.0f);
+		neutronField->addFissionBiproduct(globalPosition);
+		neutronField->addHeat(globalPosition, 1.0f);
 
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);

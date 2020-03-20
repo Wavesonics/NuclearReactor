@@ -26,7 +26,7 @@ namespace nuclearPhysics
 		ControlRod();
 		~ControlRod() override;
 
-		bool handleNeutron(Neutron &neutron) override;
+		bool handleNeutron(nuclearPhysics::Neutron &neutron, const godot::Vector2 &globalPosition) override;
 		float percentOut() const;
 		void moveOut(float delta, float speed);
 		void moveIn(float delta, float speed);

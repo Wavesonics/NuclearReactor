@@ -22,7 +22,7 @@ namespace nuclearPhysics
 		void _enter_tree() override;
 		void _ready() override;
 		void _draw() override;
-		bool handleNeutron(Neutron& neutron) override;
+		bool handleNeutron(nuclearPhysics::Neutron &neutron, const godot::Vector2 &globalPosition) override;
 
 		static void _register_methods();
 	};

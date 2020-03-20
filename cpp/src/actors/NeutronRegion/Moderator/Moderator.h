@@ -24,7 +24,7 @@ namespace nuclearPhysics
 		void _ready() override;
 		void _draw() override;
 
-		bool handleNeutron(nuclearPhysics::Neutron &neutron) override;
+		bool handleNeutron(nuclearPhysics::Neutron &neutron, const godot::Vector2 &globalPosition) override;
 
 		static void _register_methods();
 		static constexpr float CROSS_SECTION_RELATIVISTIC = 0.1f;

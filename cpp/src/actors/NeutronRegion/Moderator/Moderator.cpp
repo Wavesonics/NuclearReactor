@@ -50,7 +50,7 @@ void Moderator::_draw()
     NeutronRegion::_draw();
 }
 
-bool Moderator::handleNeutron(Neutron &neutron)
+bool Moderator::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 {
     if(!neutron.isThermalized())
     {

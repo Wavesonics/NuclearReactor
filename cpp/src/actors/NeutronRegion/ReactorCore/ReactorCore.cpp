@@ -19,7 +19,7 @@ ReactorCore::ReactorCore() : NeutronRegion()
 
 ReactorCore::~ReactorCore() = default;
 
-bool ReactorCore::handleNeutron(Neutron & neutron)
+bool ReactorCore::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 {
     return false;
 }
