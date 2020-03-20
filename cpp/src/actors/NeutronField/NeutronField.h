@@ -85,13 +85,13 @@ namespace nuclearPhysics
 
 		int getNeutronFlux() const;
 
-		void addFissionBiproduct(const godot::Vector2 &globalPos);
+		void addFissionBiproduct(const godot::Vector2 &position);
 
-		godot::Point2 toHeatGrid(const godot::Vector2 &globalPos) const;
+		godot::Point2 toHeatGrid(const godot::Vector2 &position) const;
 
-		void addHeat(const godot::Vector2 &globalPos, const float heat);
+		void addHeat(const godot::Vector2 &position, const float heat);
 
-		float readHeat(const godot::Vector2 &globalPos) const;
+		float readHeat(const godot::Vector2 &position) const;
 
 		virtual void _init();
 

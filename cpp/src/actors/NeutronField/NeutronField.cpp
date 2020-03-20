@@ -149,26 +149,26 @@ int NeutronField::getNeutronFlux() const
 	return neutronFlux;
 }
 
-void NeutronField::addFissionBiproduct(const Vector2 &globalPos)
+void NeutronField::addFissionBiproduct(const Vector2 &position)
 {
-	const Point2 &grid = biproductMap->toGrid(globalPos);
+	const Point2 &grid = biproductMap->toGrid(position);
 	biproductMap->addHeat(biproduct, grid.x, grid.y);
 }
 
-Point2 NeutronField::toHeatGrid(const godot::Vector2 &globalPos) const
+Point2 NeutronField::toHeatGrid(const godot::Vector2 &position) const
 {
-	return thermalMap->toGrid(globalPos);
+	return thermalMap->toGrid(position);
 }
 
-void NeutronField::addHeat(const Vector2 &globalPos, const float heat)
+void NeutronField::addHeat(const Vector2 &position, const float heat)
 {
-	const Point2 &grid = thermalMap->toGrid(globalPos);
+	const Point2 &grid = thermalMap->toGrid(position);
 	thermalMap->addHeat(heat, grid.x, grid.y);
 }
 
-float NeutronField::readHeat(const godot::Vector2 &globalPos) const
+float NeutronField::readHeat(const godot::Vector2 &position) const
 {
-	const Point2 &grid = thermalMap->toGrid(globalPos);
+	const Point2 &grid = thermalMap->toGrid(position);
 	return thermalMap->readMagnitude(grid.x, grid.y);
 }
 

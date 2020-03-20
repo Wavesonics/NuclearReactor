@@ -91,23 +91,27 @@ func _physics_process(delta):
 		for ii in range(numSegments):
 			var x = segmentWidth / 2.0
 			var y = (ii * segmentHeight) + (ii*2.0)
-			var globalPos := to_global(Vector2(x, y))
-			var gridPos := neutronField.to_heat_grid(globalPos) as Vector2
+			var neutronSpace := position + Vector2(x, y).rotated(rotation)
+			#var neutronSpace := pos.rotated(rotation)
+			
+			var gridPos := thermalMap.to_grid(neutronSpace) as Vector2
+			
 			var gridX := gridPos.x as int
 			var gridY := gridPos.y as int
 			
-			absorbe_heat(ii, gridX, gridY, heatTransferAmmount)
-			# Also absorbe heat from the immedately neighbor
-			absorbe_heat(ii, gridX-1, gridY, heatTransferAmmount)
-			absorbe_heat(ii, gridX+1, gridY, heatTransferAmmount)
+			if thermalMap.range_check(gridX, gridY):
+				absorbe_heat(ii, gridX, gridY, heatTransferAmmount)
+				# Also absorbe heat from the immedately neighbor
+				absorbe_heat(ii, gridX-1, gridY, heatTransferAmmount)
+				absorbe_heat(ii, gridX+1, gridY, heatTransferAmmount)
 
 
 func absorbe_heat(index: int, gridX: int, gridY: int, heatTransferAmmount: float):
-	if thermalMap.range_check(gridX, gridY):
-		var heat := thermalMap.read_magnitude(gridX, gridY) as float
-		if heat > 0.0:
-			thermalMap.add_heat(-heatTransferAmmount, gridX, gridY)
-			add_pressure(index, heatTransferAmmount)
+	#if thermalMap.range_check(gridX, gridY):
+	var heat := thermalMap.read_magnitude(gridX, gridY) as float
+	if heat > 0.0:
+		thermalMap.add_heat(-heatTransferAmmount, gridX, gridY)
+		add_pressure(index, heatTransferAmmount)
 
 
 func _draw():
