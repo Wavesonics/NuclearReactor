@@ -5,7 +5,7 @@
 [ext_resource path="res://simulation/Simulation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/3d_control_panel/3dControlPanel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://vr/art/middle_console/middle_console_03.glb" type="PackedScene" id=6]
+[ext_resource path="res://vr/art/middle_console/middle_console_04.glb" type="PackedScene" id=6]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=7]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/qodot/game-definitions/fgd/qodot_fgd.tres" type="Resource" id=9]
@@ -252,9 +252,9 @@ transparent = false
 [node name="FpsTimer" type="Timer" parent="FpsLabel"]
 autostart = true
 
-[node name="middle_console_03" parent="." instance=ExtResource( 6 )]
-transform = Transform( -0.0971313, 0, -0.995272, 0, 1, 0, 0.995272, 0, -0.0971313, 1.9393, 0.9625, 0.465545 )
-
 [node name="ControlPanel" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.998041, -0.0586162, 0.0218726, 0, 0.349602, 0.936898, -0.0625641, -0.935063, 0.348918, -0.28511, 1.07011, 0.405789 )
+transform = Transform( 0.998041, -0.0586162, 0.0218726, 0, 0.349602, 0.936898, -0.0625641, -0.935063, 0.348918, -0.28511, 1.36014, 0.405789 )
+
+[node name="middle_console_04" parent="." instance=ExtResource( 6 )]
+transform = Transform( -0.0456072, 0, -0.998959, 0, 1, 0, 0.998959, 0, -0.0456072, 1.79708, 1.06884, 0.355049 )
 [connection signal="timeout" from="FpsLabel/FpsTimer" to="." method="_on_FpsTimer_timeout"]
