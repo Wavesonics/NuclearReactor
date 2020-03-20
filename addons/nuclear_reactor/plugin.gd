@@ -16,6 +16,8 @@ func _enter_tree():
 	
 	add_custom_type("Heatmap", "Node2D", preload("res://actors/HeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 	add_custom_type("DiffusingHeatMap", "Node2D", preload("res://actors/DiffusingHeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
+	
+	add_custom_type("NeutronField", "Node2D", preload("res://actors/neutron_field/NeutronFieldCpp.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 
 
 func _exit_tree():
@@ -29,3 +31,8 @@ func _exit_tree():
 	remove_custom_type("PipeSplit")
 	remove_custom_type("PipeCombiner")
 	remove_custom_type("HeatSink")
+	
+	remove_custom_type("Heatmap")
+	remove_custom_type("DiffusingHeatMap")
+	
+	remove_custom_type("NeutronField")

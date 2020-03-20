@@ -201,9 +201,9 @@ bool DiffusingHeatMap::rangeCheck(const int x, const int y) const
 	return HeatMap::rangeCheck(x, y);
 }
 
-godot::Point2 DiffusingHeatMap::toGrid(const godot::Vector2 &globalPos) const
+godot::Point2 DiffusingHeatMap::toGrid(const godot::Vector2 &neutronPos) const
 {
-	return HeatMap::toGrid(globalPos);
+	return HeatMap::toGrid(neutronPos);
 }
 
 void DiffusingHeatMap::_register_methods()

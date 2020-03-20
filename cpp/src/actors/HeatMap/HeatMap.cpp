@@ -31,12 +31,10 @@ bool HeatMap::rangeCheck(const int x, const int y) const
 	return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
 }
 
-Point2 HeatMap::toGrid(const godot::Vector2 &globalPos) const
+Point2 HeatMap::toGrid(const godot::Vector2 &neutronPos) const
 {
-	const Vector2 pos = reactorCore->to_local(globalPos);
-
-	const int gridX = (int)floor(pos.x / cellWidth);
-	const int gridY = (int)floor(pos.y / cellHeight);
+	const int gridX = (int)floor(neutronPos.x / cellWidth);
+	const int gridY = (int)floor(neutronPos.y / cellHeight);
 
 	return Point2(gridX, gridY);
 }

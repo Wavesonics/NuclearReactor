@@ -27,8 +27,7 @@ NeutronRegion::~NeutronRegion() = default;
 
 bool NeutronRegion::contains(const Vector2 &globalPoint) const
 {
-	const Vector2 &localPoint = to_local(globalPoint);
-	return area.has_point(localPoint);
+	return globalArea.has_point(globalPoint);
 }
 
 void NeutronRegion::_init()
@@ -40,7 +39,7 @@ void NeutronRegion::_init()
 void NeutronRegion::_enter_tree()
 {
 	// Create our global Rect2 for testing global points
-	const Vector2 &globalAreaPos = to_global(area.position);
+	const Vector2 &globalAreaPos = area.position + get_position();
 	globalArea = Rect2(globalAreaPos, area.size);
 }
 

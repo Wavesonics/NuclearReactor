@@ -54,7 +54,7 @@ namespace nuclearPhysics
 
 		float readMagnitude(const int x, const int y) const override;
 
-		godot::Point2 toGrid(const godot::Vector2 &globalPos) const override;
+		godot::Point2 toGrid(const godot::Vector2 &neutronPos) const override;
 
 		static void _register_methods();
 

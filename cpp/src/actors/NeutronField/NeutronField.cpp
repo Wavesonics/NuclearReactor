@@ -132,12 +132,11 @@ void debugTree(const BspRegion1dNode *node)
 
 void NeutronField::initBspTree()
 {
-	const auto &globalPos = reactorCore->to_global(reactorCore->area.get_position());
-	const auto &localPos = to_local(globalPos);
-	float y = localPos.y;
+	const auto &pos = reactorCore->area.get_position();
+	float y = pos.y;
 	float height = reactorCore->area.size.height;
 
-	float regionStart = localPos.x;
+	float regionStart = pos.x;
 	float regionWidth = reactorCore->area.size.width;
 
 	// Root
@@ -175,12 +174,11 @@ void NeutronField::addToNode(NeutronRegion *region, BspRegion1dNode *node)
 	// If this is a leaf, test to see if we belong here
 	if(node->isLeaf())
 	{
-		const auto &globalAreaPos = region->to_global(region->area.get_position());
-		const auto &localAreaPos = to_local(globalAreaPos);
-		const auto localArea = Rect2(localAreaPos, region->area.size);
+		Vector2 pos = region->area.position + region->get_position();
+		Rect2 area = Rect2(pos, region->area.size);
 
 		// If we intersect in anyway, add our region to this leaf
-		if(node->area.intersects(localArea))
+		if(node->area.intersects(area))
 		{
 			node->includedRegions.push_back(region);
 		}
@@ -363,24 +361,24 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 		Vector2 scaledVelocity = neutron.velocity * delta;
 		neutron.position += scaledVelocity;
 
-		const Vector2 &globalPos = to_global(neutron.position);
-		if(!reactorCore->contains(globalPos))
+		const Vector2 &pos = neutron.position;
+		if(!reactorCore->contains(pos))
 		{
 			result.escapedNeutrons++;
 			removal->push_back(ii);
 		}
 		else
 		{
-			auto *node = getRegionsToCheck(neutron);
-			auto &regionSubset = node->includedRegions;
+			const BspRegion1dNode *node = getRegionsToCheck(neutron);
 
-			if(!regionSubset.empty())
+			if(!node->includedRegions.empty())
 			{
-				for(auto &region : regionSubset)
+				//for(auto &region : regions)
+				for(auto &region : node->includedRegions)
 				{
-					if(region->contains(globalPos))
+					if(region->contains(pos))
 					{
-						if(region->handleNeutron(neutron, globalPos))
+						if(region->handleNeutron(neutron, pos))
 						{
 							removal->push_back(ii);
 							break; // No need to continue, we've been removed

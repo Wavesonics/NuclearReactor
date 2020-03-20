@@ -93,8 +93,8 @@ bool FuelRod::handleNeutron(Neutron &neutron, const Vector2 &globalPosition)
 	if(fission)
 	{
 		//Godot::print("FISSION!");
-		neutronField->addFissionBiproduct(globalPosition);
-		neutronField->addHeat(globalPosition, 1.0f);
+		neutronField->addFissionBiproduct(neutron.position);
+		neutronField->addHeat(neutron.position, 1.0f);
 
 		spawnFissionNeutron(neutron);
 		spawnFissionNeutron(neutron);

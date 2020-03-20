@@ -39,7 +39,7 @@ namespace nuclearPhysics
 
 		void calculateCellSizes(const godot::Rect2 &rect);
 
-		virtual godot::Point2 toGrid(const godot::Vector2 &globalPos) const;
+		virtual godot::Point2 toGrid(const godot::Vector2 &neutronPos) const;
 
 		virtual void addHeat(float heat, const int x, const int y);
 
