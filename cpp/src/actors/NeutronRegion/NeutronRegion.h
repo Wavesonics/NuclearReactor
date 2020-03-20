@@ -33,7 +33,7 @@ namespace nuclearPhysics
 		virtual bool handleNeutron(nuclearPhysics::Neutron &neutron) = 0;
 
 		// Convenience method for checking the area
-		bool contains(const godot::Point2 &point) const;
+		bool contains(const godot::Point2 &globalPoint) const;
 
 		virtual void _init();
 		virtual void _enter_tree();

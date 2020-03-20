@@ -6,7 +6,6 @@
 [ext_resource path="res://vr/Ubuntu-Medium.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://actors/2d_control_panel/2dControlPanel.tscn" type="PackedScene" id=10]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 80
 outline_size = 1
@@ -23,9 +22,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Simulation" parent="." instance=ExtResource( 1 )]
-position = Vector2( 10, 82.864 )
-scale = Vector2( 0.75, 0.75 )
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 700.0
+margin_bottom = 700.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1200, 1200 )
+
+[node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport"]
+offset = Vector2( 1600, 1500 )
+current = true
+zoom = Vector2( 3, 3 )
+
+[node name="Simulation" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
+scale = Vector2( 2, 2 )
 
 [node name="FpsLabel" type="Label" parent="."]
 anchor_left = 1.0

@@ -25,9 +25,9 @@ NeutronRegion::NeutronRegion() : Node2D()
 
 NeutronRegion::~NeutronRegion() = default;
 
-bool NeutronRegion::contains(const Vector2 &point) const
+bool NeutronRegion::contains(const Vector2 &globalPoint) const
 {
-	const auto localPoint = to_local(point);
+	const Vector2 &localPoint = to_local(globalPoint);
 	return area.has_point(localPoint);
 }
 
@@ -40,7 +40,7 @@ void NeutronRegion::_init()
 void NeutronRegion::_enter_tree()
 {
 	// Create our global Rect2 for testing global points
-	Vector2 globalAreaPos = get_global_position() + area.position;
+	const Vector2 &globalAreaPos = to_global(area.position);
 	globalArea = Rect2(globalAreaPos, area.size);
 }
 
@@ -51,10 +51,10 @@ void NeutronRegion::_ready()
 
 	// Add every neutron region to the neutron field so it can be checked
 	auto nodes = get_tree()->get_nodes_in_group(NeutronField::GROUP);
-	if (!nodes.empty())
+	if(!nodes.empty())
 	{
-		auto* neutronField = Object::cast_to<NeutronField>(nodes[0]);
-		if (neutronField != nullptr)
+		auto *neutronField = Object::cast_to<NeutronField>(nodes[0]);
+		if(neutronField != nullptr)
 		{
 			neutronField->addNeutronRegion(this);
 		}
@@ -74,7 +74,7 @@ void NeutronRegion::_register_methods()
 {
 	register_property<NeutronRegion, godot::Rect2>("area", &NeutronRegion::area, DEFAULT_BOUNDS);
 	register_property<NeutronRegion, godot::Color>("drawColor", &NeutronRegion::drawColor, Color());
-	
+
 	register_method("contains", &NeutronRegion::contains);
 	register_method("_init", &NeutronRegion::_init);
 	register_method("_enter_tree", &NeutronRegion::_enter_tree);
