@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entry/3d/BaseGame3d.tscn" type="PackedScene" id=1]
+[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=2]
+[ext_resource path="res://simulation/Simulation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entry/3d/vr/mobile/Game3dVrMobile.gd" type="Script" id=6]
+
+[node name="3dGame" instance=ExtResource( 1 )]
+script = ExtResource( 6 )
+
+[node name="SimulationCanvas" parent="." index="0" instance=ExtResource( 2 )]
+transform = Transform( 0.182047, 0, 0.98329, 0, 1, 0, -0.98329, 0, 0.182047, -3.26044, 1.76305, 2.37667 )
+visible = false
+editor_live_update = false
+transparent = false
+
+[node name="SimulationContainer" type="Control" parent="SimulationCanvas" index="2"]
+margin_right = 1200.0
+margin_bottom = 1200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="SimulationCanvas/SimulationContainer" index="0"]
+offset = Vector2( 800, 300 )
+current = true
+zoom = Vector2( 1.75, 1.75 )
+
+[node name="Simulation" parent="SimulationCanvas/SimulationContainer" index="1" instance=ExtResource( 3 )]
+
+[node name="entity_0_worldspawn" parent="Room/QodotMap" index="0"]
+properties = {
+"_tb_textures": "textures/base",
+"classname": "worldspawn"
+}
+
+[node name="entity_1_light" parent="Room/QodotMap" index="1"]
+properties = {
+"classname": "light",
+"origin": "32 72 56"
+}
+
+[node name="FpsLabel" parent="." index="3" instance=ExtResource( 4 )]
+transform = Transform( 0.534854, 0, 0.844945, 0, 1, 0, -0.844945, 0, 0.534854, -1.65268, 1.96817, 1.49544 )
+text = "00 fps"
+font_size_multiplier = 2.0
+
+[node name="FpsUpdateTimer" type="Timer" parent="FpsLabel" index="2"]
+autostart = true
+
+[node name="OqVrPlayer" parent="." index="4" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108541, 2.34782 )
+[connection signal="timeout" from="FpsLabel/FpsUpdateTimer" to="." method="_on_FpsUpdateTimer_timeout"]

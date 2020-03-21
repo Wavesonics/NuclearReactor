@@ -25,28 +25,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650793, 0, 0.0127676 )
 [node name="ScramLabel" parent="ScramGroup" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0 )
 text = "SCRAM"
-margin = 16
-billboard = false
-depth_test = true
-resize_mode = 0
-font_size_multiplier = 1.0
-font_color = Color( 1, 1, 1, 1 )
-background_color = Color( 0, 0, 0, 1 )
-transparent = false
 
 [node name="ScramButton" parent="ScramGroup" instance=ExtResource( 3 )]
 
 [node name="NeutronFluxLabel" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.213313, 0.0144023 )
 text = "Neutron Flux: 0"
-margin = 16
-billboard = false
-depth_test = true
-resize_mode = 0
-font_size_multiplier = 1.0
-font_color = Color( 1, 1, 1, 1 )
-background_color = Color( 0, 0, 0, 1 )
-transparent = false
 
 [node name="FluxUpdateTimer" type="Timer" parent="."]
 wait_time = 0.25

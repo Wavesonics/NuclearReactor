@@ -90,4 +90,39 @@ script = ExtResource( 6 )
 pipePath = NodePath("../Pipe3")
 font = ExtResource( 7 )
 updateThreshold = 0.1
+
+[node name="Sensor1" type="Node2D" parent="."]
+position = Vector2( 577.877, 130.528 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Combiner0")
+font = ExtResource( 7 )
+updateThreshold = 0.1
+
+[node name="Sensor4" type="Node2D" parent="."]
+position = Vector2( 577.877, 130.528 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Combiner0")
+font = ExtResource( 7 )
+updateThreshold = 0.1
+
+[node name="Sensor5" type="Node2D" parent="."]
+position = Vector2( 707.112, 306.288 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Pipe2_1A")
+font = ExtResource( 7 )
+updateThreshold = 0.1
+
+[node name="Sensor2" type="Node2D" parent="."]
+position = Vector2( 612.77, 562.174 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Splitter0")
+font = ExtResource( 7 )
+updateThreshold = 0.1
+
+[node name="Sensor3" type="Node2D" parent="."]
+position = Vector2( 283.22, 32.3091 )
+script = ExtResource( 6 )
+pipePath = NodePath("../Heatsink")
+font = ExtResource( 7 )
+updateThreshold = 0.1
 [connection signal="timeout" from="FluidSimTimer" to="." method="_on_FluidSimTimer_timeout"]

@@ -16,9 +16,7 @@ func _ready():
 			ii += 1
 	else:
 		var ii := 0
-		print("ADAMB: Creating control rod panels: %d" % ControlSystem.controlRods.size())
 		for rod in ControlSystem.controlRods:
-			print("ADAMB: Creating CRP")
 			var node := controlRodPanelScene.instance()
 			node.set_control_rod(rod, ii)
 			$ControlRods.add_child(node)

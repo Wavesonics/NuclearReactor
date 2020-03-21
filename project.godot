@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://OQ_Toolkit/OQ_ARVRController/scripts/Feature_RigidBodyGrab.gd"
 }, {
+"base": "Camera",
+"class": "FpsCamera",
+"language": "GDScript",
+"path": "res://addons/fpscontroller/Camera.gd"
+}, {
+"base": "KinematicBody",
+"class": "FpsController",
+"language": "GDScript",
+"path": "res://addons/fpscontroller/FpsController.gd"
+}, {
 "base": "Button",
 "class": "MomentaryButton",
 "language": "GDScript",
@@ -163,6 +173,8 @@ _global_script_class_icons={
 "ControlRodPanel": "",
 "CoolantPipe": "",
 "Feature_RigidBodyGrab": "",
+"FpsCamera": "",
+"FpsController": "",
 "MomentaryButton": "",
 "OQClass_GrabbableRigidBody": "",
 "QodotEntity": "",
@@ -215,6 +227,7 @@ enabled=PoolStringArray( "nuclear_reactor", "qodot", "thread_pool" )
 
 [gdnative]
 
+singletons_disabled=[  ]
 singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 
 [input]
@@ -257,7 +270,7 @@ scram={
 [rendering]
 
 quality/driver/driver_name="GLES2"
-quality/intended_usage/framebuffer_allocation.mobile=2
 threads/thread_model=2
 vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"
+quality/subsurface_scattering/quality=0

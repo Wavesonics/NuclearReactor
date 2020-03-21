@@ -23,6 +23,7 @@ func set_enable_rendering(value):
 	update()
 
 func _ready():
+	add_to_group("sensors")
 	update()
 
 

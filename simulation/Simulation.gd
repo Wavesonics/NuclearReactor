@@ -2,6 +2,7 @@ extends Node2D
 
 onready var pipes := get_tree().get_nodes_in_group("pipes")
 onready var pipeJoints := get_tree().get_nodes_in_group("pipe_joints")
+onready var sensors := get_tree().get_nodes_in_group("sensors")
 const TASK_TAG := "fluid_worker"
 
 
@@ -18,6 +19,15 @@ func _ready():
 		var thermocouples := get_tree().get_nodes_in_group("thermocouples")
 		for thermocouple in thermocouples:
 			thermocouple.enableRendering = false
+		
+		for pipe in pipes:
+			pipe.enableRendering = false
+		
+		for join in pipeJoints:
+			join.enableRendering = false
+		
+		for sensor in sensors:
+			sensor.enableRendering = false
 
 """
 func _input(event):
