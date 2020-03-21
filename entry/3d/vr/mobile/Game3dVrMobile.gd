@@ -8,3 +8,6 @@ func _ready():
 func _on_FpsUpdateTimer_timeout():
 	var fps := Engine.get_frames_per_second()
 	$FpsLabel.set_label_text("%d fps" % fps)
+	
+	var neutrons := ControlSystem.neutronField.num_neutrons() as int
+	$NeutronsLabel.set_label_text("%d" % neutrons)

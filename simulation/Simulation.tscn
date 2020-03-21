@@ -5,7 +5,7 @@
 [ext_resource path="res://actors/fluid/HeatSink.gd" type="Script" id=3]
 [ext_resource path="res://actors/fluid/CoolantPipe.gd" type="Script" id=4]
 [ext_resource path="res://actors/moderator/Moderator.gdns" type="Script" id=5]
-[ext_resource path="res://actors/neutron_field/NeutronFieldCpp.gdns" type="Script" id=6]
+[ext_resource path="res://actors/neutron_field/NeutronField.gdns" type="Script" id=6]
 [ext_resource path="res://actors/fuel_rod/FuelRodcpp.gdns" type="Script" id=7]
 [ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=8]
 [ext_resource path="res://actors/Thermocouple.gdns" type="Script" id=9]
@@ -14,6 +14,7 @@
 [ext_resource path="res://simulation/Simulation.gd" type="Script" id=12]
 [ext_resource path="res://actors/HeatMap.gdns" type="Script" id=13]
 [ext_resource path="res://actors/DiffusingHeatMap.gdns" type="Script" id=14]
+
 
 [node name="Simulation" type="Node2D"]
 script = ExtResource( 12 )

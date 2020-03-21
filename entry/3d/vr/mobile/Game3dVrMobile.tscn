@@ -50,6 +50,11 @@ font_size_multiplier = 2.0
 [node name="FpsUpdateTimer" type="Timer" parent="FpsLabel" index="2"]
 autostart = true
 
-[node name="OqVrPlayer" parent="." index="4" instance=ExtResource( 5 )]
+[node name="NeutronsLabel" parent="." index="4" instance=ExtResource( 4 )]
+transform = Transform( 0.507313, 0, 0.861762, 0, 1, 0, -0.861762, 0, 0.507313, -1.64509, 1.77225, 1.49364 )
+text = "Neutrons"
+font_size_multiplier = 2.0
+
+[node name="OqVrPlayer" parent="." index="5" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108541, 2.34782 )
 [connection signal="timeout" from="FpsLabel/FpsUpdateTimer" to="." method="_on_FpsUpdateTimer_timeout"]
