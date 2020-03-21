@@ -346,7 +346,12 @@ void NeutronField::debugTreeDraw(const BspTreeNode *node, int level)
 	if(node->isLeaf())
 	{
 		auto c = Color((float) (rand() % 2), (float) (rand() % 2), (float) (rand() % 2), 0.5f);
-		draw_rect(node->area, c);
+
+		auto pos = node->area.position;
+		auto size = node->area.size;
+		size.width -= 2.0f;
+		auto rect = Rect2(pos, size);
+		draw_rect(rect, c);
 	}
 	else
 	{
@@ -358,7 +363,7 @@ void NeutronField::debugTreeDraw(const BspTreeNode *node, int level)
 void NeutronField::_draw()
 {
 	//srand(0);
-	//debugTreeDraw(root, 0);
+	//debugTreeDraw(bspTree.getRoot(), 0);
 
 	if(enableRendering && !neutrons.empty())
 	{
@@ -413,7 +418,8 @@ void NeutronField::_register_methods()
 										   NeutronField::DEFAULT_BIPRODUCT_DECAY_RATE);
 	register_property<NeutronField, bool>("enableRendering", &NeutronField::enableRendering, true);
 	register_property<NeutronField, int>("maxRender", &NeutronField::maxRender, NeutronField::DEFAULT_MAX_RENDER);
-	register_property<NeutronField, int>("bspTreeDepth", &NeutronField::bspTreeDepth, NeutronField::DEFAULT_BSP_TREE_DEPTH);
+	register_property<NeutronField, int>("bspTreeDepth", &NeutronField::bspTreeDepth,
+										 NeutronField::DEFAULT_BSP_TREE_DEPTH);
 
 	register_method("get_max_population", &NeutronField::getMaxPopulation);
 	register_method("num_neutrons", &NeutronField::numNeutrons);

@@ -28,6 +28,8 @@ namespace nuclearPhysics
 		const nuclearPhysics::BspTreeNode *findRegions(const float x, const BspTreeNode *node) const;
 
 		void addToNode(NeutronRegion *region, BspTreeNode *node);
+
+		nuclearPhysics::BspTreeNode *getRoot();
 	};
 }
 

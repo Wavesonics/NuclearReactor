@@ -130,3 +130,8 @@ const BspTreeNode *BspTree::findRegions(const float x, const BspTreeNode *node) 
 		}
 	}
 }
+
+nuclearPhysics::BspTreeNode *BspTree::getRoot()
+{
+	return root;
+}
