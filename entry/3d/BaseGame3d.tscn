@@ -1,10 +1,9 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=1]
 [ext_resource path="res://entry/3d/BaseGame3d.gd" type="Script" id=2]
-[ext_resource path="res://actors/3d_control_panel/3dControlPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://vr/art/middle_console/middle_console_04_new_rivets.glb" type="PackedScene" id=3]
 [ext_resource path="res://vr/art/wall_console/wall_console_01.glb" type="PackedScene" id=7]
-[ext_resource path="res://vr/art/middle_console/middle_console_04.glb" type="PackedScene" id=8]
 [ext_resource path="res://addons/qodot/game-definitions/fgd/qodot_fgd.tres" type="Resource" id=10]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_entity.gd" type="Script" id=11]
 [ext_resource path="res://textures/base/wall_02.jpg" type="Texture" id=13]
@@ -283,8 +282,5 @@ transform = Transform( 0.015906, 0.0286918, -0.999462, 0.0118438, 0.999513, 0.02
 [node name="wall_console_11" parent="Room" instance=ExtResource( 7 )]
 transform = Transform( 0.015906, 0.0286918, -0.999462, 0.0118438, 0.999514, 0.0288817, 0.999803, -0.0122967, 0.015559, 3.44782, 1.11404, -6.31746 )
 
-[node name="middle_console_04" parent="." instance=ExtResource( 8 )]
-transform = Transform( -0.0456072, 0, -0.998959, 0, 1, 0, 0.998959, 0, -0.0456072, 1.79708, 1.06884, 0.355049 )
-
-[node name="ControlPanel" parent="middle_console_04" instance=ExtResource( 3 )]
-transform = Transform( -0.0456073, 0, 0.99896, 0, 1, 0, -0.99896, 0, -0.0456073, 0.325517, 0.297037, 1.78409 )
+[node name="middle_console_04_new_rivets" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.0252872, 0, -0.99968, 0, 1, 0, 0.99968, 0, -0.0252872, 1.05416, 0.9625, -0.265996 )
