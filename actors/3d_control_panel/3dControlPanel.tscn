@@ -37,7 +37,7 @@ transparent = false
 [node name="ScramButton" parent="ScramGroup" instance=ExtResource( 3 )]
 
 [node name="NeutronFluxLabel" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.213313, 0.0144023 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.213313, 0.0381087 )
 text = "Neutron Flux: 0"
 margin = 16
 billboard = false
