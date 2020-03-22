@@ -267,11 +267,9 @@ BatchResult NeutronField::processNeutronBatch(vector<int> *removal, int start, i
 			const BspTreeNode *node = bspTree.getRegionsToCheck(neutron);
 			if(!node->includedRegions.empty())
 			{
-				//for(auto &region : regions)
-				//for(NeutronRegion *region : node->includedRegions)
-				for(int xx=0; xx<node->includedRegions.size(); ++xx)
+				//for(auto &region : regions) // This will itterate all regions
+				for(NeutronRegion *region : node->includedRegions)
 				{
-					NeutronRegion *region = node->includedRegions[xx];
 					if(region->contains(pos))
 					{
 						if(region->handleNeutron(neutron, pos))

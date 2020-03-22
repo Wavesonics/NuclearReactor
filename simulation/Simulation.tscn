@@ -10,11 +10,10 @@
 [ext_resource path="res://actors/reactor/ReactorCoreCpp.gdns" type="Script" id=8]
 [ext_resource path="res://actors/Thermocouple.gdns" type="Script" id=9]
 [ext_resource path="res://actors/control_rod/ControlRodCpp.gdns" type="Script" id=10]
-[ext_resource path="res://vr/DefaultFont.tres" type="DynamicFont" id=11]
+[ext_resource path="res://common_assets/DefaultFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://simulation/Simulation.gd" type="Script" id=12]
 [ext_resource path="res://actors/HeatMap.gdns" type="Script" id=13]
 [ext_resource path="res://actors/DiffusingHeatMap.gdns" type="Script" id=14]
-
 
 [node name="Simulation" type="Node2D"]
 script = ExtResource( 12 )

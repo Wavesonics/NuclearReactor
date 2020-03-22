@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/control_room_00.map-6b97399ca147ccc4f33be6cda5f9e1f9.tres"
+
+[deps]
+
+source_file="res://entry/3d/assets/control_room/control_room_00.map"
+dest_files=[ "res://.import/control_room_00.map-6b97399ca147ccc4f33be6cda5f9e1f9.tres" ]
+
+[params]
+

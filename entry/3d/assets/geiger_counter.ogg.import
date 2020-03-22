@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/geiger_counter.ogg-a4fa5a7df8da2a0b01478041ad5bbb2f.oggstr"
+
+[deps]
+
+source_file="res://entry/3d/assets/geiger_counter.ogg"
+dest_files=[ "res://.import/geiger_counter.ogg-a4fa5a7df8da2a0b01478041ad5bbb2f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

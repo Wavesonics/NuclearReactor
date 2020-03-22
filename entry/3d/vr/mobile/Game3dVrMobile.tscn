@@ -4,7 +4,7 @@
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://simulation/Simulation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://vr/vr_player/OqVrPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entry/3d/vr/mobile/vr_player/OqVrPlayer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entry/3d/vr/mobile/Game3dVrMobile.gd" type="Script" id=6]
 
 [node name="3dGame" instance=ExtResource( 1 )]
@@ -30,31 +30,39 @@ zoom = Vector2( 1.75, 1.75 )
 
 [node name="Simulation" parent="SimulationCanvas/SimulationContainer" index="1" instance=ExtResource( 3 )]
 
+[node name="FpsLabel" parent="." index="1" instance=ExtResource( 4 )]
+transform = Transform( 0.534854, 0, 0.844945, 0, 1, 0, -0.844945, 0, 0.534854, -1.65268, 1.96817, 1.49544 )
+text = "00 fps"
+margin = 16
+billboard = false
+depth_test = true
+resize_mode = 0
+font_size_multiplier = 2.0
+font_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0, 0, 0, 1 )
+transparent = false
+
+[node name="FpsUpdateTimer" type="Timer" parent="FpsLabel" index="2"]
+autostart = true
+
+[node name="NeutronsLabel" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 0.507313, 0, 0.861762, 0, 1, 0, -0.861762, 0, 0.507313, -1.64509, 1.77225, 1.49364 )
+text = "Neutrons"
+margin = 16
+billboard = false
+depth_test = true
+resize_mode = 0
+font_size_multiplier = 2.0
+font_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0, 0, 0, 1 )
+transparent = false
+
+[node name="OqVrPlayer" parent="." index="3" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108541, 2.34782 )
+
 [node name="entity_0_worldspawn" parent="Room/QodotMap" index="0"]
 properties = {
 "_tb_textures": "textures/base",
 "classname": "worldspawn"
 }
-
-[node name="entity_1_light" parent="Room/QodotMap" index="1"]
-properties = {
-"classname": "light",
-"origin": "32 72 56"
-}
-
-[node name="FpsLabel" parent="." index="3" instance=ExtResource( 4 )]
-transform = Transform( 0.534854, 0, 0.844945, 0, 1, 0, -0.844945, 0, 0.534854, -1.65268, 1.96817, 1.49544 )
-text = "00 fps"
-font_size_multiplier = 2.0
-
-[node name="FpsUpdateTimer" type="Timer" parent="FpsLabel" index="2"]
-autostart = true
-
-[node name="NeutronsLabel" parent="." index="4" instance=ExtResource( 4 )]
-transform = Transform( 0.507313, 0, 0.861762, 0, 1, 0, -0.861762, 0, 0.507313, -1.64509, 1.77225, 1.49364 )
-text = "Neutrons"
-font_size_multiplier = 2.0
-
-[node name="OqVrPlayer" parent="." index="5" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0108541, 2.34782 )
 [connection signal="timeout" from="FpsLabel/FpsUpdateTimer" to="." method="_on_FpsUpdateTimer_timeout"]

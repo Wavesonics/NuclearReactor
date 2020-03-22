@@ -31,5 +31,5 @@ properties = {
 "classname": "worldspawn"
 }
 
-[node name="FpsController" parent="." index="3" instance=ExtResource( 2 )]
+[node name="FpsController" parent="." index="2" instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4093, 2.44573 )
