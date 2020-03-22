@@ -18,7 +18,7 @@ func _enter_tree():
 	add_custom_type("Heatmap", "Node2D", preload("res://actors/HeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 	add_custom_type("DiffusingHeatMap", "Node2D", preload("res://actors/DiffusingHeatMap.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 	
-	add_custom_type("NeutronField", "Node2D", preload("res://actors/neutron_field/NeutronFieldCpp.gdns"), preload("res://addons/nuclear_reactor/node.png"))
+	add_custom_type("NeutronField", "Node2D", preload("res://actors/neutron_field/NeutronField.gdns"), preload("res://addons/nuclear_reactor/node.png"))
 
 
 func _exit_tree():
